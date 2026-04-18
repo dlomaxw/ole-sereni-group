@@ -1,26 +1,241 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap');
 @import "tailwindcss";
 
+
+/* ─── OSG Design System ─────────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --osg-navy:        #0a1628;
+  --osg-navy-mid:    #0f2040;
+  --osg-navy-light:  #162952;
+  --osg-gold:        #c9a84c;
+  --osg-gold-light:  #e0c475;
+  --osg-gold-pale:   #f5e8c0;
+  --osg-white:       #fafafa;
+  --osg-creme:       #fcfdfc; /* Refined architectural white */
+  --osg-offwhite:    #f0ede8;
+  --osg-slate:       #8a9ab5;
+  --osg-charcoal:    #1e2d45;
+
+  --background: var(--osg-creme);
+  --foreground: var(--osg-navy);
+
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans:  'Inter', system-ui, sans-serif;
+  --font-mono:  'DM Mono', monospace;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+  --font-mono: var(--font-mono);
+
+  --color-osg-navy:       var(--osg-navy);
+  --color-osg-navy-mid:   var(--osg-navy-mid);
+  --color-osg-navy-light: var(--osg-navy-light);
+  --color-osg-gold:       var(--osg-gold);
+  --color-osg-gold-light: var(--osg-gold-light);
+  --color-osg-gold-pale:  var(--osg-gold-pale);
+  --color-osg-white:      var(--osg-white);
+  --color-osg-creme:      var(--osg-creme);
+  --color-osg-offwhite:   var(--osg-offwhite);
+  --color-osg-slate:      var(--osg-slate);
+  --color-osg-charcoal:   var(--osg-charcoal);
+  
+  --shadow-architectural: 0 40px 100px -15px rgba(10, 22, 40, 0.12);
+  --shadow-gold: 0 10px 40px -10px rgba(201, 168, 76, 0.4);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─── Base Reset ────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--osg-creme);
+  color: var(--osg-navy);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* ─── Typography Scale (Premium Refinement) ─────────────────────────── */
+.text-display {
+  font-family: var(--font-serif);
+  font-size: clamp(3.5rem, 9vw, 8rem);
+  font-weight: 800;
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  font-style: italic;
+}
+
+.text-heading-xl {
+  font-family: var(--font-sans);
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  font-style: italic;
+}
+
+.text-heading-lg {
+  font-family: var(--font-sans);
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.text-system-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--osg-gold);
+}
+
+.text-body-muted {
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: var(--osg-navy);
+  opacity: 0.65;
+  font-weight: 500;
+}
+
+/* ─── Buttons (Ultra-Premium) ─────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 3rem;
+  background: var(--osg-gold);
+  color: var(--osg-navy);
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-gold);
+}
+
+.btn-primary:hover {
+  background: var(--osg-gold-light);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 20px 50px -10px rgba(201, 168, 76, 0.5);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 3rem;
+  background: transparent;
+  color: var(--osg-navy);
+  border: 1px solid rgba(10, 22, 40, 0.1);
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-outline:hover {
+  background: var(--osg-navy);
+  color: white;
+  border-color: var(--osg-navy);
+  transform: translateY(-4px);
+}
+
+/* ─── Containers (Expansive Grid) ───────────────────────────────────── */
+.container-osg {
+  max-width: 1720px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+@media (min-width: 1024px) { .container-osg { padding: 0 4rem; } }
+@media (min-width: 1536px) { .container-osg { padding: 0 8rem; } }
+
+.section-padding { padding: 6rem 1.5rem; }
+@media (min-width: 1024px) { .section-padding { padding: 12rem 0; } }
+
+/* ─── Backgrounds & Grids ───────────────────────────────────────────── */
+.bg-grid-blueprint {
+  background-image: 
+    linear-gradient(rgba(201, 168, 76, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201, 168, 76, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.card-terminal {
+  background: rgba(10, 22, 40, 0.02);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(10, 22, 40, 0.05);
+  position: relative;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-terminal:hover {
+  background: white;
+  border-color: var(--osg-gold);
+  box-shadow: var(--shadow-architectural);
+  transform: translateY(-8px);
+}
+
+.corner-accent {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--osg-gold);
+  opacity: 0.3;
+  transition: all 0.4s ease;
+}
+.card-terminal:hover .corner-accent { opacity: 1; scale: 1.25; }
+
+.corner-tl { top: 0; left: 0; border-right: 0; border-bottom: 0; }
+.corner-tr { top: 0; right: 0; border-left: 0; border-bottom: 0; }
+.corner-bl { bottom: 0; left: 0; border-right: 0; border-top: 0; }
+.corner-br { bottom: 0; right: 0; border-left: 0; border-top: 0; }
+
+/* ─── Form Elements (Refined) ───────────────────────────────────────── */
+.input-architectural {
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid rgba(10, 22, 40, 0.1) !important;
+  border-radius: 0 !important;
+  padding: 1.5rem 0 !important;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.input-architectural:focus {
+  border-bottom-color: var(--osg-gold) !important;
+  background: rgba(10, 22, 40, 0.02) !important;
+  padding-left: 1rem !important;
+}
+
+/* ─── Status & Feedback ─────────────────────────────────────────────── */
+.badge-system {
+  padding: 0.35rem 1rem;
+  background: rgba(201, 168, 76, 0.1);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  color: var(--osg-gold);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
 }
