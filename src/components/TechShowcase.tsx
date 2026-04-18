@@ -51,7 +51,7 @@ export default function TechShowcase({ categoryKey }: TechShowcaseProps) {
       </div>
 
       {/* 3D Visualization Area */}
-      <div className="flex-1 relative p-12 lg:p-20 overflow-hidden bg-osg-navy/20 flex flex-col">
+      <div className="flex-1 relative p-12 lg:p-20 overflow-hidden bg-transparent flex flex-col">
         {/* Background Layered Grid */}
         <div className="absolute inset-0 bg-scanlines opacity-[0.03] pointer-events-none" />
         
@@ -139,7 +139,7 @@ export default function TechShowcase({ categoryKey }: TechShowcaseProps) {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 + (i * 0.08), ease: [0.16, 1, 0.3, 1] }}
-                    className="p-6 border border-white/15 bg-white/[0.05] group/item hover:bg-white/[0.1] hover:border-osg-gold/60 transition-all duration-500 cursor-default relative overflow-hidden rounded-lg"
+                    className="p-6 border border-white/15 bg-white/[0.02] group/item hover:bg-white/[0.08] hover:border-osg-gold/60 transition-all duration-500 cursor-default relative overflow-hidden rounded-lg"
                 >
                     <div className="absolute inset-0 bg-grid-blueprint opacity-0 group-hover/item:opacity-5 transition-opacity duration-500" />
                     <div className="relative z-10 flex items-start gap-3 mb-4">
