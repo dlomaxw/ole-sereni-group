@@ -2,39 +2,37 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import {
   Menu, X, ChevronDown, ArrowUpRight, ArrowRight,
-  Grid, Square, Palette, Hammer, Zap, Home,
-  Layout, DoorOpen, Box, Component, Shield,
-  Hotel, Briefcase, GraduationCap, ShoppingBag, Cpu,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/context/AuthContext';
 
 const services = [
-  { label: 'Aluminium & Glass Systems', href: '/services/aluminium-glass', icon: Grid, desc: 'Facades, curtain walls & glazing solutions' },
-  { label: 'Gypsum Works & Ceilings', href: '/services/gypsum-works', icon: Square, desc: 'Suspended ceilings and partitions' },
-  { label: 'Painting & Tiling', href: '/services/painting-tiling', icon: Palette, desc: 'Premium surface finishes' },
-  { label: 'Carpentry & Joinery', href: '/services/carpentry', icon: Hammer, desc: 'Bespoke timber and millwork' },
-  { label: 'Electrical Installations', href: '/services/electrical', icon: Zap, desc: 'Commercial electrical systems' },
-  { label: 'Interior & Exterior Finishing', href: '/services/finishing', icon: Home, desc: 'Complete finishing solutions' },
+  { label: 'Aluminium & Glass Systems', href: '/services/aluminium-glass', image: '/images/service-aluminium.jpg', desc: 'Facades, curtain walls & glazing solutions' },
+  { label: 'Gypsum Works & Ceilings', href: '/services/gypsum-works', image: '/images/service-gypsum.jpg', desc: 'Suspended ceilings and partitions' },
+  { label: 'Painting & Tiling', href: '/services/painting-tiling', image: '/images/service-tiling.jpg', desc: 'Premium surface finishes' },
+  { label: 'Carpentry & Joinery', href: '/services/carpentry', image: '/images/service-carpentry.jpg', desc: 'Bespoke timber and millwork' },
+  { label: 'Electrical Installations', href: '/services/electrical', image: '/images/service-electrical.jpg', desc: 'Commercial electrical systems' },
+  { label: 'Interior & Exterior Finishing', href: '/services/finishing', image: '/images/service-finishing.jpg', desc: 'Complete finishing solutions' },
 ];
 
 const products = [
-  { label: 'Window Systems', href: '/products/window-systems', icon: Layout, desc: 'Aluminium and composite windows' },
-  { label: 'Door Systems', href: '/products/door-systems', icon: DoorOpen, desc: 'Security and feature entrances' },
-  { label: 'Curtain Wall & Facades', href: '/products/curtain-wall', icon: Box, desc: 'High-performance facade systems' },
-  { label: 'Glass Systems', href: '/products/glass-systems', icon: Component, desc: 'Structural and decorative glass' },
-  { label: 'Aluminium Profiles', href: '/products/aluminium-profiles', icon: Cpu, desc: 'Extrusions and custom profiles' },
-  { label: 'Specialized Systems', href: '/products/specialized-systems', icon: Shield, desc: 'Bespoke architectural solutions' },
+  { label: 'Window Systems', href: '/products/window-systems', image: '/images/product-window.jpg', desc: 'Aluminium and composite windows' },
+  { label: 'Door Systems', href: '/products/door-systems', image: '/images/product-door.jpg', desc: 'Security and feature entrances' },
+  { label: 'Curtain Wall & Facades', href: '/products/curtain-wall', image: '/images/typology-curtain-wall.jpg', desc: 'High-performance facade systems' },
+  { label: 'Glass Systems', href: '/products/glass-systems', image: '/images/product-glass.jpg', desc: 'Structural and decorative glass' },
+  { label: 'Aluminium Profiles', href: '/products/aluminium-profiles', image: '/images/product-profile.jpg', desc: 'Extrusions and custom profiles' },
+  { label: 'Specialized Systems', href: '/products/specialized-systems', image: '/images/product-specialized.jpg', desc: 'Bespoke architectural solutions' },
 ];
 
 const industries = [
-  { label: 'Hospitality & Residential', href: '/industries/hospitality-residential', icon: Hotel, desc: 'Hotels, resorts, and homes' },
-  { label: 'Corporate & Commercial', href: '/industries/corporate-commercial', icon: Briefcase, desc: 'Offices and commercial spaces' },
-  { label: 'Educational & Institutional', href: '/industries/educational-institutional', icon: GraduationCap, desc: 'Schools and public buildings' },
-  { label: 'Retail & Light Industrial', href: '/industries/retail-industrial', icon: ShoppingBag, desc: 'Retail fit-outs and warehouses' },
+  { label: 'Hospitality & Residential', href: '/industries/hospitality-residential', image: '/images/industry-hospitality.jpg', desc: 'Hotels, resorts, and homes' },
+  { label: 'Corporate & Commercial', href: '/industries/corporate-commercial', image: '/images/industry-corporate.jpg', desc: 'Offices and commercial spaces' },
+  { label: 'Educational & Institutional', href: '/industries/educational-institutional', image: '/images/industry-educational.jpg', desc: 'Schools and public buildings' },
+  { label: 'Retail & Light Industrial', href: '/industries/retail-industrial', image: '/images/industry-retail.jpg', desc: 'Retail fit-outs and warehouses' },
 ];
 
 const navLinks = [
@@ -91,35 +89,35 @@ export default function Navbar() {
       <header
         className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${
           scrolled
-            ? 'bg-white shadow-[0_2px_20px_rgba(10,22,40,0.08)]'
+            ? 'bg-white shadow-[0_4px_30px_rgba(10,22,40,0.12)]'
             : 'bg-white'
         }`}
       >
         {/* Gold top accent bar */}
-        <div className="h-[3px] bg-osg-gold w-full" />
+        <div className="h-1 bg-osg-gold w-full" />
 
-        <div className="max-w-[1720px] mx-auto px-6 md:px-10 lg:px-16 flex items-center justify-between h-[80px]">
+        <div className="max-w-[1720px] mx-auto px-8 md:px-12 lg:px-20 flex items-center justify-between h-24">
 
           {/* ── Logo ── */}
-          <Link href="/" className="flex items-center gap-4 group flex-shrink-0">
+          <Link href="/" className="flex items-center gap-6 group flex-shrink-0">
             <div className="relative flex items-end gap-1">
-              <span className="font-serif font-black text-[2.2rem] text-osg-navy leading-none tracking-[-0.04em]">
+              <span className="font-serif font-black text-3xl text-osg-navy leading-none tracking-[-0.04em]">
                 OSG
               </span>
-              <div className="w-[6px] h-[6px] rounded-full bg-osg-gold mb-1 group-hover:scale-125 transition-transform" />
+              <div className="w-2 h-2 rounded-full bg-osg-gold mb-1 group-hover:scale-125 transition-transform" />
             </div>
-            <div className="hidden lg:block border-l border-osg-navy/10 pl-4">
-              <p className="text-[9px] font-black tracking-[0.45em] text-osg-navy uppercase leading-none">
+            <div className="hidden lg:block border-l border-osg-navy/10 pl-6">
+              <p className="text-xs font-black tracking-[0.5em] text-osg-navy uppercase leading-tight">
                 Ole Sereni Group
               </p>
-              <p className="text-[7px] font-bold tracking-[0.35em] text-osg-gold uppercase leading-none mt-[5px]">
+              <p className="text-[10px] font-bold tracking-[0.4em] text-osg-gold uppercase leading-tight mt-1">
                 Engineering Identity
               </p>
             </div>
           </Link>
 
           {/* ── Desktop Nav ── */}
-          <nav className="hidden xl:flex items-center gap-1" aria-label="Primary navigation">
+          <nav className="hidden xl:flex items-center gap-2" aria-label="Primary navigation">
             {navLinks.map((link) => (
               <div
                 key={link.label}
@@ -129,7 +127,7 @@ export default function Navbar() {
               >
                 <Link
                   href={link.href}
-                  className={`flex items-center gap-1.5 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] transition-colors duration-200 ${
+                  className={`flex items-center gap-2 px-6 py-3 text-sm font-black uppercase tracking-[0.25em] transition-colors duration-200 ${
                     isActive(link.href)
                       ? 'text-osg-gold'
                       : 'text-osg-navy/60 hover:text-osg-navy'
@@ -138,81 +136,86 @@ export default function Navbar() {
                   {link.label}
                   {link.dropdown && (
                     <ChevronDown
-                      size={12}
+                      size={14}
                       className={`transition-transform duration-200 ${activeDropdown === link.label ? 'rotate-180' : ''}`}
                     />
                   )}
                 </Link>
 
-                {/* ── Improved Dropdown ── */}
+                {/* ── Enhanced Dropdown with Images ── */}
                 <AnimatePresence>
                   {link.dropdown && activeDropdown === link.label && (
                     <motion.div
-                      initial={{ opacity: 0, y: 8 }}
+                      initial={{ opacity: 0, y: 12 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 4 }}
-                      transition={{ duration: 0.15, ease: [0.16, 1, 0.3, 1] }}
+                      exit={{ opacity: 0, y: 8 }}
+                      transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
                       onMouseEnter={() => handleMouseEnter(link.label)}
                       onMouseLeave={handleMouseLeave}
-                      className="absolute top-full left-1/2 -translate-x-1/2 mt-3 bg-white border border-osg-navy/8 shadow-[0_20px_60px_-10px_rgba(10,22,40,0.15)] z-[110] overflow-hidden"
-                      style={{ width: link.dropdown.length <= 4 ? '380px' : '560px' }}
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-4 bg-white border border-osg-navy/8 shadow-[0_30px_80px_-15px_rgba(10,22,40,0.2)] z-[110] overflow-hidden rounded-xl"
+                      style={{ width: '900px' }}
                     >
                       {/* Dropdown header */}
-                      <div className="flex items-center justify-between px-5 py-3 border-b border-osg-navy/6 bg-osg-navy/[0.015]">
-                        <span className="text-[8px] font-black tracking-[0.55em] text-osg-gold uppercase">
+                      <div className="flex items-center justify-between px-8 py-5 border-b border-osg-navy/6 bg-osg-navy/[0.02]">
+                        <span className="text-xs font-black tracking-[0.6em] text-osg-gold uppercase">
                           {link.label}
                         </span>
                         <Link
                           href={link.featured?.href ?? link.href}
-                          className="flex items-center gap-1 text-[8px] font-bold tracking-[0.3em] text-osg-navy/40 hover:text-osg-navy uppercase transition-colors"
+                          className="flex items-center gap-1.5 text-xs font-bold tracking-[0.3em] text-osg-navy/50 hover:text-osg-navy uppercase transition-colors"
                         >
                           {link.featured?.label}
-                          <ArrowUpRight size={9} />
+                          <ArrowUpRight size={12} />
                         </Link>
                       </div>
 
-                      {/* Items */}
-                      <div className={`grid gap-px bg-osg-navy/5 ${link.dropdown.length <= 4 ? 'grid-cols-1' : 'grid-cols-2'}`}>
+                      {/* Items Grid with Images */}
+                      <div className="grid grid-cols-3 gap-px bg-osg-navy/5">
                         {link.dropdown.map((sub) => (
                           <Link
                             key={sub.label}
                             href={sub.href}
-                            className="group flex items-start gap-3.5 px-5 py-4 bg-white hover:bg-[#faf9f7] transition-colors"
+                            className="group flex flex-col bg-white hover:bg-[#faf9f7] transition-colors"
                           >
-                            {/* Icon badge */}
-                            <div className="flex-shrink-0 w-9 h-9 flex items-center justify-center border border-osg-navy/8 bg-osg-offwhite group-hover:border-osg-gold/40 group-hover:bg-osg-gold/8 transition-all duration-200 mt-0.5">
-                              <sub.icon size={14} className="text-osg-navy/35 group-hover:text-osg-gold transition-colors duration-200" />
+                            {/* Image */}
+                            <div className="relative w-full h-40 overflow-hidden bg-osg-navy/8">
+                              <Image
+                                src={sub.image}
+                                alt={sub.label}
+                                fill
+                                className="object-cover group-hover:scale-110 transition-transform duration-500"
+                                sizes="300px"
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-osg-navy/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                             </div>
 
-                            {/* Text */}
-                            <div className="min-w-0">
-                              <p className="text-[11px] font-black text-osg-navy uppercase tracking-[0.1em] leading-none group-hover:text-osg-navy transition-colors">
+                            {/* Text Content */}
+                            <div className="p-5 flex-grow flex flex-col">
+                              <h4 className="text-sm font-black text-osg-navy uppercase tracking-[0.15em] leading-tight mb-2 group-hover:text-osg-gold transition-colors">
                                 {sub.label}
-                              </p>
-                              <p className="text-[10px] text-osg-navy/40 font-medium mt-1.5 leading-relaxed">
+                              </h4>
+                              <p className="text-xs text-osg-navy/50 font-medium leading-relaxed flex-grow">
                                 {sub.desc}
                               </p>
+                              <div className="flex items-center gap-2 mt-4 text-osg-gold/60 group-hover:text-osg-gold transition-colors">
+                                <span className="text-[10px] font-black uppercase tracking-[0.25em]">Explore</span>
+                                <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
+                              </div>
                             </div>
-
-                            {/* Arrow */}
-                            <ArrowRight
-                              size={12}
-                              className="flex-shrink-0 ml-auto mt-1 text-osg-navy/0 group-hover:text-osg-gold/60 transition-all duration-200 translate-x-1 group-hover:translate-x-0"
-                            />
                           </Link>
                         ))}
                       </div>
 
                       {/* Dropdown footer */}
-                      <div className="flex items-center justify-between px-5 py-3 bg-osg-navy/[0.02] border-t border-osg-navy/6">
-                        <p className="text-[8px] font-bold tracking-[0.3em] text-osg-navy/25 uppercase">
-                          Ole Sereni Group
+                      <div className="flex items-center justify-between px-8 py-4 bg-osg-navy/[0.015] border-t border-osg-navy/6">
+                        <p className="text-xs font-bold tracking-[0.35em] text-osg-navy/30 uppercase">
+                          Ole Sereni Group — Premium Architectural Systems
                         </p>
                         <Link
                           href="/contact"
-                          className="flex items-center gap-1 text-[8px] font-black tracking-[0.3em] text-osg-navy/40 hover:text-osg-gold uppercase transition-colors"
+                          className="flex items-center gap-1.5 text-xs font-black tracking-[0.3em] text-osg-navy/40 hover:text-osg-gold uppercase transition-colors"
                         >
-                          Get a Quote <ArrowRight size={8} />
+                          Get a Quote <ArrowRight size={10} />
                         </Link>
                       </div>
                     </motion.div>
@@ -223,20 +226,20 @@ export default function Navbar() {
           </nav>
 
           {/* ── Actions ── */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             {!osgUser ? (
               <Link
                 href="/login"
-                className="hidden lg:flex items-center gap-2 px-5 py-2.5 bg-osg-navy text-white text-[9px] font-black uppercase tracking-[0.3em] hover:bg-osg-gold hover:text-osg-navy transition-all duration-300"
+                className="hidden lg:flex items-center gap-2 px-7 py-3 bg-osg-navy text-white text-xs font-black uppercase tracking-[0.3em] hover:bg-osg-gold hover:text-osg-navy transition-all duration-300 rounded-lg"
               >
-                Portal Login <ArrowUpRight size={12} />
+                Portal Login <ArrowUpRight size={13} />
               </Link>
             ) : (
               <Link
                 href="/portal/dashboard"
-                className="hidden lg:flex items-center gap-2 px-5 py-2.5 bg-osg-gold text-osg-navy text-[9px] font-black uppercase tracking-[0.3em] hover:bg-osg-gold-light transition-all duration-300"
+                className="hidden lg:flex items-center gap-2 px-7 py-3 bg-osg-gold text-osg-navy text-xs font-black uppercase tracking-[0.3em] hover:bg-osg-gold-light transition-all duration-300 rounded-lg"
               >
-                Dashboard <ArrowUpRight size={12} />
+                Dashboard <ArrowUpRight size={13} />
               </Link>
             )}
 
@@ -244,15 +247,15 @@ export default function Navbar() {
             <button
               onClick={() => setMobileOpen(true)}
               aria-label="Open menu"
-              className="xl:hidden flex items-center justify-center w-10 h-10 text-osg-navy hover:text-osg-gold transition-colors"
+              className="xl:hidden flex items-center justify-center w-11 h-11 text-osg-navy hover:bg-osg-navy/5 transition-colors rounded-lg"
             >
-              <Menu size={22} />
+              <Menu size={24} />
             </button>
           </div>
         </div>
       </header>
 
-      {/* ── Mobile Menu (unchanged from original) ── */}
+      {/* ── Mobile Menu ── */}
       <AnimatePresence>
         {mobileOpen && (
           <>
@@ -269,35 +272,35 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="fixed top-0 right-0 bottom-0 z-[200] w-[min(380px,100vw)] bg-osg-navy flex flex-col xl:hidden overflow-y-auto"
+              className="fixed top-0 right-0 bottom-0 z-[200] w-[min(400px,100vw)] bg-osg-navy flex flex-col xl:hidden overflow-y-auto"
             >
               {/* Mobile header */}
               <div className="flex items-center justify-between px-6 py-5 border-b border-white/10">
-                <Link href="/" onClick={() => setMobileOpen(false)} className="font-serif font-black text-2xl text-white tracking-[-0.03em]">
+                <Link href="/" onClick={() => setMobileOpen(false)} className="font-serif font-black text-3xl text-white tracking-[-0.03em]">
                   OSG<span className="text-osg-gold">.</span>
                 </Link>
                 <button
                   onClick={() => setMobileOpen(false)}
                   aria-label="Close menu"
-                  className="w-9 h-9 flex items-center justify-center text-white/50 hover:text-white transition-colors"
+                  className="w-10 h-10 flex items-center justify-center text-white/50 hover:text-white transition-colors"
                 >
-                  <X size={20} />
+                  <X size={24} />
                 </button>
               </div>
 
               {/* Mobile links */}
-              <nav className="flex-1 px-4 py-4" aria-label="Mobile navigation">
+              <nav className="flex-1 px-5 py-6" aria-label="Mobile navigation">
                 {navLinks.map((link) => (
                   <div key={link.label}>
                     {link.dropdown ? (
                       <div>
                         <button
                           onClick={() => setMobileExpanded(mobileExpanded === link.label ? null : link.label)}
-                          className="w-full flex items-center justify-between px-4 py-3.5 text-[11px] font-black uppercase tracking-[0.25em] text-white/60 hover:text-white transition-colors"
+                          className="w-full flex items-center justify-between px-4 py-4 text-sm font-black uppercase tracking-[0.25em] text-white/70 hover:text-white transition-colors"
                         >
                           {link.label}
                           <ChevronDown
-                            size={13}
+                            size={16}
                             className={`transition-transform duration-200 ${mobileExpanded === link.label ? 'rotate-180 text-osg-gold' : ''}`}
                           />
                         </button>
@@ -310,24 +313,24 @@ export default function Navbar() {
                               transition={{ duration: 0.2 }}
                               className="overflow-hidden"
                             >
-                              <div className="pl-4 pb-2">
+                              <div className="pl-6 pb-3 space-y-2">
                                 {link.dropdown.map((sub) => (
                                   <Link
                                     key={sub.label}
                                     href={sub.href}
                                     onClick={() => setMobileOpen(false)}
-                                    className="flex items-center gap-3 px-4 py-3 text-[10px] font-bold text-white/40 hover:text-osg-gold uppercase tracking-[0.2em] transition-colors"
+                                    className="flex flex-col px-4 py-3 text-xs font-bold text-white/50 hover:text-osg-gold uppercase tracking-[0.2em] transition-colors bg-white/5 rounded-lg"
                                   >
-                                    <sub.icon size={13} className="flex-shrink-0" />
-                                    {sub.label}
+                                    <span className="font-black mb-1">{sub.label}</span>
+                                    <span className="text-[10px] text-white/30 font-normal">{sub.desc}</span>
                                   </Link>
                                 ))}
                                 <Link
                                   href={link.href}
                                   onClick={() => setMobileOpen(false)}
-                                  className="flex items-center gap-1.5 px-4 py-2 text-[9px] font-black text-osg-gold/60 hover:text-osg-gold uppercase tracking-[0.3em] transition-colors"
+                                  className="flex items-center gap-2 px-4 py-3 text-xs font-black text-osg-gold/80 hover:text-osg-gold uppercase tracking-[0.3em] transition-colors mt-2"
                                 >
-                                  View all {link.label} <ArrowRight size={9} />
+                                  View all {link.label} <ArrowRight size={11} />
                                 </Link>
                               </div>
                             </motion.div>
@@ -338,8 +341,8 @@ export default function Navbar() {
                       <Link
                         href={link.href}
                         onClick={() => setMobileOpen(false)}
-                        className={`flex items-center px-4 py-3.5 text-[11px] font-black uppercase tracking-[0.25em] transition-colors ${
-                          isActive(link.href) ? 'text-osg-gold' : 'text-white/60 hover:text-white'
+                        className={`flex items-center px-4 py-4 text-sm font-black uppercase tracking-[0.3em] transition-colors ${
+                          isActive(link.href) ? 'text-osg-gold' : 'text-white/70 hover:text-white'
                         }`}
                       >
                         {link.label}
@@ -350,11 +353,11 @@ export default function Navbar() {
               </nav>
 
               {/* Mobile CTA */}
-              <div className="px-6 pb-8 pt-4 border-t border-white/10">
+              <div className="px-6 pb-8 pt-5 border-t border-white/10">
                 <Link
                   href={osgUser ? '/portal/dashboard' : '/login'}
                   onClick={() => setMobileOpen(false)}
-                  className="flex items-center justify-center h-12 bg-osg-gold text-osg-navy text-[10px] font-black uppercase tracking-[0.3em] hover:bg-osg-gold-light transition-colors"
+                  className="flex items-center justify-center h-14 bg-osg-gold text-osg-navy text-xs font-black uppercase tracking-[0.35em] hover:bg-osg-gold-light transition-colors rounded-lg"
                 >
                   {osgUser ? 'Go to Dashboard' : 'Portal Login'}
                 </Link>
