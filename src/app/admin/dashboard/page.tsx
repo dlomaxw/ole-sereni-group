@@ -42,18 +42,18 @@ export default function AdminDashboardPage() {
           { label: 'Running Projects', value: '12', icon: Activity, color: 'bg-white text-osg-navy' },
           { label: 'Pending Project', value: '2', icon: AlertCircle, color: 'bg-white text-osg-navy' },
         ].map((stat, i) => (
-          <div key={i} className={`${stat.color} p-8 rounded-[2rem] shadow-sm border border-osg-navy/5 flex flex-col justify-between group hover:shadow-xl transition-all h-60`}>
+          <div key={i} className={`${stat.color} p-10 rounded-[2rem] shadow-sm border border-osg-navy/5 flex flex-col justify-between group hover:shadow-xl transition-all h-64`}>
             <div className="flex justify-between items-start">
-              <div className={`w-12 h-12 rounded-full flex items-center justify-center ${stat.color === 'bg-osg-navy text-white' ? 'bg-white/10' : 'bg-osg-cream/30'}`}>
-                <stat.icon size={20} className={stat.color === 'bg-osg-navy text-white' ? 'text-osg-gold' : 'text-osg-navy'} />
+              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${stat.color === 'bg-osg-navy text-white' ? 'bg-white/10' : 'bg-gray-100'}`}>
+                <stat.icon size={24} className={stat.color === 'bg-osg-navy text-white' ? 'text-osg-gold' : 'text-osg-navy'} />
               </div>
-              <button className={`w-10 h-10 rounded-full flex items-center justify-center border ${stat.color === 'bg-osg-navy text-white' ? 'border-white/20 hover:bg-white/10' : 'border-osg-navy/10 hover:bg-osg-cream/30'} transition-all`}>
-                <ArrowUpRight size={16} />
+              <button className={`w-10 h-10 rounded-xl flex items-center justify-center border ${stat.color === 'bg-osg-navy text-white' ? 'border-white/20 hover:bg-white/10' : 'border-osg-navy/10 hover:bg-gray-100'} transition-all`}>
+                <ArrowUpRight size={18} />
               </button>
             </div>
-            <div>
-              <h4 className="text-5xl font-serif font-black mb-2 tracking-tighter">{stat.value}</h4>
-              <p className="text-[10px] font-black uppercase tracking-[0.3em] opacity-40">{stat.label}</p>
+            <div className="space-y-2">
+              <h4 className="text-6xl font-serif font-black tracking-tighter leading-none">{stat.value}</h4>
+              <p className="text-sm font-bold uppercase tracking-widest opacity-40">{stat.label}</p>
             </div>
           </div>
         ))}
@@ -63,12 +63,12 @@ export default function AdminDashboardPage() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {/* Project Analytics Card */}
-        <div className="lg:col-span-8 bg-white p-10 rounded-[2.5rem] border border-osg-navy/5 shadow-sm space-y-10 group">
+        <div className="lg:col-span-8 bg-white p-10 rounded-[2.5rem] border border-osg-navy/5 shadow-sm space-y-8 group">
           <div className="flex justify-between items-center">
-            <h3 className="text-[13px] font-black uppercase tracking-[0.4em] text-osg-navy">Project Analytics</h3>
+            <h3 className="text-sm font-bold uppercase tracking-widest text-osg-navy">Project Analytics</h3>
             <div className="flex gap-2">
                  {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, i) => (
-                    <span key={i} className="w-8 h-8 flex items-center justify-center text-[10px] font-black text-osg-navy/20">{day}</span>
+                    <span key={i} className="w-9 h-9 flex items-center justify-center text-xs font-bold text-osg-navy/30">{day}</span>
                  ))}
             </div>
           </div>
@@ -86,7 +86,7 @@ export default function AdminDashboardPage() {
                   }`}
                 />
                 {i === 3 && (
-                  <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-osg-gold text-osg-navy px-2 py-1 text-[9px] font-black rounded-lg shadow-lg">75%</div>
+                  <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-osg-gold text-osg-navy px-3 py-1 text-xs font-bold rounded-lg shadow-lg">75%</div>
                 )}
               </div>
             ))}
@@ -96,24 +96,24 @@ export default function AdminDashboardPage() {
         {/* Reminders Card */}
         <div className="lg:col-span-4 bg-white p-10 rounded-[2.5rem] border border-osg-navy/5 shadow-sm flex flex-col justify-between">
           <div>
-            <div className="flex justify-between items-center mb-10">
-              <h3 className="text-[11px] font-black uppercase tracking-[0.3em] opacity-40">Next Sequence</h3>
-              <MoreHorizontal size={18} className="opacity-20" />
+            <div className="flex justify-between items-center mb-8">
+              <h3 className="text-xs font-bold uppercase tracking-widest text-osg-navy/40">Next Sequence</h3>
+              <MoreHorizontal size={20} className="opacity-20" />
             </div>
-            <h4 className="text-2xl font-serif font-black text-osg-navy leading-tight mb-4 italic">Meeting with <br/> Architectural Board</h4>
-            <p className="text-[10px] font-bold text-osg-navy/40 uppercase tracking-widest">Time: 02.00 pm - 04.00 pm</p>
+            <h4 className="text-3xl font-serif font-black text-osg-navy leading-tight mb-4 italic">Meeting with <br/> Architectural Board</h4>
+            <p className="text-sm font-semibold text-osg-navy/40 uppercase tracking-widest">Time: 02.00 pm – 04.00 pm</p>
           </div>
           
-          <div className="space-y-6">
+          <div className="space-y-6 mt-8">
             <div className="flex -space-x-4">
               {[1,2,3].map(i => (
                 <div key={i} className="w-12 h-12 rounded-full border-4 border-white overflow-hidden bg-osg-cream">
                   <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=User${i}`} alt="User" />
                 </div>
               ))}
-              <div className="w-12 h-12 rounded-full border-4 border-white bg-osg-gold flex items-center justify-center text-[10px] font-black text-osg-navy">+12</div>
+              <div className="w-12 h-12 rounded-full border-4 border-white bg-osg-gold flex items-center justify-center text-xs font-black text-osg-navy">+12</div>
             </div>
-            <button className="w-full bg-osg-navy text-white rounded-[1.5rem] py-5 flex items-center justify-center gap-3 text-[11px] font-black uppercase tracking-widest hover:bg-osg-gold hover:text-osg-navy transition-all shadow-xl shadow-osg-navy/10">
+            <button className="w-full bg-osg-navy text-white rounded-2xl py-5 flex items-center justify-center gap-3 text-sm font-bold uppercase tracking-widest hover:bg-osg-gold hover:text-osg-navy transition-all shadow-xl shadow-osg-navy/10">
               <Video size={18} /> Start Digital Brief
             </button>
           </div>
@@ -124,27 +124,27 @@ export default function AdminDashboardPage() {
           
           {/* Team Collaboration */}
           <div className="bg-white p-10 rounded-[2.5rem] border border-osg-navy/5 shadow-sm">
-             <div className="flex justify-between items-center mb-10">
-                <h3 className="text-[11px] font-black uppercase tracking-[0.4em] text-osg-navy">Team Collaboration</h3>
-                <button className="text-[18px] text-osg-navy/20 hover:text-osg-gold transition-colors"><Plus size={24} /></button>
+             <div className="flex justify-between items-center mb-8">
+                <h3 className="text-sm font-bold uppercase tracking-widest text-osg-navy">Team Collaboration</h3>
+                <button className="text-osg-navy/20 hover:text-osg-gold transition-colors"><Plus size={22} /></button>
              </div>
-             <div className="space-y-6">
+             <div className="space-y-5">
                 {[
                   { name: 'Elena Sterling', task: 'Lead Project Strategist', status: 'Active', color: 'bg-green-100 text-green-700' },
                   { name: 'Marcus Chen', task: 'Structural Engineer', status: 'Review', color: 'bg-osg-gold/20 text-osg-gold' },
-                  { name: 'Sarah J.', task: 'Logistics Manager', status: 'Pending', color: 'bg-osg-cream text-osg-navy/40' },
+                  { name: 'Sarah J.', task: 'Logistics Manager', status: 'Pending', color: 'bg-gray-100 text-osg-navy/40' },
                 ].map((member, i) => (
                   <div key={i} className="flex items-center justify-between group">
                     <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-2xl bg-osg-cream overflow-hidden">
+                        <div className="w-12 h-12 rounded-2xl bg-gray-100 overflow-hidden shrink-0">
                             <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${member.name}`} alt="Member" />
                         </div>
                         <div>
-                            <p className="text-[12px] font-black text-osg-navy uppercase tracking-tighter leading-none mb-1">{member.name}</p>
-                            <p className="text-[9px] font-bold text-osg-navy/30 uppercase tracking-widest">{member.task}</p>
+                            <p className="text-sm font-bold text-osg-navy leading-none mb-1">{member.name}</p>
+                            <p className="text-xs text-osg-navy/40">{member.task}</p>
                         </div>
                     </div>
-                    <span className={`px-4 py-1.5 rounded-full text-[8px] font-black uppercase tracking-widest ${member.color}`}>
+                    <span className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider ${member.color}`}>
                         {member.status}
                     </span>
                   </div>
@@ -155,7 +155,7 @@ export default function AdminDashboardPage() {
           {/* Project Progress Gauge */}
           <div className="bg-white p-10 rounded-[2.5rem] border border-osg-navy/5 shadow-sm flex flex-col items-center justify-center text-center relative overflow-hidden group">
               <div className="absolute inset-0 bg-noise opacity-[0.02]"></div>
-              <h3 className="text-[11px] font-black uppercase tracking-[0.4em] text-osg-navy mb-12 relative z-10">Deployment Phase</h3>
+              <h3 className="text-sm font-bold uppercase tracking-widest text-osg-navy mb-10 relative z-10">Deployment Phase</h3>
               
               <div className="relative w-48 h-24 mb-6">
                 <svg className="w-48 h-48 transform -rotate-180" viewBox="0 0 100 100">
@@ -170,10 +170,10 @@ export default function AdminDashboardPage() {
                 </svg>
                 <div className="absolute top-1/2 left-0 right-0 transform translate-y-2 flex flex-col items-center">
                     <span className="text-4xl font-serif font-black text-osg-navy leading-none">75%</span>
-                    <span className="text-[8px] font-black text-osg-navy/20 uppercase tracking-[0.3em] mt-2">Certified</span>
+                    <span className="text-xs font-bold text-osg-navy/30 uppercase tracking-widest mt-2">Certified</span>
                 </div>
               </div>
-              <p className="text-[10px] font-bold text-osg-navy/30 uppercase tracking-[0.4em] mt-2 relative z-10 italic">Glazing Integrity Pass</p>
+              <p className="text-sm font-semibold text-osg-navy/30 uppercase tracking-widest mt-2 relative z-10 italic">Glazing Integrity Pass</p>
           </div>
 
           {/* Time Tracker Card */}
@@ -181,20 +181,20 @@ export default function AdminDashboardPage() {
               <div className="absolute -left-10 -bottom-10 opacity-10 group-hover:scale-110 transition-transform duration-2000">
                   <PieChart size={300} className="text-white" />
               </div>
-              <div className="relative z-10 flex flex-col h-full justify-between">
-                  <h3 className="text-[11px] font-black uppercase tracking-[0.5em] text-white/30 mb-8">System Uptime</h3>
+              <div className="relative z-10 flex flex-col h-full justify-between gap-8">
+                  <h3 className="text-xs font-bold uppercase tracking-widest text-white/30">System Uptime</h3>
                   
-                  <div className="mb-10">
-                    <p className="text-5xl font-serif font-black text-osg-gold tracking-tighter leading-none mb-4">01:24:08</p>
-                    <p className="text-[9px] font-black text-white/20 uppercase tracking-[0.3em]">Live Feed Active //</p>
+                  <div>
+                    <p className="text-6xl font-serif font-black text-osg-gold tracking-tighter leading-none mb-3">01:24:08</p>
+                    <p className="text-xs font-semibold text-white/30 uppercase tracking-widest">Live Feed Active //</p>
                   </div>
 
                   <div className="flex gap-4">
-                    <button className="flex-1 bg-white/10 hover:bg-white text-white hover:text-osg-navy p-4 rounded-3xl flex items-center justify-center transition-all">
-                        <Play size={18} fill="currentColor" />
+                    <button className="flex-1 bg-white/10 hover:bg-white text-white hover:text-osg-navy p-4 rounded-2xl flex items-center justify-center transition-all">
+                        <Play size={20} fill="currentColor" />
                     </button>
-                    <button className="flex-1 bg-white/10 hover:bg-osg-gold text-white hover:text-osg-navy p-4 rounded-3xl flex items-center justify-center transition-all">
-                        <Square size={18} fill="currentColor" />
+                    <button className="flex-1 bg-white/10 hover:bg-osg-gold text-white hover:text-osg-navy p-4 rounded-2xl flex items-center justify-center transition-all">
+                        <Square size={20} fill="currentColor" />
                     </button>
                   </div>
               </div>
