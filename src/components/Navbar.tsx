@@ -1,251 +1,390 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { 
-  Menu, X, Phone, Mail, ChevronDown, ArrowRight, Shield, ArrowUpRight,
-  Home, Info, Layers, Cpu, Building2, Briefcase, Grid, Square, Palette, 
-  Hammer, Zap, Layout, DoorOpen, Box, Component, Hotel, GraduationCap, ShoppingBag
+import {
+  Menu, X, ChevronDown, ArrowUpRight, ArrowRight,
+  Grid, Square, Palette, Hammer, Zap, Home,
+  Layout, DoorOpen, Box, Component, Shield,
+  Hotel, Briefcase, GraduationCap, ShoppingBag, Cpu,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/context/AuthContext';
 
 const services = [
-  { label: 'Aluminium & Glass Systems', href: '/services/aluminium-glass', icon: Grid },
-  { label: 'Gypsum Works & Ceilings', href: '/services/gypsum-works', icon: Square },
-  { label: 'Painting & Tiling', href: '/services/painting-tiling', icon: Palette },
-  { label: 'Carpentry & Joinery', href: '/services/carpentry', icon: Hammer },
-  { label: 'Electrical Installations', href: '/services/electrical', icon: Zap },
-  { label: 'Interior & Exterior Finishing', href: '/services/finishing', icon: Home },
+  { label: 'Aluminium & Glass Systems', href: '/services/aluminium-glass', icon: Grid, desc: 'Facades, curtain walls, and glazing' },
+  { label: 'Gypsum Works & Ceilings', href: '/services/gypsum-works', icon: Square, desc: 'Suspended ceilings and partitions' },
+  { label: 'Painting & Tiling', href: '/services/painting-tiling', icon: Palette, desc: 'Premium surface finishes' },
+  { label: 'Carpentry & Joinery', href: '/services/carpentry', icon: Hammer, desc: 'Bespoke timber and millwork' },
+  { label: 'Electrical Installations', href: '/services/electrical', icon: Zap, desc: 'Commercial electrical systems' },
+  { label: 'Interior & Exterior Finishing', href: '/services/finishing', icon: Home, desc: 'Complete finishing solutions' },
 ];
 
 const products = [
-  { label: 'Window Systems', href: '/products/window-systems', icon: Layout },
-  { label: 'Door Systems', href: '/products/door-systems', icon: DoorOpen },
-  { label: 'Curtain Wall & Facades', href: '/products/curtain-wall', icon: Box },
-  { label: 'Glass Systems', href: '/products/glass-systems', icon: Component },
-  { label: 'Aluminium Profiles', href: '/products/aluminium-profiles', icon: Menu },
-  { label: 'Specialized Systems', href: '/products/specialized-systems', icon: Shield },
+  { label: 'Window Systems', href: '/products/window-systems', icon: Layout, desc: 'Aluminium and composite windows' },
+  { label: 'Door Systems', href: '/products/door-systems', icon: DoorOpen, desc: 'Security and feature entrances' },
+  { label: 'Curtain Wall & Facades', href: '/products/curtain-wall', icon: Box, desc: 'High-performance facade systems' },
+  { label: 'Glass Systems', href: '/products/glass-systems', icon: Component, desc: 'Structural and decorative glass' },
+  { label: 'Aluminium Profiles', href: '/products/aluminium-profiles', icon: Cpu, desc: 'Extrusions and custom profiles' },
+  { label: 'Specialized Systems', href: '/products/specialized-systems', icon: Shield, desc: 'Bespoke architectural solutions' },
 ];
 
 const industries = [
-  { label: 'Hospitality & Residential', href: '/industries/hospitality-residential', icon: Hotel },
-  { label: 'Corporate & Commercial', href: '/industries/corporate-commercial', icon: Briefcase },
-  { label: 'Educational & Institutional', href: '/industries/educational-institutional', icon: GraduationCap },
-  { label: 'Retail & Light Industrial', href: '/industries/retail-industrial', icon: ShoppingBag },
+  { label: 'Hospitality & Residential', href: '/industries/hospitality-residential', icon: Hotel, desc: 'Hotels, resorts, and homes' },
+  { label: 'Corporate & Commercial', href: '/industries/corporate-commercial', icon: Briefcase, desc: 'Offices and commercial spaces' },
+  { label: 'Educational & Institutional', href: '/industries/educational-institutional', icon: GraduationCap, desc: 'Schools and public buildings' },
+  { label: 'Retail & Light Industrial', href: '/industries/retail-industrial', icon: ShoppingBag, desc: 'Retail fit-outs and warehouses' },
 ];
 
 const navLinks = [
-  { label: 'Home', href: '/', icon: Home },
-  { label: 'About Us', href: '/about-us', icon: Info },
-  { label: 'Services', href: '/services', dropdown: services, icon: Layers },
-  { label: 'Systems', href: '/products', dropdown: products, icon: Cpu },
-  { label: 'Industries', href: '/industries', dropdown: industries, icon: Building2 },
-  { label: 'Projects', href: '/projects', icon: Briefcase },
-  { label: 'Contact', href: '/contact', icon: Phone },
+  { label: 'About', href: '/about-us' },
+  { label: 'Services', href: '/services', dropdown: services, featured: { label: 'View All Services', href: '/services' } },
+  { label: 'Systems', href: '/products', dropdown: products, featured: { label: 'View All Systems', href: '/products' } },
+  { label: 'Industries', href: '/industries', dropdown: industries, featured: { label: 'View All Industries', href: '/industries' } },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const pathname = usePathname();
   const { osgUser } = useAuth();
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Hide Navbar on Login and Portal pages to avoid branding clash
-  const isHiddenRoute = pathname === '/login' || pathname?.startsWith('/portal') || pathname?.startsWith('/admin');
-  
+  const isHiddenRoute =
+    pathname === '/login' ||
+    pathname?.startsWith('/portal') ||
+    pathname?.startsWith('/admin');
+
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => setScrolled(window.scrollY > 30);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  useEffect(() => {
+    setMobileOpen(false);
+    setActiveDropdown(null);
+  }, [pathname]);
+
+  const handleMouseEnter = (label: string) => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setActiveDropdown(label);
+  };
+
+  const handleMouseLeave = () => {
+    closeTimer.current = setTimeout(() => setActiveDropdown(null), 120);
+  };
+
   if (isHiddenRoute) return null;
+
+  const isActive = (href: string) =>
+    href === '/' ? pathname === '/' : pathname?.startsWith(href);
 
   return (
     <>
-      {/* Full-Width Architectural Navbar */}
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        className={`
-          fixed top-0 left-0 right-0 z-[100] transition-all duration-700
-          ${scrolled 
-            ? 'bg-white border-b border-osg-navy/10 shadow-2xl h-24' 
-            : 'bg-white/70 backdrop-blur-3xl h-28'
-          }
-        `}
+      <motion.header
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
+          scrolled
+            ? 'bg-white/98 backdrop-blur-xl shadow-[0_1px_0_rgba(10,22,40,0.08),0_8px_32px_rgba(10,22,40,0.06)]'
+            : 'bg-white/90 backdrop-blur-md'
+        }`}
       >
-        {/* Signature HK Properties Gold Top Accent */}
-        <div className="absolute top-0 left-0 right-0 h-1 bg-osg-gold z-10"></div>
+        {/* Gold top rule */}
+        <div className="h-[3px] bg-osg-gold w-full" />
 
-        <div className="max-w-[1720px] mx-auto h-full px-8 md:px-16 flex items-center justify-between">
-          {/* Logo Section - Architectural & Bold */}
-          <Link href="/" className="flex items-center gap-6 group">
-            <div className="relative">
-              <span className="font-serif font-black text-5xl tracking-tighter text-osg-navy leading-none">
+        <div className="max-w-[1720px] mx-auto px-6 md:px-10 lg:px-16 flex items-center justify-between h-[72px]">
+
+          {/* ── Logo ── */}
+          <Link href="/" className="flex items-center gap-4 group flex-shrink-0">
+            <div className="relative flex items-end gap-1">
+              <span className="font-serif font-black text-[2.2rem] text-osg-navy leading-none tracking-[-0.04em]">
                 OSG
               </span>
-              <div className="absolute -top-1 -right-4 w-2 h-2 bg-osg-gold rounded-full"></div>
+              <div className="w-[6px] h-[6px] rounded-full bg-osg-gold mb-1 group-hover:scale-125 transition-transform" />
             </div>
-            <div className="hidden lg:flex flex-col border-l border-osg-navy/10 pl-6">
-              <span className="text-[10px] font-black tracking-[0.6em] text-osg-navy uppercase leading-none">
+            <div className="hidden lg:block border-l border-osg-navy/10 pl-4">
+              <p className="text-[9px] font-black tracking-[0.45em] text-osg-navy uppercase leading-none">
                 Ole Sereni Group
-              </span>
-              <span className="text-[7px] font-bold tracking-[0.4em] text-osg-gold uppercase leading-none mt-2">
+              </p>
+              <p className="text-[7px] font-bold tracking-[0.35em] text-osg-gold uppercase leading-none mt-[5px]">
                 Engineering Identity
-              </span>
+              </p>
             </div>
           </Link>
 
-          {/* Nav Links - Spaced & Minimalist (HK Properties Inspired) */}
-          <div className="hidden xl:flex items-center gap-12">
+          {/* ── Desktop Nav ── */}
+          <nav className="hidden xl:flex items-center" aria-label="Primary navigation">
             {navLinks.map((link) => (
               <div
                 key={link.label}
-                className="relative h-full flex items-center"
-                onMouseEnter={() => link.dropdown && setActiveDropdown(link.label)}
-                onMouseLeave={() => setActiveDropdown(null)}
+                className="relative"
+                onMouseEnter={() => link.dropdown && handleMouseEnter(link.label)}
+                onMouseLeave={() => link.dropdown && handleMouseLeave()}
               >
                 <Link
                   href={link.href}
-                  className={`
-                    px-2 py-4 text-[15px] font-black uppercase tracking-[0.25em] transition-all relative flex items-center gap-3
-                    ${activeDropdown === link.label ? 'text-osg-gold' : 'text-osg-navy/85 hover:text-osg-navy'}
-                  `}
+                  className={`flex items-center gap-1.5 px-4 py-2 text-[11px] font-black uppercase tracking-[0.22em] transition-colors duration-200 rounded-sm ${
+                    isActive(link.href)
+                      ? 'text-osg-gold'
+                      : activeDropdown === link.label
+                      ? 'text-osg-navy'
+                      : 'text-osg-navy/60 hover:text-osg-navy'
+                  }`}
                 >
-                  <motion.div
-                    whileHover={{ y: -4, scale: 1.15 }}
-                    className="flex items-center gap-3"
-                  >
-                    <link.icon size={18} className={`${activeDropdown === link.label ? 'text-osg-gold' : 'text-osg-navy/40'} drop-shadow-sm`} />
-                    <span className="relative z-10">{link.label}</span>
-                  </motion.div>
-                  {activeDropdown === link.label && (
-                    <motion.div 
-                      layoutId="nav-underline"
-                      className="absolute bottom-[-10px] left-0 right-0 h-[2px] bg-osg-gold shadow-[0_4px_12px_rgba(168,120,30,0.3)]"
+                  {link.label}
+                  {link.dropdown && (
+                    <ChevronDown
+                      size={12}
+                      className={`transition-transform duration-200 ${activeDropdown === link.label ? 'rotate-180 text-osg-gold' : ''}`}
+                    />
+                  )}
+                  {isActive(link.href) && (
+                    <motion.span
+                      layoutId="nav-active"
+                      className="absolute bottom-0 left-4 right-4 h-[2px] bg-osg-gold rounded-full"
                     />
                   )}
                 </Link>
 
-                {/* Dropdown Panel - Clean Architectural Style */}
+                {/* Mega-dropdown */}
                 <AnimatePresence>
                   {link.dropdown && activeDropdown === link.label && (
                     <motion.div
-                      initial={{ opacity: 0, y: 15 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 15 }}
-                      className="absolute top-[100%] left-[-20px] min-w-[340px] bg-white border border-osg-navy/5 shadow-[0_40px_100px_-15px_rgba(10,22,40,0.18)] p-6 z-[110]"
+                      initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 6, scale: 0.98 }}
+                      transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                      onMouseEnter={() => handleMouseEnter(link.label)}
+                      onMouseLeave={handleMouseLeave}
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[520px] bg-white border border-osg-navy/8 shadow-[0_24px_64px_-12px_rgba(10,22,40,0.18)] z-[110] overflow-hidden"
                     >
-                      <div className="grid grid-cols-1 gap-1">
+                      {/* Dropdown header */}
+                      <div className="px-6 pt-5 pb-3 border-b border-osg-navy/5 flex items-center justify-between">
+                        <span className="text-[9px] font-black tracking-[0.5em] text-osg-gold uppercase">
+                          {link.label}
+                        </span>
+                        <Link
+                          href={link.featured?.href ?? link.href}
+                          className="flex items-center gap-1.5 text-[9px] font-black tracking-[0.3em] text-osg-navy/40 hover:text-osg-navy uppercase transition-colors"
+                        >
+                          {link.featured?.label}
+                          <ArrowUpRight size={10} />
+                        </Link>
+                      </div>
+
+                      {/* Items grid */}
+                      <div className="grid grid-cols-2 gap-px bg-osg-navy/4 p-px">
                         {link.dropdown.map((sub) => (
                           <Link
                             key={sub.label}
                             href={sub.href}
-                            className="px-6 py-5 text-[13px] font-black text-osg-navy/60 hover:text-osg-gold hover:bg-osg-cream/50 transition-all uppercase tracking-widest flex items-center justify-between group rounded-xl"
+                            className="flex items-start gap-3 px-5 py-4 bg-white hover:bg-osg-offwhite transition-colors group"
                           >
-                            <div className="flex items-center gap-4">
-                              <sub.icon size={16} className="text-osg-navy/20 group-hover:text-osg-gold transition-colors" />
-                              <span>{sub.label}</span>
+                            <div className="w-8 h-8 flex-shrink-0 flex items-center justify-center bg-osg-navy/4 group-hover:bg-osg-gold/10 transition-colors mt-0.5">
+                              <sub.icon size={15} className="text-osg-navy/30 group-hover:text-osg-gold transition-colors" />
                             </div>
-                            <ArrowRight size={14} className="opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all" />
+                            <div>
+                              <p className="text-[11px] font-black text-osg-navy uppercase tracking-[0.12em] leading-none group-hover:text-osg-navy transition-colors">
+                                {sub.label}
+                              </p>
+                              {'desc' in sub && (
+                                <p className="text-[10px] text-osg-navy/40 mt-1 leading-relaxed font-medium">
+                                  {sub.desc}
+                                </p>
+                              )}
+                            </div>
                           </Link>
                         ))}
+                      </div>
+
+                      {/* Dropdown footer */}
+                      <div className="px-6 py-3 bg-osg-navy/[0.02] border-t border-osg-navy/5 flex items-center justify-between">
+                        <p className="text-[9px] text-osg-navy/30 font-bold tracking-[0.25em] uppercase">
+                          Ole Sereni Group
+                        </p>
+                        <Link
+                          href="/contact"
+                          className="text-[9px] font-black tracking-[0.3em] text-osg-navy/50 hover:text-osg-gold uppercase transition-colors flex items-center gap-1"
+                        >
+                          Get a quote <ArrowRight size={9} />
+                        </Link>
                       </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
               </div>
             ))}
-          </div>
+          </nav>
 
-          {/* Action Area */}
-          <div className="flex items-center gap-8">
-            {!osgUser && (
-              <Link 
-                href="/portal/dashboard" 
-                className="hidden lg:flex items-center gap-3 px-10 py-5 bg-osg-navy text-white text-[10px] font-black uppercase tracking-[0.3em] hover:bg-osg-gold hover:text-osg-navy transition-all shadow-xl shadow-osg-navy/10"
+          {/* ── Actions ── */}
+          <div className="flex items-center gap-3">
+            <Link
+              href="/quote"
+              className="hidden lg:flex items-center gap-2 px-5 py-2.5 text-[9px] font-black uppercase tracking-[0.3em] text-osg-gold border border-osg-gold/30 hover:bg-osg-gold hover:text-osg-navy transition-all duration-300"
+            >
+              Get Quote
+            </Link>
+
+            {!osgUser ? (
+              <Link
+                href="/login"
+                className="hidden lg:flex items-center gap-2 px-5 py-2.5 bg-osg-navy text-white text-[9px] font-black uppercase tracking-[0.3em] hover:bg-osg-gold hover:text-osg-navy transition-all duration-300"
               >
-                Portal Login <ArrowUpRight size={14} />
+                Portal <ArrowUpRight size={12} />
+              </Link>
+            ) : (
+              <Link
+                href="/portal/dashboard"
+                className="hidden lg:flex items-center gap-2 px-5 py-2.5 bg-osg-gold text-osg-navy text-[9px] font-black uppercase tracking-[0.3em] hover:bg-osg-gold-light transition-all duration-300"
+              >
+                Dashboard <ArrowUpRight size={12} />
               </Link>
             )}
-            
+
+            {/* Mobile trigger */}
             <button
               onClick={() => setMobileOpen(true)}
-              className="xl:hidden w-12 h-12 flex items-center justify-center bg-osg-navy/5 text-osg-navy hover:bg-osg-navy hover:text-white transition-all"
+              aria-label="Open menu"
+              className="xl:hidden flex items-center justify-center w-10 h-10 text-osg-navy hover:text-osg-gold transition-colors"
             >
-              <Menu size={24} />
+              <Menu size={22} />
             </button>
           </div>
         </div>
-      </motion.nav>
+      </motion.header>
 
-      {/* Full-Screen Mobile Portal */}
+      {/* ── Mobile Menu ── */}
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[200] bg-osg-navy flex flex-col p-8 lg:hidden"
-          >
-            <div className="flex justify-between items-center mb-16">
-              <Link href="/" onClick={() => setMobileOpen(false)} className="font-serif font-black text-3xl text-white">OSG</Link>
-              <button 
-                onClick={() => setMobileOpen(false)}
-                className="p-3 bg-white/5 rounded-full text-white hover:bg-osg-gold hover:text-osg-navy transition-all"
-              >
-                <X size={24} />
-              </button>
-            </div>
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMobileOpen(false)}
+              className="fixed inset-0 z-[190] bg-osg-navy/60 backdrop-blur-sm xl:hidden"
+            />
 
-            <nav className="flex flex-col gap-6 overflow-y-auto pb-12">
-              {navLinks.map((link, i) => (
-                <motion.div
-                  key={link.label}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05 }}
+            {/* Drawer */}
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className="fixed top-0 right-0 bottom-0 z-[200] w-[min(400px,100vw)] bg-osg-navy flex flex-col xl:hidden overflow-y-auto"
+            >
+              {/* Mobile header */}
+              <div className="flex items-center justify-between px-7 py-6 border-b border-white/8">
+                <Link href="/" onClick={() => setMobileOpen(false)} className="font-serif font-black text-2xl text-white tracking-[-0.03em]">
+                  OSG<span className="text-osg-gold">.</span>
+                </Link>
+                <button
+                  onClick={() => setMobileOpen(false)}
+                  aria-label="Close menu"
+                  className="w-9 h-9 flex items-center justify-center text-white/50 hover:text-white transition-colors"
                 >
-                  <Link
-                    href={link.href}
-                    onClick={() => setMobileOpen(false)}
-                    className="flex items-center gap-6 text-4xl font-serif font-black text-white/40 hover:text-osg-gold uppercase tracking-tighter transition-all"
-                  >
-                    <link.icon size={28} className="opacity-20" />
-                    {link.label}
-                  </Link>
-                  {link.dropdown && (
-                    <div className="mt-4 ml-14 flex flex-col gap-4">
-                      {link.dropdown.map(sub => (
-                        <Link 
-                          key={sub.label} 
-                          href={sub.href}
-                          onClick={() => setMobileOpen(false)}
-                          className="flex items-center gap-4 text-[10px] font-bold text-white/40 hover:text-osg-gold uppercase tracking-widest transition-all"
-                        >
-                          <sub.icon size={14} />
-                          {sub.label}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </motion.div>
-              ))}
-            </nav>
+                  <X size={20} />
+                </button>
+              </div>
 
-            <div className="mt-auto pt-10 border-t border-white/5 grid grid-cols-2 gap-4">
-              <Link href="/quote" onClick={() => setMobileOpen(false)} className="flex items-center justify-center h-16 bg-white text-osg-navy text-[10px] font-black uppercase tracking-widest rounded-2xl">
-                Get Quote
-              </Link>
-              <Link href="/portal/dashboard" onClick={() => setMobileOpen(false)} className="flex items-center justify-center h-16 border border-white/10 text-white text-[10px] font-black uppercase tracking-widest rounded-2xl">
-                Client Portal
-              </Link>
-            </div>
-          </motion.div>
+              {/* Mobile links */}
+              <nav className="flex-1 px-4 py-4" aria-label="Mobile navigation">
+                {navLinks.map((link, i) => (
+                  <motion.div
+                    key={link.label}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.04, duration: 0.3 }}
+                  >
+                    {link.dropdown ? (
+                      <div>
+                        <button
+                          onClick={() => setMobileExpanded(mobileExpanded === link.label ? null : link.label)}
+                          className="w-full flex items-center justify-between px-4 py-3.5 text-[11px] font-black uppercase tracking-[0.25em] text-white/60 hover:text-white transition-colors rounded"
+                        >
+                          {link.label}
+                          <ChevronDown
+                            size={13}
+                            className={`transition-transform duration-200 ${mobileExpanded === link.label ? 'rotate-180 text-osg-gold' : ''}`}
+                          />
+                        </button>
+                        <AnimatePresence>
+                          {mobileExpanded === link.label && (
+                            <motion.div
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: 'auto', opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.22 }}
+                              className="overflow-hidden"
+                            >
+                              <div className="pl-4 pb-2 flex flex-col gap-0.5">
+                                {link.dropdown.map((sub) => (
+                                  <Link
+                                    key={sub.label}
+                                    href={sub.href}
+                                    onClick={() => setMobileOpen(false)}
+                                    className="flex items-center gap-3 px-4 py-3 text-[10px] font-bold text-white/40 hover:text-osg-gold uppercase tracking-[0.2em] transition-colors rounded"
+                                  >
+                                    <sub.icon size={13} className="flex-shrink-0" />
+                                    {sub.label}
+                                  </Link>
+                                ))}
+                                <Link
+                                  href={link.href}
+                                  onClick={() => setMobileOpen(false)}
+                                  className="flex items-center gap-1.5 px-4 py-2 text-[9px] font-black text-osg-gold/70 hover:text-osg-gold uppercase tracking-[0.3em] transition-colors"
+                                >
+                                  View all {link.label} <ArrowRight size={9} />
+                                </Link>
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        onClick={() => setMobileOpen(false)}
+                        className={`flex items-center px-4 py-3.5 text-[11px] font-black uppercase tracking-[0.25em] transition-colors rounded ${
+                          isActive(link.href) ? 'text-osg-gold' : 'text-white/60 hover:text-white'
+                        }`}
+                      >
+                        {link.label}
+                      </Link>
+                    )}
+                  </motion.div>
+                ))}
+              </nav>
+
+              {/* Mobile CTA */}
+              <div className="px-6 pb-8 pt-4 border-t border-white/8 flex flex-col gap-3">
+                <Link
+                  href="/quote"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center justify-center h-12 bg-osg-gold text-osg-navy text-[10px] font-black uppercase tracking-[0.3em] hover:bg-osg-gold-light transition-colors"
+                >
+                  Get a Quote
+                </Link>
+                <Link
+                  href={osgUser ? '/portal/dashboard' : '/login'}
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center justify-center h-12 border border-white/15 text-white/60 text-[10px] font-black uppercase tracking-[0.3em] hover:border-white/30 hover:text-white transition-colors"
+                >
+                  {osgUser ? 'Dashboard' : 'Client Portal'}
+                </Link>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>
