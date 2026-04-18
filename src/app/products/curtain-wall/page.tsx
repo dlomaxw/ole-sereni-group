@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { ArrowRight, Layers, Thermometer, ShieldCheck, Download, Wind, Droplets } from 'lucide-react';
 import { motion } from 'framer-motion';
 import TechShowcase from '@/components/TechShowcase';
+import { ClickableImage } from '@/components/ClickableImage';
 
 const systems = [
   {
@@ -73,12 +74,13 @@ export default function CurtainWallPage() {
             {systems.map((s, i) => (
               <Reveal key={s.title} delay={i * 0.15}>
                 <div className="group">
-                  <div className="aspect-[3/4] overflow-hidden bg-osg-charcoal mb-12 relative border border-osg-navy/5 shadow-2xl transition-all duration-1000">
-                    <Image
+                  <div className="aspect-[3/4] overflow-hidden bg-osg-charcoal mb-12 relative border border-osg-navy/5 shadow-2xl transition-all duration-1000 cursor-pointer">
+                    <ClickableImage
                       src={s.image}
                       alt={s.title}
                       fill
-                      className="object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:scale-110 group-hover:opacity-100 transition-all duration-1000"
+                      className="!relative w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:scale-110 group-hover:opacity-100 transition-all duration-1000"
+                      showHover={true}
                     />
                     {/* Measurement Overlay */}
                     <div className="absolute top-1/2 left-10 right-10 flex justify-between items-center opacity-0 group-hover:opacity-30 transition-opacity pointer-events-none">

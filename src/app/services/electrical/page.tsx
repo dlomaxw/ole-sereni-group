@@ -6,6 +6,7 @@ import PageHero from '@/components/PageHero';
 import Link from 'next/link';
 import Reveal from '@/components/Reveal';
 import TechShowcase from '@/components/TechShowcase';
+import { ClickableImage } from '@/components/ClickableImage';
 
 const systems = [
   {
@@ -82,16 +83,16 @@ export default function ElectricalPage() {
                 <Link href={`#system-${i}`}>
                   <article className="group h-full flex flex-col bg-white border border-osg-navy/5 hover:border-osg-gold transition-all duration-500 shadow-sm hover:shadow-[0_20px_60px_-15px_rgba(10,22,40,0.18)] overflow-hidden rounded-lg cursor-pointer">
                   <div className="relative w-full aspect-[4/3] overflow-hidden bg-osg-navy/10">
-                    <Image
+                    <ClickableImage
                       src={s.image}
                       alt={s.name}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover object-center transition-transform duration-700 group-hover:scale-110"
                       priority={i < 2}
+                      className="!relative w-full h-full"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-osg-navy/50 via-osg-navy/10 to-transparent" />
-                    <span className="absolute top-5 right-5 bg-osg-gold text-osg-navy px-4 py-2 text-[10px] font-black uppercase tracking-widest shadow-lg rounded-sm">
+                    <div className="absolute inset-0 bg-gradient-to-t from-osg-navy/50 via-osg-navy/10 to-transparent pointer-events-none" />
+                    <span className="absolute top-5 right-5 bg-osg-gold text-osg-navy px-4 py-2 text-[10px] font-black uppercase tracking-widest shadow-lg rounded-sm pointer-events-none">
                       {s.tag}
                     </span>
                   </div>
