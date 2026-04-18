@@ -227,6 +227,20 @@ body {
   padding-left: 1rem !important;
 }
 
+/* ─── Cards ─────────────────────────────────────────────────────────── */
+.card-architectural {
+  background: white;
+  border: 1px solid rgba(10, 22, 40, 0.06);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 20px -4px rgba(10, 22, 40, 0.06);
+}
+
+.card-architectural:hover {
+  border-color: var(--osg-gold);
+  box-shadow: var(--shadow-architectural);
+  transform: translateY(-6px);
+}
+
 /* ─── Status & Feedback ─────────────────────────────────────────────── */
 .badge-system {
   padding: 0.35rem 1rem;
