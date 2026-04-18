@@ -18,12 +18,12 @@ function FloatingInput({ label, name, type = 'text', value, onChange, placeholde
   const [focused, setFocused] = useState(false);
 
   return (
-    <div className="relative group mb-10">
-      <div className="flex justify-between items-center mb-3">
-        <label className={`text-[9px] font-black uppercase tracking-[0.4em] transition-colors duration-500 ${focused ? 'text-osg-gold' : 'text-osg-navy/30'}`}>
+    <div className="relative group mb-12">
+      <div className="flex justify-between items-center mb-4">
+        <label className={`text-xs font-black uppercase tracking-[0.2em] transition-colors duration-500 ${focused ? 'text-osg-gold' : 'text-osg-navy/40'}`}>
           {label} {required && '*'}
         </label>
-        {systemIdent && <span className="text-[8px] font-mono text-osg-navy/10 uppercase tracking-widest">{systemIdent}</span>}
+        {systemIdent && <span className="text-[9px] font-mono text-osg-navy/10 uppercase tracking-widest">{systemIdent}</span>}
       </div>
       <div className="relative">
         <input 
@@ -36,7 +36,7 @@ function FloatingInput({ label, name, type = 'text', value, onChange, placeholde
           onBlur={() => setFocused(false)}
           placeholder={focused ? placeholder : ''}
           className={`
-            w-full bg-white/5 border border-osg-navy/5 p-6 text-osg-navy text-sm outline-none transition-all duration-700
+            w-full bg-white/5 border border-osg-navy/5 p-5 text-osg-navy text-sm outline-none transition-all duration-700
             ${focused ? 'border-osg-gold bg-white shadow-architectural' : 'hover:border-osg-navy/20'}
           `}
         />
@@ -179,15 +179,15 @@ export default function ContactPage() {
             {/* Right Column: Inquiry Terminal (7 of 12) */}
             <div className="lg:col-span-7">
               <Reveal delay={0.2}>
-                <div className="bg-white border border-osg-navy/5 p-12 lg:p-20 relative overflow-hidden shadow-architectural">
+                <div className="bg-white border border-osg-navy/5 p-14 lg:p-20 relative overflow-hidden shadow-architectural">
                   <div className="absolute top-0 right-0 w-64 h-64 bg-osg-gold/5 blur-[100px] pointer-events-none" />
                   
-                  <div className="mb-16">
+                  <div className="mb-20">
                     <span className="badge-system mb-6">Inquiry Mode : Active</span>
-                    <h2 className="text-heading-xl text-osg-navy not-italic tracking-tighter">
+                    <h2 className="text-4xl lg:text-5xl text-osg-navy font-black not-italic tracking-tighter leading-tight">
                       Send <br /><span className="text-osg-gold italic">Transmission.</span>
                     </h2>
-                    <p className="text-body-muted mt-6 max-w-sm">Define your technical requirements or general project scope for a direct stakeholder evaluation.</p>
+                    <p className="text-base text-osg-navy/60 mt-6 max-w-sm leading-relaxed font-medium">Define your technical requirements or general project scope for a direct stakeholder evaluation.</p>
                   </div>
 
                   {status === 'success' ? (
@@ -196,7 +196,7 @@ export default function ContactPage() {
                         <Send size={40} className="text-osg-gold" />
                       </div>
                       <h4 className="text-3xl font-black text-osg-navy uppercase mb-6 tracking-tighter italic">Route Confirmed</h4>
-                      <p className="text-body-muted text-[10px] uppercase tracking-[0.4em] mb-12 max-w-xs mx-auto">
+                      <p className="text-sm text-osg-navy/60 text-[11px] uppercase tracking-[0.3em] mb-12 max-w-xs mx-auto leading-relaxed">
                         Your data has been strictly routed to our sales department. Response latency: &lt; 24h.
                       </p>
                       <button onClick={() => setStatus('idle')} className="btn-outline !text-[10px]">
@@ -205,21 +205,21 @@ export default function ContactPage() {
                     </motion.div>
                   ) : (
                     <form onSubmit={handleSubmit} className="space-y-4">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-14">
                         <FloatingInput label="Full Name" name="name" value={form.name} onChange={handleChange} required placeholder="INPUT NAME..." systemIdent="IDENT_01" />
                         <FloatingInput label="Email Address" name="email" type="email" value={form.email} onChange={handleChange} required placeholder="ARCHITECT@DOMAIN.COM" systemIdent="IDENT_02" />
                         <FloatingInput label="Contact Line" name="phone" value={form.phone} onChange={handleChange} placeholder="+256 XXX..." systemIdent="IDENT_03" />
                         <FloatingInput label="Organisation" name="company" value={form.company} onChange={handleChange} placeholder="COMPANY LTD" systemIdent="IDENT_04" />
                       </div>
 
-                      <div className="relative group mb-12">
+                      <div className="relative group mb-14">
                         <div className="flex justify-between items-center mb-4">
-                          <label className="text-[9px] font-black uppercase tracking-[0.4em] text-osg-navy/30 group-focus-within:text-osg-gold transition-colors">Select System Sector</label>
-                          <span className="text-[8px] font-mono text-osg-navy/10 uppercase tracking-widest">SYS_ROUTING</span>
+                          <label className="text-xs font-black uppercase tracking-[0.2em] text-osg-navy/40 group-focus-within:text-osg-gold transition-colors">Select System Sector</label>
+                          <span className="text-[9px] font-mono text-osg-navy/10 uppercase tracking-widest">SYS_ROUTING</span>
                         </div>
                         <div className="relative">
                           <select name="service" value={form.service} onChange={handleChange}
-                            className="w-full bg-osg-navy/[0.02] border border-osg-navy/5 p-6 text-[11px] font-black uppercase text-osg-navy outline-none focus:border-osg-gold focus:bg-white transition-all appearance-none cursor-pointer">
+                            className="w-full bg-osg-navy/[0.02] border border-osg-navy/5 p-5 text-sm font-black uppercase text-osg-navy outline-none focus:border-osg-gold focus:bg-white transition-all appearance-none cursor-pointer">
                             <option value="">Select Target Sector...</option>
                             <option>Aluminium & Glass Systems</option>
                             <option>Gypsum Works & Ceilings</option>
@@ -233,26 +233,26 @@ export default function ContactPage() {
                         </div>
                       </div>
 
-                      <div className="relative group mb-12">
+                      <div className="relative group mb-14">
                          <div className="flex justify-between items-center mb-4">
-                            <label className="text-[9px] font-black uppercase tracking-[0.4em] text-osg-navy/30 group-focus-within:text-osg-gold transition-colors">Technical Brief</label>
-                            <span className="text-[8px] font-mono text-osg-navy/10 uppercase tracking-widest">DATA_PACKAGE</span>
+                            <label className="text-xs font-black uppercase tracking-[0.2em] text-osg-navy/40 group-focus-within:text-osg-gold transition-colors">Technical Brief</label>
+                            <span className="text-[9px] font-mono text-osg-navy/10 uppercase tracking-widest">DATA_PACKAGE</span>
                          </div>
-                         <textarea name="message" value={form.message} onChange={handleChange} required rows={5}
+                         <textarea name="message" value={form.message} onChange={handleChange} required rows={6}
                           placeholder="DEFINE PROJECT SCOPE..."
-                          className="w-full bg-osg-navy/[0.02] border border-osg-navy/5 p-8 text-osg-navy text-sm outline-none focus:border-osg-gold focus:bg-white transition-all duration-700 resize-none font-medium shadow-inner" />
+                          className="w-full bg-osg-navy/[0.02] border border-osg-navy/5 p-6 text-osg-navy text-sm outline-none focus:border-osg-gold focus:bg-white transition-all duration-700 resize-none font-medium shadow-inner" />
                       </div>
 
-                      <div className="pt-10">
+                      <div className="pt-12">
                         <button type="submit" disabled={status === 'loading'}
-                          className="btn-primary w-full justify-center group shadow-gold !py-7">
+                          className="btn-primary w-full justify-center group shadow-gold !py-6 text-sm">
                           {status === 'loading' ? (
                             <span className="flex items-center gap-4"><Activity size={18} className="animate-spin" /> ESTABLISHING LINK...</span>
                           ) : (
-                            <span className="flex items-center gap-4 text-[11px]">INITIALIZE TRANSMISSION <ArrowRight size={18} className="group-hover:translate-x-3 transition-transform" /></span>
+                            <span className="flex items-center gap-4 text-sm font-black uppercase tracking-wider">INITIALIZE TRANSMISSION <ArrowRight size={18} className="group-hover:translate-x-3 transition-transform" /></span>
                           )}
                         </button>
-                        {status === 'error' && <p className="text-red-600 text-[10px] uppercase font-black text-center mt-6 flex items-center justify-center gap-3"><AlertTriangle size={14} /> SECURITY FAULT: TRANSMISSION ABORTED.</p>}
+                        {status === 'error' && <p className="text-red-600 text-[11px] uppercase font-black text-center mt-6 flex items-center justify-center gap-3"><AlertTriangle size={14} /> SECURITY FAULT: TRANSMISSION ABORTED.</p>}
                       </div>
                     </form>
                   )}

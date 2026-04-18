@@ -13,19 +13,19 @@ const systems = [
   {
     title: 'CW-50 Stick System',
     desc: 'The versatile standard for aluminum glass facades. Featuring a 50mm face width and extensive profile depths for varying wind loads. Millimetre-precision engineering for stick-frame assembly.',
-    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1000&auto=format&fit=crop',
+    image: '/images/curtain-wall-cw50.jpg',
     tag: 'Versatile',
   },
   {
     title: 'SG-Series Glazing',
     desc: 'Bespoke structural glazing with no external caps. Creates a seamless "all-glass" aesthetic with extreme weather resistance and high-performance silicone sealing.',
-    image: 'https://images.unsplash.com/photo-1541123439591-18317abc73f2?q=80&w=1000&auto=format&fit=crop',
+    image: '/images/curtain-wall-sg-series.jpg',
     tag: 'Aesthetic',
   },
   {
     title: 'Unitized Facades',
     desc: 'Modular facade units pre-assembled in factory conditions for high-speed installation on high-rise commercial structures and extreme wind-load areas.',
-    image: 'https://images.unsplash.com/photo-1544724569-5f546fd6f2b5?q=80&w=1000&auto=format&fit=crop',
+    image: '/images/curtain-wall-unitized.jpg',
     tag: 'Industrial',
   },
 ];
