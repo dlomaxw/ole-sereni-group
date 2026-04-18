@@ -120,21 +120,21 @@ export default function ProjectBriefPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Sidebar Navigation */}
           <aside className="lg:col-span-3 space-y-8">
-            <div className="bg-white/5 border border-white/10 p-10 space-y-8">
+            <div className="bg-white/5 border border-white/10 p-12 lg:p-16 space-y-10">
               {steps.map((step, idx) => {
                 const isActive = (idx + 1) === currentStep;
                 const isCompleted = (idx + 1) < currentStep;
                 return (
-                  <div key={idx} className={`flex items-center gap-6 transition-all duration-500 ${isActive ? 'translate-x-2' : ''}`}>
-                    <div className={`w-10 h-10 flex items-center justify-center border-2 font-black text-xs transition-colors duration-500 ${
+                  <div key={idx} className={`flex items-center gap-6 transition-all duration-500 ${isActive ? 'translate-x-3' : ''}`}>
+                    <div className={`w-12 h-12 flex items-center justify-center border-2 font-black text-sm transition-colors duration-500 rounded-lg ${
                       isActive ? 'bg-osg-gold border-osg-gold text-osg-navy' : 
                       isCompleted ? 'bg-white/10 border-white/10 text-osg-gold' : 
                       'border-white/10 text-white/20'
                     }`}>
-                      {isCompleted ? <CheckCircle2 size={16} /> : step.id}
+                      {isCompleted ? <CheckCircle2 size={20} /> : step.id}
                     </div>
                     <div>
-                        <span className={`text-[10px] font-black uppercase tracking-[0.1em] block ${isActive ? 'text-white' : 'text-white/20'}`}>
+                        <span className={`text-xs font-black uppercase tracking-[0.15em] block transition-colors ${isActive ? 'text-white' : 'text-white/20'}`}>
                             {step.title}
                         </span>
                     </div>
@@ -162,52 +162,52 @@ export default function ProjectBriefPage() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.5 }}
-                className="bg-white/5 border border-white/10 p-10 lg:p-16 shadow-2xl backdrop-blur-3xl"
+                className="bg-white/5 border border-white/10 p-12 lg:p-20 shadow-2xl backdrop-blur-3xl"
               >
                 {isSuccess ? (
-                  <div className="text-center py-20 px-10">
-                    <div className="w-24 h-24 bg-osg-gold rounded-full flex items-center justify-center mx-auto mb-10 shadow-[0_0_50px_rgba(168,120,30,0.3)]">
-                      <CheckCircle2 size={48} className="text-osg-navy" />
+                  <div className="text-center py-24 px-12">
+                    <div className="w-28 h-28 bg-osg-gold rounded-full flex items-center justify-center mx-auto mb-12 shadow-[0_0_50px_rgba(168,120,30,0.3)]">
+                      <CheckCircle2 size={56} className="text-osg-navy" />
                     </div>
-                    <h2 className="text-display-sm text-white uppercase tracking-tighter mb-4">Brief Synchronized.</h2>
-                    <p className="text-osg-slate text-body-lg max-w-lg mx-auto mb-12">
+                    <h2 className="text-5xl text-white uppercase tracking-tighter mb-6">Brief Synchronized.</h2>
+                    <p className="text-osg-slate text-lg max-w-lg mx-auto mb-14 leading-relaxed">
                       Your technical architectural requirements have been captured. A structural specialist will review your brief and contact you within 24 hours.
                     </p>
-                    <Link href="/projects" className="btn-primary py-5 px-12">Explore OSG Portfolio</Link>
+                    <Link href="/projects" className="btn-primary py-6 px-16 text-base">Explore OSG Portfolio</Link>
                   </div>
                 ) : (
                   <>
                     {currentStep === 1 && (
-                      <div className="max-w-4xl space-y-12">
-                        <h2 className="text-display-xs text-white uppercase tracking-tighter mb-8">01. Project Identity</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                          <div className="space-y-4">
-                            <label className="text-[10px] font-black uppercase tracking-[0.2em] text-osg-gold">Project Name / Reference</label>
+                      <div className="max-w-4xl space-y-14">
+                        <h2 className="text-3xl lg:text-4xl text-white uppercase tracking-tighter mb-10">01. Project Identity</h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                          <div className="space-y-5">
+                            <label className="text-xs font-black uppercase tracking-[0.2em] text-osg-gold block">Project Name / Reference</label>
                             <input 
                               type="text" 
                               value={formData.projectTitle}
                               onChange={(e) => setFormData({...formData, projectTitle: e.target.value})}
-                              className="w-full bg-osg-navy border border-white/10 p-5 text-white focus:border-osg-gold outline-none transition-colors" 
+                              className="w-full bg-osg-navy border border-white/10 p-6 text-white text-base focus:border-osg-gold outline-none transition-colors" 
                               placeholder="e.g. Zenith Tower II" 
                             />
                           </div>
-                          <div className="space-y-4">
-                            <label className="text-[10px] font-black uppercase tracking-[0.2em] text-osg-gold">Lead Contact Full Name</label>
+                          <div className="space-y-5">
+                            <label className="text-xs font-black uppercase tracking-[0.2em] text-osg-gold block">Lead Contact Full Name</label>
                             <input 
                               type="text" 
                               value={formData.clientName}
                               onChange={(e) => setFormData({...formData, clientName: e.target.value})}
-                              className="w-full bg-osg-navy border border-white/10 p-5 text-white focus:border-osg-gold outline-none transition-colors" 
+                              className="w-full bg-osg-navy border border-white/10 p-6 text-white text-base focus:border-osg-gold outline-none transition-colors" 
                               placeholder="Your Name" 
                             />
                           </div>
-                          <div className="space-y-4 md:col-span-2">
-                            <label className="text-[10px] font-black uppercase tracking-[0.2em] text-osg-gold">Professional Email Address</label>
+                          <div className="space-y-5 md:col-span-2">
+                            <label className="text-xs font-black uppercase tracking-[0.2em] text-osg-gold block">Professional Email Address</label>
                             <input 
                               type="email" 
                               value={formData.clientEmail}
                               onChange={(e) => setFormData({...formData, clientEmail: e.target.value})}
-                              className="w-full bg-osg-navy border border-white/10 p-5 text-white focus:border-osg-gold outline-none transition-colors" 
+                              className="w-full bg-osg-navy border border-white/10 p-6 text-white text-base focus:border-osg-gold outline-none transition-colors" 
                               placeholder="email@company.com" 
                             />
                           </div>
@@ -217,14 +217,14 @@ export default function ProjectBriefPage() {
 
                     {currentStep === 2 && (
                        <div className="max-w-4xl">
-                         <h2 className="text-display-xs text-white uppercase tracking-tighter mb-8">02. Scope & Services Selection</h2>
-                         <p className="text-osg-slate text-body-lg mb-12">Select the specific structural and finishing work packages required for this project to help our material specialists allocate resources.</p>
+                         <h2 className="text-3xl lg:text-4xl text-white uppercase tracking-tighter mb-10">02. Scope & Services Selection</h2>
+                         <p className="text-osg-slate text-lg mb-14 leading-relaxed">Select the specific structural and finishing work packages required for this project to help our material specialists allocate resources.</p>
                          
-                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
                             {services.map((service) => (
                                <label 
                                 key={service.id} 
-                                className={`relative flex flex-col p-8 bg-osg-navy border-2 cursor-pointer transition-all duration-500 overflow-hidden group ${
+                                className={`relative flex flex-col p-10 bg-osg-navy border-2 cursor-pointer transition-all duration-500 overflow-hidden group ${
                                   formData.services.includes(service.id) ? 'border-osg-gold' : 'border-white/5 hover:border-white/20'
                                 }`}
                                >
@@ -234,41 +234,41 @@ export default function ProjectBriefPage() {
                                     checked={formData.services.includes(service.id)}
                                     onChange={() => toggleService(service.id)}
                                   />
-                                  <service.icon className={`mb-6 transition-colors ${formData.services.includes(service.id) ? 'text-osg-gold' : 'text-osg-slate group-hover:text-white'}`} size={32} />
-                                  <h3 className="text-heading-md text-white uppercase tracking-tighter mb-2">{service.title}</h3>
-                                  <p className="text-[10px] text-osg-slate uppercase font-bold tracking-widest leading-relaxed">{service.desc}</p>
+                                  <service.icon className={`mb-8 transition-colors text-3xl ${formData.services.includes(service.id) ? 'text-osg-gold' : 'text-osg-slate group-hover:text-white'}`} size={40} />
+                                  <h3 className="text-xl text-white uppercase tracking-tighter mb-3 font-black">{service.title}</h3>
+                                  <p className="text-xs text-osg-slate uppercase font-bold tracking-wider leading-relaxed">{service.desc}</p>
                                   {formData.services.includes(service.id) && (
                                     <div className="absolute -top-10 -right-10 w-20 h-20 bg-osg-gold rotate-45 flex items-end justify-center pb-2">
-                                      <CheckCircle2 className="text-osg-navy -rotate-45" size={16} />
+                                      <CheckCircle2 className="text-osg-navy -rotate-45" size={20} />
                                     </div>
                                   )}
                                </label>
                             ))}
                          </div>
 
-                         <div className="space-y-12">
+                         <div className="space-y-14">
                             <div className="flex items-center gap-6">
-                               <h3 className="text-heading-sm text-white uppercase tracking-tighter">Preliminary Technical Metrics</h3>
+                               <h3 className="text-2xl text-white uppercase tracking-tighter font-black">Preliminary Technical Metrics</h3>
                                <div className="h-px flex-grow bg-white/10" />
                             </div>
                             
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                              <div className="space-y-4">
-                                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-osg-gold">Estimated Floor Area (SQM)</label>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                              <div className="space-y-5">
+                                <label className="text-xs font-black uppercase tracking-[0.2em] text-osg-gold block">Estimated Floor Area (SQM)</label>
                                 <input 
                                   type="number" 
                                   value={formData.area}
                                   onChange={(e) => setFormData({...formData, area: e.target.value})}
-                                  className="w-full bg-osg-navy border border-white/10 p-5 text-white focus:border-osg-gold outline-none transition-colors" 
+                                  className="w-full bg-osg-navy border border-white/10 p-6 text-white text-base focus:border-osg-gold outline-none transition-colors" 
                                   placeholder="e.g. 15000" 
                                 />
                               </div>
-                              <div className="space-y-4">
-                                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-osg-gold">Material Preference</label>
+                              <div className="space-y-5">
+                                <label className="text-xs font-black uppercase tracking-[0.2em] text-osg-gold block">Material Preference</label>
                                 <select 
                                   value={formData.materialGrade}
                                   onChange={(e) => setFormData({...formData, materialGrade: e.target.value})}
-                                  className="w-full bg-osg-navy border border-white/10 p-5 text-white focus:border-osg-gold outline-none transition-colors appearance-none"
+                                  className="w-full bg-osg-navy border border-white/10 p-6 text-white text-base focus:border-osg-gold outline-none transition-colors appearance-none"
                                 >
                                   <option>Grade A Premium Finishing</option>
                                   <option>Standard Commercial Specifications</option>
@@ -277,12 +277,12 @@ export default function ProjectBriefPage() {
                               </div>
                             </div>
 
-                            <div className="space-y-4">
-                              <label className="text-[10px] font-black uppercase tracking-[0.2em] text-osg-gold">Project Description & Core Objectives</label>
+                            <div className="space-y-5">
+                              <label className="text-xs font-black uppercase tracking-[0.2em] text-osg-gold block">Project Description & Core Objectives</label>
                               <textarea 
                                 value={formData.description}
                                 onChange={(e) => setFormData({...formData, description: e.target.value})}
-                                className="w-full bg-osg-navy border border-white/10 p-6 text-white text-small h-40 focus:border-osg-gold outline-none transition-colors"
+                                className="w-full bg-osg-navy border border-white/10 p-6 text-white text-base h-44 focus:border-osg-gold outline-none transition-colors resize-none"
                                 placeholder="Briefly describe the architectural vision and functional requirements..."
                               />
                             </div>
@@ -299,25 +299,25 @@ export default function ProjectBriefPage() {
                     )}
 
                     {/* Navigation Buttons */}
-                    <div className="mt-20 flex justify-between items-center border-t border-white/10 pt-12">
+                    <div className="mt-24 flex justify-between items-center border-t border-white/10 pt-14">
                       <button 
                         onClick={prevStep}
                         disabled={currentStep === 1 || isSubmitting}
-                        className="flex items-center gap-3 text-osg-slate hover:text-white font-black text-[10px] uppercase tracking-[0.2em] disabled:opacity-30 disabled:pointer-events-none transition-all"
+                        className="flex items-center gap-3 text-osg-slate hover:text-white font-black text-xs uppercase tracking-[0.2em] disabled:opacity-30 disabled:pointer-events-none transition-all"
                       >
-                        <ArrowLeft size={16} /> Previous Step
+                        <ArrowLeft size={18} /> Previous Step
                       </button>
                       <button 
                         onClick={currentStep === steps.length ? handleFinalSubmit : nextStep}
                         disabled={isSubmitting}
-                        className="btn-primary group py-5 px-14 flex items-center gap-3"
+                        className="btn-primary group py-6 px-16 flex items-center gap-3 text-base"
                       >
                         {isSubmitting ? (
                           <>Synchronizing <span className="animate-pulse">...</span></>
                         ) : (
                           <>
                             {currentStep === steps.length ? 'Submit Final Brief' : 'Save & Continue'} 
-                            <ArrowRight className="ml-3 group-hover:translate-x-2 transition-transform" size={18} />
+                            <ArrowRight className="ml-3 group-hover:translate-x-2 transition-transform" size={20} />
                           </>
                         )}
                       </button>
