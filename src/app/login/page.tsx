@@ -128,29 +128,29 @@ export default function LoginPage() {
           </Link>
         </div>
 
-        <div className="flex-1 flex items-center justify-center px-8 py-16 sm:px-16">
+        <div className="flex-1 flex items-center justify-center px-10 py-16 sm:px-20">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full max-w-sm"
+            className="w-full max-w-xl"
           >
             {/* Brand mark */}
-            <Link href="/" className="inline-flex flex-col mb-12 group">
-              <span className="font-serif font-black text-5xl tracking-widest text-osg-navy leading-none group-hover:text-osg-gold transition-colors duration-500">
+            <Link href="/" className="inline-flex flex-col mb-14 group">
+              <span className="font-serif font-black text-7xl tracking-widest text-osg-navy leading-none group-hover:text-osg-gold transition-colors duration-500">
                 OSG
               </span>
-              <span className="text-[9px] font-black tracking-[0.4em] text-osg-gold uppercase mt-2 font-mono">
+              <span className="text-[10px] font-black tracking-[0.4em] text-osg-gold uppercase mt-2 font-mono">
                 Ole Sereni Group
               </span>
             </Link>
 
             {/* Heading */}
-            <div className="mb-10">
-              <h2 className="font-sans font-black text-osg-navy text-2xl uppercase tracking-tight leading-tight">
+            <div className="mb-12">
+              <h2 className="font-sans font-black text-osg-navy text-4xl uppercase tracking-tight leading-tight">
                 Portal Sign In
               </h2>
-              <p className="text-osg-slate text-sm mt-2 leading-relaxed">
+              <p className="text-osg-slate text-base mt-3 leading-relaxed">
                 Authorized clients and project owners only.
               </p>
             </div>
@@ -158,13 +158,13 @@ export default function LoginPage() {
             {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-0">
               {/* Email field */}
-              <div className="group border-b border-osg-navy/15 focus-within:border-osg-gold transition-colors duration-300 pb-1 mb-8">
-                <label className="block text-[9px] font-black uppercase tracking-[0.3em] text-osg-slate mb-3 font-mono">
+              <div className="group border-b-2 border-osg-navy/15 focus-within:border-osg-gold transition-colors duration-300 pb-3 mb-10">
+                <label className="block text-[10px] font-black uppercase tracking-[0.3em] text-osg-slate mb-4 font-mono">
                   Email Address
                 </label>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-4">
                   <Mail
-                    size={14}
+                    size={18}
                     className="text-osg-navy/30 group-focus-within:text-osg-gold transition-colors duration-300 shrink-0"
                   />
                   <input
@@ -173,19 +173,19 @@ export default function LoginPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="your@email.com"
-                    className="flex-1 bg-transparent outline-none text-osg-navy font-medium text-sm placeholder:text-osg-navy/25 py-1"
+                    className="flex-1 bg-transparent outline-none text-osg-navy font-medium text-base placeholder:text-osg-navy/25 py-1"
                   />
                 </div>
               </div>
 
               {/* Password field */}
-              <div className="group border-b border-osg-navy/15 focus-within:border-osg-gold transition-colors duration-300 pb-1 mb-10">
-                <label className="block text-[9px] font-black uppercase tracking-[0.3em] text-osg-slate mb-3 font-mono">
+              <div className="group border-b-2 border-osg-navy/15 focus-within:border-osg-gold transition-colors duration-300 pb-3 mb-12">
+                <label className="block text-[10px] font-black uppercase tracking-[0.3em] text-osg-slate mb-4 font-mono">
                   Password
                 </label>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-4">
                   <Lock
-                    size={14}
+                    size={18}
                     className="text-osg-navy/30 group-focus-within:text-osg-gold transition-colors duration-300 shrink-0"
                   />
                   <input
@@ -194,7 +194,7 @@ export default function LoginPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Enter your passphrase"
-                    className="flex-1 bg-transparent outline-none text-osg-navy font-medium text-sm placeholder:text-osg-navy/25 py-1"
+                    className="flex-1 bg-transparent outline-none text-osg-navy font-medium text-base placeholder:text-osg-navy/25 py-1"
                   />
                   <button
                     type="button"
@@ -202,7 +202,7 @@ export default function LoginPage() {
                     className="text-osg-navy/30 hover:text-osg-gold transition-colors duration-300"
                     aria-label={showPassword ? 'Hide password' : 'Show password'}
                   >
-                    {showPassword ? <EyeOff size={14} /> : <Eye size={14} />}
+                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                   </button>
                 </div>
               </div>
@@ -212,7 +212,7 @@ export default function LoginPage() {
                 <motion.p
                   initial={{ opacity: 0, y: -4 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="text-red-500 text-[10px] font-bold uppercase tracking-widest mb-6 font-mono"
+                  className="text-red-500 text-[11px] font-bold uppercase tracking-widest mb-6 font-mono"
                 >
                   {error}
                 </motion.p>
@@ -222,16 +222,16 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={isPending}
-                className="w-full btn-primary justify-center py-5 disabled:opacity-50 disabled:cursor-not-allowed group"
+                className="w-full btn-primary justify-center py-6 text-base disabled:opacity-50 disabled:cursor-not-allowed group"
               >
                 {isPending ? (
-                  <Loader2 className="animate-spin" size={18} />
+                  <Loader2 className="animate-spin" size={20} />
                 ) : (
                   <>
                     Access Workspace
                     <ArrowRight
                       className="group-hover:translate-x-1 transition-transform duration-300"
-                      size={16}
+                      size={18}
                     />
                   </>
                 )}
@@ -239,8 +239,8 @@ export default function LoginPage() {
             </form>
 
             {/* Footer */}
-            <div className="mt-12 pt-8 border-t border-osg-navy/8">
-              <p className="text-osg-slate text-[11px] leading-relaxed">
+            <div className="mt-14 pt-10 border-t border-osg-navy/8">
+              <p className="text-osg-slate text-sm leading-relaxed">
                 Don&apos;t have access?{' '}
                 <Link
                   href="/brief"
