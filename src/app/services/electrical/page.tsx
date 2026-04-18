@@ -79,7 +79,8 @@ export default function ElectricalPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {systems.map((s, i) => (
               <Reveal key={s.name} delay={i * 0.08}>
-                <article className="group h-full flex flex-col bg-white border border-osg-navy/5 hover:border-osg-gold transition-all duration-500 shadow-sm hover:shadow-[0_20px_60px_-15px_rgba(10,22,40,0.18)] overflow-hidden rounded-lg">
+                <Link href={`#system-${i}`}>
+                  <article className="group h-full flex flex-col bg-white border border-osg-navy/5 hover:border-osg-gold transition-all duration-500 shadow-sm hover:shadow-[0_20px_60px_-15px_rgba(10,22,40,0.18)] overflow-hidden rounded-lg cursor-pointer">
                   <div className="relative w-full aspect-[4/3] overflow-hidden bg-osg-navy/10">
                     <Image
                       src={s.image}
@@ -114,6 +115,7 @@ export default function ElectricalPage() {
                     </div>
                   </div>
                 </article>
+              </Link>
               </Reveal>
             ))}
           </div>
