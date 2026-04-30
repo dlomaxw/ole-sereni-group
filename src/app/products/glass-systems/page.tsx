@@ -96,9 +96,9 @@ export default function GlassSystemsPage() {
                        <h3 className={`font-sans font-black text-white uppercase tracking-tight leading-tight transition-colors group-hover:text-osg-gold ${sol.size === 'large' ? 'text-3xl sm:text-4xl lg:text-5xl' : 'text-2xl sm:text-3xl'}`}>{sol.title}</h3>
                        <p className="text-white/75 text-sm sm:text-base font-sans max-w-sm transition-all duration-700">{sol.desc}</p>
                        {sol.cta ? (
-                         <Link href="/resources/downloads" className="inline-flex min-h-10 items-center justify-center rounded-full bg-osg-gold px-5 py-3 text-[9px] font-black uppercase tracking-[0.08em] text-osg-navy transition-all hover:bg-white">{sol.cta}</Link>
+                         <Link href="#technical-depth" className="inline-flex min-h-12 w-fit items-center justify-center gap-3 rounded-full bg-osg-gold px-6 py-3 text-[10px] font-black uppercase tracking-[0.14em] text-osg-navy shadow-lg shadow-osg-gold/20 transition-all hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-osg-gold">{sol.cta} <ArrowRight size={16} /></Link>
                        ) : (
-                         <Link href="/resources/downloads" className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full bg-osg-gold px-5 py-3 text-[9px] font-black uppercase tracking-[0.08em] text-osg-navy transition-all hover:bg-white">
+                         <Link href="#technical-depth" className="inline-flex min-h-12 w-fit items-center justify-center gap-3 rounded-full bg-osg-gold px-6 py-3 text-[10px] font-black uppercase tracking-[0.14em] text-osg-navy shadow-lg shadow-osg-gold/20 transition-all hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-osg-gold">
                            Technical Spec <ArrowRight size={16} />
                          </Link>
                        )}
@@ -112,7 +112,7 @@ export default function GlassSystemsPage() {
       </section>
 
       {/* Technical Exploration Showcase */}
-      <section className="py-48 bg-[#0B1C2C] text-white relative overflow-hidden">
+      <section id="technical-depth" className="scroll-mt-28 py-48 bg-[#0B1C2C] text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-blueprint opacity-[0.03] pointer-events-none" />
         <div className="container-clean relative z-10">
             <div className="max-w-4xl mb-32 space-y-12">

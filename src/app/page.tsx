@@ -201,22 +201,25 @@ export default function Home() {
                 desc: 'Bespoke curtain walls engineered for structural resilience.',
                 image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200',
                 icon: Building2,
+                href: '/services/aluminium-glass',
               },
               { 
                 title: 'Structural Glazing', 
                 desc: 'Unitized frameworks designed for ethereal transparency.',
                 image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200',
                 icon: Layout,
+                href: '/products/glass-systems',
               },
               { 
                 title: 'Clean Finishing', 
                 desc: 'Precision interior finishing using advanced material logic.',
                 image: 'https://images.unsplash.com/photo-1558211583-d26f610c1eb1?q=80&w=1200',
                 icon: Cpu,
+                href: '/services/painting-tiling',
               }
             ].map((item, i) => (
               <Reveal key={i} delay={i * 0.1}>
-                <Link href="/services" className="group block h-full">
+                <Link href={item.href} className="group block h-full">
                   <div className="bg-white/5 backdrop-blur-3xl border border-white/5 rounded-[1.75rem] lg:rounded-[2.25rem] overflow-hidden group h-full flex flex-col transition-all duration-700 hover:border-osg-gold shadow-2xl relative">
                     <div className="absolute inset-0 bg-grid-blueprint opacity-[0.02] pointer-events-none" />
                     <div className="relative aspect-[4/3] min-h-[260px] overflow-hidden">
@@ -231,9 +234,11 @@ export default function Home() {
                         <h3 className="text-2xl lg:text-3xl font-sans font-black text-white uppercase tracking-tight group-hover:text-osg-gold transition-colors">{item.title}</h3>
                         <p className="text-base lg:text-lg text-white/40 font-sans leading-relaxed group-hover:text-white/55 transition-colors">{item.desc}</p>
                       </div>
-                      <div className="pt-12 mt-auto border-t border-white/5 flex justify-between items-center text-[10px] font-black uppercase tracking-[0.5em] group-hover:text-osg-gold transition-colors">
-                         <span>EXPLORE SPECS</span>
-                         <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
+                      <div className="pt-8 mt-auto border-t border-white/10">
+                         <span className="inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-osg-gold px-5 py-3 text-[10px] font-black uppercase tracking-[0.18em] text-osg-navy shadow-lg shadow-osg-gold/20 transition-all group-hover:bg-white group-hover:shadow-white/10">
+                           Explore Specs
+                           <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                         </span>
                       </div>
                     </div>
                   </div>

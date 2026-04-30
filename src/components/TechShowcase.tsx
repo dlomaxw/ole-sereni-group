@@ -18,15 +18,15 @@ export default function TechShowcase({ categoryKey }: TechShowcaseProps) {
   const currentSpecs = data.specs[activeTab] || [];
 
   return (
-    <div className="rounded-3xl border border-white/10 bg-osg-navy/80 bg-grid-blueprint min-h-[520px] flex flex-col lg:flex-row overflow-hidden group/container">
+    <div className="rounded-3xl border border-white/15 bg-[#081b2b] bg-grid-blueprint min-h-[520px] flex flex-col lg:flex-row overflow-hidden group/container shadow-2xl shadow-black/20">
       {/* Sidebar Navigator */}
-      <div className="w-full lg:w-80 border-b lg:border-b-0 lg:border-r border-white/10 bg-white/[0.04] backdrop-blur-md z-20">
-        <div className="p-5 sm:p-6 border-b border-white/10 bg-osg-navy/40 relative">
+      <div className="w-full lg:w-80 border-b lg:border-b-0 lg:border-r border-white/15 bg-[#102f4b] backdrop-blur-md z-20">
+        <div className="p-5 sm:p-6 border-b border-white/15 bg-black/10 relative">
           <div className="absolute top-0 right-0 p-2 opacity-20 group-hover/container:opacity-40 transition-opacity">
             <span className="text-[10px] font-mono text-osg-gold">SCN_LN / {data.id.substring(0, 3).toUpperCase()}</span>
           </div>
           <h3 className="text-[10px] font-black text-osg-gold uppercase tracking-[0.28em] mb-2 font-mono">System Selector</h3>
-          <p className="text-[9px] text-white/65 uppercase font-black tracking-widest leading-snug">Initialize Category Specs</p>
+          <p className="text-[9px] text-white/85 uppercase font-black tracking-widest leading-snug">Initialize Category Specs</p>
         </div>
         <div className="p-3 sm:p-4 space-y-2">
           {data.subCategories.map((sub) => (
@@ -34,7 +34,7 @@ export default function TechShowcase({ categoryKey }: TechShowcaseProps) {
               key={sub.id}
               onClick={() => setActiveTab(sub.id)}
               className={`w-full group flex items-center justify-between rounded-xl p-4 transition-all duration-300 relative ${
-                activeTab === sub.id ? 'bg-osg-gold text-osg-navy shadow-lg' : 'bg-white/[0.03] text-white/70 hover:bg-white/[0.08] hover:text-white'
+                activeTab === sub.id ? 'bg-osg-gold text-osg-navy shadow-lg' : 'bg-white/[0.06] text-white/85 hover:bg-white/[0.12] hover:text-white'
               }`}
             >
               <span className="text-[11px] font-black uppercase tracking-[0.14em] transition-transform group-hover:translate-x-1">{sub.label}</span>
@@ -45,7 +45,7 @@ export default function TechShowcase({ categoryKey }: TechShowcaseProps) {
             </button>
           ))}
         </div>
-        <div className="mt-auto p-5 sm:p-6 border-t border-white/10 text-[9px] font-mono text-white/35 uppercase tracking-widest">
+        <div className="mt-auto p-5 sm:p-6 border-t border-white/15 text-[9px] font-mono text-white/55 uppercase tracking-widest">
             OSG / TECH-SPEC / {data.id} / v1.4
         </div>
       </div>
@@ -56,9 +56,9 @@ export default function TechShowcase({ categoryKey }: TechShowcaseProps) {
         <div className="absolute inset-0 bg-scanlines opacity-[0.03] pointer-events-none" />
         
         {/* Animated Headline */}
-        <div className="relative z-10 mb-8">
-            <span className="text-[10px] font-black text-osg-gold uppercase tracking-[0.28em] mb-3 block animate-pulse">Analyzing Structural Logic...</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white font-black uppercase tracking-tight leading-tight">
+        <div className="relative z-10 mb-8 max-w-4xl">
+            <span className="text-[10px] font-black text-osg-gold uppercase tracking-[0.24em] mb-3 block animate-pulse">Analyzing Structural Logic...</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl text-white font-black uppercase tracking-tight leading-tight">
               Technical <span className="text-osg-gold uppercase">Schematic.</span>
             </h2>
         </div>

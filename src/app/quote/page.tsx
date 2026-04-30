@@ -300,14 +300,14 @@ export default function UnifiedIntakePage() {
             className="object-cover transition-transform duration-1000 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-osg-navy/60 to-transparent" />
-          <div className="absolute bottom-16 left-16 right-16">
-            <div className="bg-white/10 backdrop-blur-3xl p-10 rounded-[3rem] border border-white/20 text-white space-y-6">
+          <div className="absolute bottom-6 left-6 right-6 xl:bottom-10 xl:left-10 xl:right-10">
+            <div className="max-w-3xl rounded-[2rem] border border-white/20 bg-osg-navy/55 p-6 text-white shadow-2xl backdrop-blur-3xl sm:p-8 xl:p-9">
                <div className="flex items-center gap-3">
                  <Activity size={18} className="text-osg-gold animate-pulse" />
-                 <p className="text-[10px] font-black uppercase tracking-[0.4em] text-osg-gold">Structural Integrity defined.</p>
+                 <p className="text-[9px] font-black uppercase tracking-[0.24em] text-osg-gold">Structural Integrity defined.</p>
                </div>
-               <h3 className="text-4xl font-black font-sans tracking-tighter leading-none">Engineering full-scale <br/><span className="text-white/40">modernist facades.</span></h3>
-               <p className="text-sm font-bold text-white/60 leading-relaxed uppercase tracking-widest">
+               <h3 className="mt-4 text-2xl font-black font-sans tracking-tight leading-[1.02] sm:text-3xl xl:text-4xl">Engineering full-scale <span className="text-white/55">modernist facades.</span></h3>
+               <p className="mt-4 max-w-2xl text-xs font-bold text-white/75 leading-relaxed uppercase tracking-[0.18em]">
                  Your unified brief will be analyzed by our architectural engineering team using proprietary BOQ algorithms.
                </p>
             </div>

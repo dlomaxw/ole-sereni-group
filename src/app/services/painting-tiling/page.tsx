@@ -69,15 +69,14 @@ export default function PaintingTilingPage() {
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-700" style={{ backgroundImage: 'linear-gradient(rgba(201,168,76,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,0.2) 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
                   </div>
 
-                  <div className="relative z-20 h-full p-12 flex flex-col justify-end">
-                    <span className="text-[10px] font-black text-osg-gold uppercase tracking-[0.3em] mb-4 opacity-0 group-hover:opacity-100 transition-opacity translate-y-4 group-hover:translate-y-0 transition-transform">{s.tag}</span>
+                  <div className="relative z-20 h-full p-8 sm:p-10 lg:p-12 flex flex-col justify-end">
+                    <span className="mb-4 w-fit rounded-full bg-osg-gold/15 px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.22em] text-osg-gold transition-colors group-hover:bg-osg-gold group-hover:text-osg-navy">{s.tag}</span>
                     <h3 className="text-2xl font-black text-osg-navy group-hover:text-white mb-6 uppercase tracking-tighter leading-none transition-colors">{s.name}</h3>
-                    <p className="text-sm text-osg-navy/50 group-hover:text-white/60 leading-relaxed font-light transition-colors">{s.desc}</p>
+                    <p className="text-sm text-osg-navy/60 group-hover:text-white/75 leading-relaxed font-medium transition-colors">{s.desc}</p>
                     
-                    <div className="mt-8 pt-8 border-t border-osg-navy/5 group-hover:border-white/10 flex items-center justify-between opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all">
-                        <span className="text-[9px] font-black text-osg-gold uppercase tracking-widest">Technical Spec</span>
-                        <ArrowRight size={16} className="text-osg-gold" />
-                    </div>
+                    <Link href="#technical-depth" className="mt-8 inline-flex min-h-12 w-fit items-center justify-center gap-3 rounded-full bg-osg-gold px-6 py-3 text-[10px] font-black uppercase tracking-[0.14em] text-osg-navy shadow-lg shadow-osg-gold/20 transition-all hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-osg-gold">
+                      Technical Spec <ArrowRight size={16} />
+                    </Link>
                   </div>
                 </div>
               </Reveal>
@@ -87,7 +86,7 @@ export default function PaintingTilingPage() {
       </section>
 
       {/* Technical Exploration Showcase */}
-      <section className="section-padding bg-osg-navy relative overflow-hidden">
+      <section id="technical-depth" className="section-padding scroll-mt-28 bg-osg-navy relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-blueprint opacity-10 pointer-events-none" />
         <div className="container-osg relative z-10">
             <div className="max-w-3xl mb-16">
