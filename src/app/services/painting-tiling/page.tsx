@@ -22,13 +22,13 @@ const systems = [
   { 
     name: 'Architectural Textured Coatings', 
     desc: 'Bespoke textured wall finishes, including Italian stucco, concrete-effect renders, and specialized metallic coatings.',
-    image: 'https://images.unsplash.com/photo-1541123439591-18317abc73f2?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=800&auto=format&fit=crop',
     tag: 'Artisanal'
   },
   { 
     name: 'Large-Format Porcelain Tiling', 
     desc: 'Precision installation of jumbo-format porcelain slabs up to 3200mm, featuring rectified edges and colour-matched epoxy grouting.',
-    image: 'https://images.unsplash.com/photo-1502005229762-f1d00d7ff5a9?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=800&auto=format&fit=crop',
     tag: 'Precision'
   },
   { 
@@ -54,7 +54,7 @@ export default function PaintingTilingPage() {
         <div className="container-osg relative z-10">
           <Reveal className="mb-20">
             <span className="text-[10px] font-black text-osg-gold uppercase tracking-[0.5em] mb-4 block leading-none">Scope of Works // 03</span>
-            <h2 className="text-display-sm text-osg-navy font-black uppercase tracking-tighter italic">Surface <br/><span className="text-osg-navy/20">Finishes.</span></h2>
+            <h2 className="text-display-sm text-osg-navy font-black uppercase tracking-tighter">Surface <br/><span className="text-osg-navy/20">Finishes.</span></h2>
           </Reveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -93,7 +93,7 @@ export default function PaintingTilingPage() {
             <div className="max-w-3xl mb-16">
                 <Reveal>
                     <span className="text-[10px] font-black text-osg-gold uppercase tracking-[0.5em] mb-4 block leading-none">Technical Depth // 06</span>
-                    <h2 className="text-display-xs lg:text-display-sm text-white font-black uppercase tracking-tighter italic">Material <br /><span className="text-osg-gold">Parameters.</span></h2>
+                    <h2 className="text-display-xs lg:text-display-sm text-white font-black uppercase tracking-tighter">Material <br /><span className="text-osg-gold">Parameters.</span></h2>
                     <p className="mt-6 text-white/50 text-lg max-w-xl">
                         Analyze the adhesion, slip resistance, and VOC characteristics of our premium surface coating and tiling solutions.
                     </p>
@@ -109,7 +109,7 @@ export default function PaintingTilingPage() {
       <section className="bg-osg-navy py-12 border-t border-white/5">
         <div className="container-osg flex flex-col md:flex-row items-center justify-between gap-10">
           <div className="max-w-xl">
-            <h3 className="text-heading-md text-white mb-3 italic">Premium finish project?</h3>
+            <h3 className="text-heading-md text-white mb-3">Premium finish project?</h3>
             <p className="text-white/40 text-small uppercase tracking-widest">Our finishing team executes to the highest architectural standards.</p>
           </div>
           <Link href="/quote" className="btn-primary flex-shrink-0 !bg-white !text-osg-navy">Initialize Project <ArrowRight size={16} /></Link>
@@ -118,3 +118,4 @@ export default function PaintingTilingPage() {
     </main>
   );
 }
+

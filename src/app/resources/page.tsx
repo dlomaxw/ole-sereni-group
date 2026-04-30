@@ -42,42 +42,63 @@ export default function ResourcesPage() {
         breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Resources' }]}
       />
 
-      <section className="section-padding bg-osg-navy">
-        <div className="container-osg">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+      <section className="py-32 bg-[#0B1C2C]">
+        <div className="container-clean">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-24">
             {resourceCategories.map((cat, i) => (
-              <Reveal key={cat.title} delay={i * 0.08}>
-                <Link href={cat.href} className="block group">
-                  <div className="card-glass p-8 h-full flex items-start gap-6 group-hover:border-osg-gold/40 transition-all">
-                    <div className="w-14 h-14 flex items-center justify-center flex-shrink-0" style={{ background: cat.color }}>
-                      <cat.icon size={22} className="text-osg-gold" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-heading-md text-white mb-2 group-hover:text-osg-gold transition-colors">{cat.title}</h3>
-                      <p className="text-small text-osg-slate leading-relaxed mb-4">{cat.desc}</p>
-                      <div className="flex items-center justify-between">
-                        <span className="badge-gold">{cat.count}</span>
-                        <ArrowRight size={16} className="text-osg-gold/50 group-hover:text-osg-gold group-hover:translate-x-1 transition-all" />
-                      </div>
+              <motion.div 
+                key={cat.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <Link href={cat.href} className="block group h-full">
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-12 lg:p-16 rounded-[3rem] h-full transition-all duration-700 hover:bg-white/10 hover:border-osg-gold relative overflow-hidden shadow-2xl">
+                    <div className="absolute inset-0 bg-grid-blueprint opacity-[0.02] pointer-events-none" />
+                    
+                    <div className="flex items-start gap-10 relative z-10">
+                        <div className="w-20 h-20 rounded-2xl flex items-center justify-center bg-white/5 border border-white/10 group-hover:border-osg-gold group-hover:bg-osg-navy group-hover:text-osg-gold transition-all duration-500 flex-shrink-0">
+                            <cat.icon size={32} className="transition-transform group-hover:scale-110" />
+                        </div>
+                        <div className="flex-1 space-y-6">
+                           <div className="flex justify-between items-center">
+                              <h3 className="text-3xl font-sans font-black text-white uppercase tracking-tight group-hover:text-osg-gold transition-colors">{cat.title}</h3>
+                              <span className="text-[10px] font-black text-osg-gold uppercase tracking-[0.4em]">{cat.count}</span>
+                           </div>
+                           <p className="text-white/40 text-lg font-sans leading-relaxed group-hover:text-white/60 transition-colors">
+                             {cat.desc}
+                           </p>
+                           <div className="pt-6 border-t border-white/5 flex items-center justify-between group-hover:text-osg-gold transition-colors">
+                              <span className="text-[10px] font-black uppercase tracking-[0.4em]">Access Archive</span>
+                              <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
+                           </div>
+                        </div>
                     </div>
                   </div>
                 </Link>
-              </Reveal>
+              </motion.div>
             ))}
           </div>
 
           {/* Quick access */}
-          <Reveal>
-            <div className="card-gold-outline p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6">
-              <div>
-                <h3 className="text-heading-lg text-white mb-2">Need a custom specification?</h3>
-                <p className="text-body text-osg-slate">Our technical team can prepare project-specific material and system specifications on request.</p>
-              </div>
-              <Link href="/contact" className="btn-primary flex-shrink-0">Talk to Our Engineers <ArrowRight size={14} /></Link>
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.98 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="bg-white border border-osg-navy/5 p-12 lg:p-20 flex flex-col lg:flex-row items-center justify-between gap-12 rounded-[4rem] shadow-premium"
+          >
+            <div className="space-y-4 text-center lg:text-left">
+              <h3 className="text-4xl lg:text-5xl font-sans font-black text-osg-navy uppercase tracking-tight">Need a custom specification?</h3>
+              <p className="text-osg-navy/40 text-lg lg:text-xl font-sans max-w-2xl">Our technical team can prepare project-specific material and system specifications on request.</p>
             </div>
-          </Reveal>
+            <Link href="/contact" className="btn-cta !px-16 py-6 !text-[10px] flex-shrink-0">
+              TALK TO OUR ENGINEERS <ArrowRight size={16} />
+            </Link>
+          </motion.div>
         </div>
       </section>
     </>
   );
 }
+

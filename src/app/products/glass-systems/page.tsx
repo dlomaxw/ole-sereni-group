@@ -5,19 +5,20 @@ import PageHero from '@/components/PageHero';
 import Link from 'next/link';
 import Reveal from '@/components/Reveal';
 import TechShowcase from '@/components/TechShowcase';
+import Image from 'next/image';
 
 
 const solutions = [
   {
     title: 'Structural Glass',
     desc: 'Engineered load-bearing solutions for floors, stairs, and facades.',
-    image: 'https://images.unsplash.com/photo-1541888946425-d81bb19480c5?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=800&auto=format&fit=crop',
     size: 'large',
   },
   {
     title: 'Frameless Balustrades',
     desc: 'Seamless safety for high-end terraces and balconies.',
-    image: 'https://images.unsplash.com/photo-1628133534591-912abda85d41?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1518005020951-eccb494ad742?q=80&w=800&auto=format&fit=crop',
     size: 'small',
   },
   {
@@ -40,9 +41,14 @@ const physicsPoints = [
   { title: 'Low-Iron Extra Clear', desc: 'Eliminating the natural green tint for absolute color neutrality and brilliance.' },
 ];
 
+import { motion } from 'framer-motion';
+
 export default function GlassSystemsPage() {
   return (
-    <main className="bg-osg-navy">
+    <main className="bg-[#F8F9FB] min-h-screen relative overflow-hidden font-sans">
+      {/* Background Architectural Grid */}
+      <div className="absolute inset-0 bg-grid-blueprint opacity-[0.03] pointer-events-none" />
+      
       <PageHero
         label="Architectural Portfolio"
         title="Uncompromised"
@@ -53,119 +59,149 @@ export default function GlassSystemsPage() {
         ctaSecondary={{ label: 'View Portfolio', href: '/projects' }}
       />
 
-      {/* Bento Solutions Grid */}
-      <section className="section-padding bg-white relative overflow-hidden">
-        {/* Architectural Background Detail */}
-        <div className="absolute right-0 top-0 w-1/3 h-full bg-[#f4f6f5] -skew-x-12 translate-x-1/2 pointer-events-none opacity-50" />
+      {/* Bento Solutions Grid: Luxury High-Contrast */}
+      <section className="py-40 bg-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-blueprint opacity-[0.01]" />
         
-        <div className="container-osg relative z-10">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-            <Reveal>
-              <span className="text-[10px] font-black text-osg-gold uppercase tracking-[0.5em] mb-4 block leading-none">The Collection // 04</span>
-              <h2 className="text-display-sm text-osg-navy font-black uppercase tracking-tighter italic leading-none">Structural <br/><span className="text-osg-navy/20">Precision.</span></h2>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <p className="text-osg-navy/40 max-w-sm text-[10px] uppercase tracking-[0.3em] font-black leading-relaxed border-l-2 border-osg-gold pl-8">
-                From load-bearing structural glass to intelligent office partitions, our systems are tested against rigorous engineering standards.
-              </p>
-            </Reveal>
+        <div className="container-clean">
+          <div className="flex flex-col lg:flex-row items-end justify-between mb-32 gap-16">
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-4xl space-y-10">
+              <div className="flex items-center gap-6">
+                 <div className="w-12 h-[1px] bg-osg-gold/40"></div>
+                 <span className="text-[10px] font-black text-osg-gold uppercase tracking-[0.6em]">The Collection // 04</span>
+              </div>
+              <h2 className="text-[4rem] lg:text-[7rem] text-osg-navy font-black uppercase tracking-tighter leading-[0.85] font-sans">Structural <br/><span className="text-osg-navy/10">Precision.</span></h2>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="lg:w-1/3 border-l border-osg-gold pl-12">
+               <p className="text-[10px] text-osg-navy/40 uppercase tracking-[0.4em] font-black leading-relaxed">
+                    From load-bearing structural glass to intelligent office partitions, our systems are tested against rigorous engineering standards.
+               </p>
+            </motion.div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[400px]">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 auto-rows-[360px] lg:auto-rows-[420px]">
             {solutions.map((sol, i) => (
-              <Reveal key={sol.title} className={sol.size === 'large' ? 'md:col-span-8' : 'md:col-span-4'}>
-                <div className="group relative h-full overflow-hidden bg-osg-charcoal border border-osg-navy/5 shadow-2xl transition-all duration-1000">
-                  <img src={sol.image} alt={sol.title} className="absolute inset-0 w-full h-full object-cover grayscale opacity-50 group-hover:scale-105 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-1000" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-osg-navy/90 via-osg-navy/20 to-transparent flex flex-col justify-end p-10">
-                    <h3 className={`font-black text-white uppercase tracking-tighter mb-2 leading-none transition-colors group-hover:text-osg-gold ${sol.size === 'large' ? 'text-4xl' : 'text-2xl'}`}>{sol.title}</h3>
-                    <p className="text-white/40 text-xs max-w-xs mb-6 opacity-0 group-hover:opacity-100 transition-all duration-500 font-light">{sol.desc}</p>
-                    {sol.cta ? (
-                      <button className="btn-primary w-fit py-3 px-8 text-[10px] !bg-white !text-osg-navy">{sol.cta}</button>
-                    ) : (
-                      <div className="flex items-center gap-4 text-osg-gold text-[10px] font-black uppercase tracking-widest translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all">
-                        Technical Spec <ArrowRight size={14} />
-                      </div>
-                    )}
+              <motion.div 
+                key={sol.title} 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                viewport={{ once: true }}
+                className={sol.size === 'large' ? 'md:col-span-8' : 'md:col-span-4'}
+              >
+                <div className="group relative h-full overflow-hidden rounded-[2rem] lg:rounded-[3rem] bg-osg-navy border border-osg-navy/5 shadow-premium transition-all duration-1000">
+                  <Image src={sol.image} alt={sol.title} fill className="absolute inset-0 w-full h-full object-cover grayscale opacity-75 group-hover:scale-105 group-hover:opacity-95 group-hover:grayscale-0 transition-all duration-[1500ms]" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B1C2C] via-[#0B1C2C]/70 to-[#0B1C2C]/10 flex flex-col justify-end p-6 sm:p-8 lg:p-10">
+                    <div className="space-y-6 relative z-10">
+                       <h3 className={`font-sans font-black text-white uppercase tracking-tight leading-tight transition-colors group-hover:text-osg-gold ${sol.size === 'large' ? 'text-3xl sm:text-4xl lg:text-5xl' : 'text-2xl sm:text-3xl'}`}>{sol.title}</h3>
+                       <p className="text-white/75 text-sm sm:text-base font-sans max-w-sm transition-all duration-700">{sol.desc}</p>
+                       {sol.cta ? (
+                         <Link href="/resources/downloads" className="inline-flex min-h-10 items-center justify-center rounded-full bg-osg-gold px-5 py-3 text-[9px] font-black uppercase tracking-[0.08em] text-osg-navy transition-all hover:bg-white">{sol.cta}</Link>
+                       ) : (
+                         <Link href="/resources/downloads" className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full bg-osg-gold px-5 py-3 text-[9px] font-black uppercase tracking-[0.08em] text-osg-navy transition-all hover:bg-white">
+                           Technical Spec <ArrowRight size={16} />
+                         </Link>
+                       )}
+                    </div>
                   </div>
                 </div>
-              </Reveal>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Technical Exploration Showcase */}
-      <section className="section-padding bg-osg-navy relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid-blueprint opacity-10 pointer-events-none" />
-        <div className="container-osg relative z-10">
-            <div className="max-w-3xl mb-16">
-                <Reveal>
-                    <span className="text-[10px] font-black text-osg-gold uppercase tracking-[0.5em] mb-4 block leading-none">Technical Depth // 04</span>
-                    <h2 className="text-display-xs lg:text-display-sm text-white font-black uppercase tracking-tighter italic">Laminate <br /><span className="text-osg-gold">Schematics.</span></h2>
-                    <p className="mt-6 text-white/50 text-lg max-w-xl">
-                        Explore the surface tension, fragmentation patterns, and UV filtration indexes of our structural and safety glass configurations.
-                    </p>
-                </Reveal>
+      <section className="py-48 bg-[#0B1C2C] text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-blueprint opacity-[0.03] pointer-events-none" />
+        <div className="container-clean relative z-10">
+            <div className="max-w-4xl mb-32 space-y-12">
+                <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="flex items-center gap-6">
+                    <div className="w-12 h-[1px] bg-osg-gold/40"></div>
+                    <span className="text-[10px] font-black text-osg-gold uppercase tracking-[0.6em]">Technical Depth // 04</span>
+                </motion.div>
+                <h2 className="text-4xl sm:text-5xl lg:text-6xl font-sans font-black uppercase tracking-tight leading-tight">Laminate <span className="text-osg-gold">Schematics.</span></h2>
+                <p className="text-lg sm:text-xl text-white/50 font-sans leading-relaxed max-w-2xl">
+                    Explore the surface tension, fragmentation patterns, and UV filtration indexes of our structural and safety glass configurations.
+                </p>
             </div>
             
-            <Reveal delay={0.2}>
-                <TechShowcase categoryKey="GlassSystems" />
-            </Reveal>
+            <TechShowcase categoryKey="GlassSystems" />
         </div>
       </section>
 
-      {/* Physics / Performance Row */}
-      <section className="section-padding bg-osg-navy border-t border-white/5">
-        <div className="container-osg">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-            <Reveal className="relative">
-              <div className="aspect-square bg-osg-charcoal border border-white/5 overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1541888946425-d81bb19480c5?q=80&w=1200&auto=format&fit=crop" className="w-full h-full object-cover grayscale opacity-40 hover:scale-110 transition-transform duration-1000" alt="Glass Physics" />
+      {/* Physics / Performance Module: High-Fidelity Data */}
+      <section className="py-56 bg-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-blueprint opacity-[0.01]" />
+        <div className="container-clean">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-32 items-center">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="lg:col-span-6 relative group"
+            >
+              <div className="aspect-square bg-[#F8F9FB] rounded-[5rem] overflow-hidden border border-osg-navy/5 shadow-premium relative">
+                <Image src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=1200&auto=format&fit=crop" fill className="object-cover grayscale opacity-30 group-hover:scale-110 group-hover:opacity-50 transition-all duration-[2000ms]" alt="Glass Physics" />
+                <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent" />
               </div>
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-12 shadow-2xl w-[90%] md:w-3/4 border border-osg-navy/5">
-                <span className="text-osg-gold text-[9px] font-black uppercase tracking-[0.4em] mb-4 block">Engineered Thresholds</span>
-                <h3 className="text-osg-navy font-black text-3xl mb-8 tracking-tighter uppercase italic leading-none">Performance <br/>Matrix.</h3>
-                <div className="space-y-6">
+              
+              {/* High-Fidelity Data Floating Card */}
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                viewport={{ once: true }}
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/80 backdrop-blur-3xl p-16 rounded-[4rem] shadow-premium w-[85%] border border-osg-navy/5"
+              >
+                <span className="text-osg-gold text-[10px] font-black uppercase tracking-[0.5em] mb-6 block">Engineered Thresholds</span>
+                <h3 className="text-osg-navy font-sans font-black text-4xl mb-12 tracking-tight uppercase leading-none">Performance <br/>Matrix.</h3>
+                <div className="space-y-8">
                   {[
                     { label: 'Thermal U-Value', value: '0.8 W/m²K', icon: Wind },
                     { label: 'Acoustic Reduction', value: '45dB +', icon: Waves },
                     { label: 'Visual Light Trans.', value: '92%', icon: Eye },
                     { label: 'Impact Safety', value: 'Class 1', icon: ShieldCheck },
                   ].map(m => (
-                    <div key={m.label} className="flex justify-between items-center border-b border-osg-navy/5 pb-4 group">
-                      <div className="flex items-center gap-4">
-                        <m.icon size={16} className="text-osg-gold opacity-40 group-hover:opacity-100 transition-opacity" />
-                        <span className="text-osg-navy opacity-60 font-black uppercase tracking-widest text-[9px]">{m.label}</span>
+                    <div key={m.label} className="flex justify-between items-center border-b border-osg-navy/5 pb-6 group/item">
+                      <div className="flex items-center gap-6">
+                        <m.icon size={20} className="text-osg-gold group-hover/item:scale-110 transition-transform" />
+                        <span className="text-osg-navy/40 font-black uppercase tracking-[0.3em] text-[9px]">{m.label}</span>
                       </div>
-                      <span className="text-osg-navy font-black text-xl italic group-hover:text-osg-gold transition-colors">{m.value}</span>
+                      <span className="text-2xl font-sans font-black text-osg-navy group-hover/item:text-osg-gold transition-colors">{m.value}</span>
                     </div>
                   ))}
                 </div>
-              </div>
-            </Reveal>
+              </motion.div>
+            </motion.div>
 
-            <div className="space-y-10">
-              <Reveal>
-                <span className="text-osg-gold font-black uppercase tracking-[0.5em] text-[10px] block mb-6">Structural Mastery</span>
-                <h2 className="text-display-sm text-white font-black uppercase tracking-tighter leading-none italic mb-8">The Physics of <br/><span className="text-osg-gold">Transparency.</span></h2>
-                <p className="text-white/40 text-lg leading-relaxed font-light mb-12">
+            <div className="lg:col-span-6 space-y-16">
+              <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-10">
+                <span className="text-osg-gold font-black uppercase tracking-[0.6em] text-[10px] block">Structural Mastery</span>
+                <h2 className="text-[4rem] lg:text-[6rem] text-osg-navy font-sans font-black uppercase tracking-tighter leading-[0.85]">The Physics of <br/><span className="text-osg-navy/10">Transparency.</span></h2>
+                <p className="text-2xl text-osg-navy/40 leading-relaxed font-sans">
                   Our glass systems are high-performance engineering components. Through advanced lamination and coating techniques, we achieve industry-leading insulation without sacrificing clarity.
                 </p>
-              </Reveal>
+              </motion.div>
               
-              <div className="space-y-12">
+              <div className="space-y-16">
                 {physicsPoints.map((pt, i) => (
-                  <Reveal key={pt.title} delay={i * 0.1}>
-                    <div className="flex items-start gap-8 group">
-                      <div className="w-12 h-12 flex items-center justify-center bg-white/5 border border-white/10 text-osg-gold group-hover:bg-osg-gold group-hover:text-osg-navy transition-all">
-                        <ShieldCheck size={20} />
-                      </div>
-                      <div>
-                        <h4 className="text-[11px] font-black text-white uppercase tracking-widest mb-3 group-hover:text-osg-gold transition-colors">{pt.title}</h4>
-                        <p className="text-white/30 text-xs leading-relaxed max-w-sm font-medium">{pt.desc}</p>
-                      </div>
+                  <motion.div 
+                    key={pt.title} 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.1 }}
+                    viewport={{ once: true }}
+                    className="flex items-start gap-10 group"
+                  >
+                    <div className="w-16 h-16 flex-shrink-0 rounded-2xl bg-[#F8F9FB] flex items-center justify-center text-osg-navy group-hover:bg-osg-navy group-hover:text-osg-gold transition-all duration-500 shadow-premium">
+                       <ShieldCheck size={28} />
                     </div>
-                  </Reveal>
+                    <div className="space-y-4">
+                       <h4 className="text-xl font-sans font-black text-osg-navy uppercase tracking-tight group-hover:text-osg-gold transition-colors">{pt.title}</h4>
+                       <p className="text-lg text-osg-navy/40 font-sans leading-relaxed max-w-sm">{pt.desc}</p>
+                    </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
@@ -173,51 +209,66 @@ export default function GlassSystemsPage() {
         </div>
       </section>
 
-      {/* Technical CTA Bento */}
-      <section className="section-padding bg-white relative overflow-hidden">
+      {/* Technical CTA Bento: Design Integration */}
+      <section className="py-48 bg-[#0B1C2C] text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-blueprint opacity-[0.03] pointer-events-none" />
-        <div className="container-osg relative z-10">
-          <div className="max-w-4xl mx-auto text-center mb-16">
-            <Reveal>
-              <Eye className="mx-auto text-osg-gold mb-12" size={64} />
-              <h2 className="text-5xl lg:text-7xl text-osg-navy font-black uppercase tracking-tighter mb-8 italic">Integrate into <br/><span className="text-osg-navy/20">your design.</span></h2>
-              <p className="text-lg text-osg-navy/50 font-light leading-relaxed max-w-2xl mx-auto">
+        <div className="container-clean">
+          <div className="max-w-5xl mx-auto text-center mb-32 space-y-12">
+            <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}>
+              <Eye className="mx-auto text-osg-gold/40 mb-12" size={80} />
+              <h2 className="text-[4rem] lg:text-[7rem] font-sans font-black uppercase tracking-tighter leading-none">Integrate into <br/><span className="text-white/10">your design.</span></h2>
+              <p className="text-2xl text-white/40 font-sans leading-relaxed max-w-3xl mx-auto">
                 Access our BIM library, CAD details, and performance data sheets to seamlessly incorporate our glass systems into your next project.
               </p>
-            </Reveal>
+            </motion.div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {[
               { icon: Download, label: 'BIM / Revit Library' },
               { icon: ArrowRight, label: 'Technical Manuals' },
               { icon: ShieldCheck, label: 'Certifications' },
             ].map((item, i) => (
-              <Reveal key={item.label} delay={i * 0.1}>
-                <div className="bg-[#f8f9f8] border border-osg-navy/5 p-12 flex flex-col items-center group hover:bg-osg-navy transition-all duration-700 shadow-2xl shadow-osg-navy/5">
-                  <item.icon size={32} className="text-osg-gold group-hover:scale-110 transition-transform mb-8" />
-                  <span className="text-[10px] font-black uppercase tracking-[0.4em] text-osg-navy group-hover:text-white transition-colors">{item.label}</span>
-                </div>
-              </Reveal>
+              <motion.div 
+                key={item.label} 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-white/5 backdrop-blur-xl border border-white/5 p-16 rounded-[4rem] flex flex-col items-center group hover:border-osg-gold transition-all duration-700 shadow-2xl"
+              >
+                <item.icon size={40} className="text-osg-gold group-hover:scale-110 transition-transform mb-10" />
+                <span className="text-[10px] font-black uppercase tracking-[0.5em] text-white/40 group-hover:text-white transition-colors text-center">{item.label}</span>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Final Call */}
-      <section className="section-padding-lg bg-[#fcfdfc] text-center border-t border-osg-navy/5">
-        <div className="container-osg">
-          <Reveal>
-            <span className="text-osg-gold font-black uppercase text-[10px] tracking-[0.5em] mb-10 block leading-none">Engineering Brief</span>
-            <h2 className="text-5xl lg:text-7xl text-osg-navy font-black uppercase tracking-tighter mb-10 italic leading-none">Specify the <br/><span className="text-osg-navy/20">Perfect Lite.</span></h2>
-            <p className="text-lg text-osg-navy/50 mb-16 max-w-2xl mx-auto font-light leading-relaxed">Consult with our glazed-unit specialists to determine the optimal glass configuration for your project requirements.</p>
-            <div className="flex flex-wrap justify-center gap-6">
-              <Link href="/contact" className="btn-primary py-6 px-14">Request Consultation</Link>
-              <Link href="/resources/downloads" className="btn-outline !text-osg-navy !border-osg-navy/10 hover:!border-osg-navy py-6 px-14 text-[10px] font-black uppercase tracking-widest transition-all">Get Performance Data</Link>
+      {/* Final Call: Specified Lite */}
+      <section className="py-64 bg-white text-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-blueprint opacity-[0.02]" />
+        <div className="container-clean">
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="space-y-16"
+          >
+            <div className="flex flex-col items-center gap-6">
+                <div className="w-16 h-[1px] bg-osg-gold/40"></div>
+                <span className="text-osg-gold font-black uppercase text-[11px] tracking-[0.6em]">Engineering Brief</span>
             </div>
-          </Reveal>
+            <h2 className="text-[4rem] lg:text-[8rem] text-osg-navy font-sans font-black uppercase tracking-tighter leading-none">Specify the <br/><span className="text-osg-navy/10">Perfect Lite.</span></h2>
+            <p className="text-2xl text-osg-navy/40 max-w-3xl mx-auto font-sans leading-relaxed">Consult with our glazed-unit specialists to determine the optimal glass configuration for your project requirements.</p>
+            <div className="flex flex-wrap justify-center gap-10 pt-8">
+              <Link href="/contact" className="btn-cta !px-16 py-6 !text-[11px]">REQUEST CONSULTATION</Link>
+              <Link href="/resources/downloads" className="flex items-center gap-6 px-12 py-6 rounded-full border border-osg-navy/10 text-[11px] font-black uppercase tracking-widest text-osg-navy hover:bg-osg-navy hover:text-white transition-all">GET PERFORMANCE DATA</Link>
+            </div>
+          </motion.div>
         </div>
       </section>
     </main>
   );
 }
+

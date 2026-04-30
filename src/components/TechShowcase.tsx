@@ -18,26 +18,26 @@ export default function TechShowcase({ categoryKey }: TechShowcaseProps) {
   const currentSpecs = data.specs[activeTab] || [];
 
   return (
-    <div className="card-terminal bg-grid-blueprint border-white/10 min-h-[600px] flex flex-col lg:flex-row overflow-hidden group/container">
+    <div className="rounded-3xl border border-white/10 bg-osg-navy/80 bg-grid-blueprint min-h-[520px] flex flex-col lg:flex-row overflow-hidden group/container">
       {/* Sidebar Navigator */}
-      <div className="w-full lg:w-80 border-b lg:border-b-0 lg:border-r border-white/5 bg-osg-navy/40 backdrop-blur-md z-20">
-        <div className="p-8 border-b border-white/5 bg-osg-navy/20 relative">
+      <div className="w-full lg:w-80 border-b lg:border-b-0 lg:border-r border-white/10 bg-white/[0.04] backdrop-blur-md z-20">
+        <div className="p-5 sm:p-6 border-b border-white/10 bg-osg-navy/40 relative">
           <div className="absolute top-0 right-0 p-2 opacity-20 group-hover/container:opacity-40 transition-opacity">
             <span className="text-[10px] font-mono text-osg-gold">SCN_LN / {data.id.substring(0, 3).toUpperCase()}</span>
           </div>
-          <h3 className="text-[10px] font-black text-osg-gold uppercase tracking-[0.4em] mb-2 font-mono">System Selector</h3>
-          <p className="text-[9px] text-white/40 uppercase font-black tracking-widest leading-none">Initialize Category Specs</p>
+          <h3 className="text-[10px] font-black text-osg-gold uppercase tracking-[0.28em] mb-2 font-mono">System Selector</h3>
+          <p className="text-[9px] text-white/65 uppercase font-black tracking-widest leading-snug">Initialize Category Specs</p>
         </div>
-        <div className="p-4 space-y-2">
+        <div className="p-3 sm:p-4 space-y-2">
           {data.subCategories.map((sub) => (
             <button
               key={sub.id}
               onClick={() => setActiveTab(sub.id)}
-              className={`w-full group flex items-center justify-between p-4 transition-all duration-500 relative ${
-                activeTab === sub.id ? 'bg-osg-gold text-osg-navy' : 'text-white/40 hover:bg-white/5 hover:text-white'
+              className={`w-full group flex items-center justify-between rounded-xl p-4 transition-all duration-300 relative ${
+                activeTab === sub.id ? 'bg-osg-gold text-osg-navy shadow-lg' : 'bg-white/[0.03] text-white/70 hover:bg-white/[0.08] hover:text-white'
               }`}
             >
-              <span className="text-[11px] font-black uppercase tracking-widest transition-transform group-hover:translate-x-2">{sub.label}</span>
+              <span className="text-[11px] font-black uppercase tracking-[0.14em] transition-transform group-hover:translate-x-1">{sub.label}</span>
               <ChevronRight size={14} className={activeTab === sub.id ? 'opacity-100' : 'opacity-0'} />
               {activeTab === sub.id && (
                 <motion.div layoutId="active-marker" className="absolute left-0 w-1.5 h-full bg-osg-navy" />
@@ -45,26 +45,26 @@ export default function TechShowcase({ categoryKey }: TechShowcaseProps) {
             </button>
           ))}
         </div>
-        <div className="mt-auto p-8 border-t border-white/5 text-[9px] font-mono text-white/20 uppercase tracking-widest">
+        <div className="mt-auto p-5 sm:p-6 border-t border-white/10 text-[9px] font-mono text-white/35 uppercase tracking-widest">
             OSG / TECH-SPEC / {data.id} / v1.4
         </div>
       </div>
 
       {/* 3D Visualization Area */}
-      <div className="flex-1 relative p-12 lg:p-20 overflow-hidden bg-osg-navy/20 flex flex-col">
+      <div className="flex-1 relative p-5 sm:p-8 lg:p-12 overflow-hidden bg-osg-navy/20 flex flex-col">
         {/* Background Layered Grid */}
         <div className="absolute inset-0 bg-scanlines opacity-[0.03] pointer-events-none" />
         
         {/* Animated Headline */}
-        <div className="relative z-10 mb-12">
-            <span className="text-[10px] font-black text-osg-gold uppercase tracking-[0.5em] mb-4 block animate-pulse">Analyzing Structural Logic...</span>
-            <h2 className="text-display-sm text-white font-black uppercase tracking-tighter italic leading-none">
-              Technical <span className="text-osg-gold">Schematic.</span>
+        <div className="relative z-10 mb-8">
+            <span className="text-[10px] font-black text-osg-gold uppercase tracking-[0.28em] mb-3 block animate-pulse">Analyzing Structural Logic...</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white font-black uppercase tracking-tight leading-tight">
+              Technical <span className="text-osg-gold uppercase">Schematic.</span>
             </h2>
         </div>
 
         {/* Dynamic 3D Viewer Placeholder */}
-        <div className="flex-1 flex items-center justify-center perspective-[1200px] mb-12 relative">
+        <div className="flex-1 flex min-h-[300px] items-center justify-center perspective-[1200px] mb-8 relative">
             <AnimatePresence mode="wait">
                 <motion.div
                     key={activeTab}
@@ -132,14 +132,14 @@ export default function TechShowcase({ categoryKey }: TechShowcaseProps) {
         </div>
 
         {/* Technical Data Console */}
-        <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {currentSpecs.map((spec, i) => (
                 <motion.div
                     key={spec.id}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.3 + (i * 0.1), ease: [0.16, 1, 0.3, 1] }}
-                    className="p-6 border border-white/10 bg-white/[0.02] group/item hover:bg-white/[0.05] hover:border-osg-gold/40 transition-all duration-500 cursor-default relative overflow-hidden"
+                    className="p-4 border border-white/10 bg-white/[0.04] group/item hover:bg-white/[0.08] hover:border-osg-gold/40 transition-all duration-500 cursor-default relative overflow-hidden rounded-2xl"
                 >
                     <div className="flex items-center gap-4 mb-4">
                         <div className="w-10 h-10 flex items-center justify-center bg-osg-gold/5 border border-osg-gold/20 text-osg-gold group-hover/item:bg-osg-gold group-hover/item:text-osg-navy transition-all duration-500">
@@ -147,7 +147,7 @@ export default function TechShowcase({ categoryKey }: TechShowcaseProps) {
                         </div>
                         <div className="flex flex-col">
                             <span className="text-[8px] font-mono text-osg-gold/50 tracking-widest uppercase">{spec.id}</span>
-                            <span className="text-[10px] font-black text-white/30 uppercase tracking-widest">{spec.label}</span>
+                            <span className="text-[10px] font-black text-white/60 uppercase tracking-widest">{spec.label}</span>
                         </div>
                     </div>
                     <div>
@@ -162,3 +162,4 @@ export default function TechShowcase({ categoryKey }: TechShowcaseProps) {
     </div>
   );
 }
+

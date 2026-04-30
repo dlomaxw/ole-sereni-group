@@ -34,7 +34,7 @@ const systems = [
   { 
     name: 'Fire-Rated Partitions', 
     desc: 'Certified drywall partition systems meeting 60, 90, and 120-minute fire resistance ratings for commercial safety compliance.',
-    image: 'https://images.unsplash.com/photo-1541888946425-d81bb19480c5?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=800&auto=format&fit=crop',
     tag: 'Safety'
   },
 ];
@@ -54,7 +54,7 @@ export default function GypsumWorksPage() {
         <div className="container-osg relative z-10">
           <Reveal className="mb-20">
             <span className="text-[10px] font-black text-osg-gold uppercase tracking-[0.5em] mb-4 block leading-none">Scope of Works // 02</span>
-            <h2 className="text-display-sm text-osg-navy font-black uppercase tracking-tighter italic">Precision <br/><span className="text-osg-navy/20">Systems.</span></h2>
+            <h2 className="text-display-sm text-osg-navy font-black uppercase tracking-tighter">Precision <br/><span className="text-osg-navy/20">Systems.</span></h2>
           </Reveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -93,7 +93,7 @@ export default function GypsumWorksPage() {
             <div className="max-w-3xl mb-16">
                 <Reveal>
                     <span className="text-[10px] font-black text-osg-gold uppercase tracking-[0.5em] mb-4 block leading-none">Technical Depth // 04</span>
-                    <h2 className="text-display-xs lg:text-display-sm text-white font-black uppercase tracking-tighter italic">Structural <br /><span className="text-osg-gold">Schematics.</span></h2>
+                    <h2 className="text-display-xs lg:text-display-sm text-white font-black uppercase tracking-tighter">Structural <br /><span className="text-osg-gold">Schematics.</span></h2>
                     <p className="mt-6 text-white/50 text-lg max-w-xl">
                         Review the acoustic and fire-resistance parameters of our specialized gypsum board and ceiling tile applications.
                     </p>
@@ -109,7 +109,7 @@ export default function GypsumWorksPage() {
       <section className="bg-osg-navy py-12 border-t border-white/5">
         <div className="container-osg flex flex-col md:flex-row items-center justify-between gap-10">
           <div className="max-w-xl">
-            <h3 className="text-heading-md text-white mb-3 italic">Technical interior required?</h3>
+            <h3 className="text-heading-md text-white mb-3">Technical interior required?</h3>
             <p className="text-white/40 text-small uppercase tracking-widest">Our engineers can assist with acoustic and fire-rating specifications.</p>
           </div>
           <Link href="/quote" className="btn-primary flex-shrink-0 !bg-white !text-osg-navy">Initialize Project <ArrowRight size={16} /></Link>
@@ -118,3 +118,4 @@ export default function GypsumWorksPage() {
     </main>
   );
 }
+

@@ -617,3 +617,72 @@ Every output you produce must aim for the following standard:
 Never write code that is messy, rushed, overly complex, or difficult to maintain.
 
 Always behave like a senior software engineer working on a real production system.
+
+---
+
+## OSG Project Progress Log
+
+### Working Directory
+- Correct full project: `C:\Users\RAZER\Documents\osg group\website\osg-web`.
+- Do not use incomplete folder: `C:\Users\RAZER\Documents\osg-web`.
+
+### Completed UI / Build Work
+- Build blockers fixed:
+  - Added missing `ArrowRight` import in `src/app/admin/dashboard/page.tsx`.
+  - Added missing `Loader2` import in `src/app/admin/erp/finance/page.tsx`.
+  - Defined missing global CSS token references including `--osg-bg-gray`.
+  - Updated ESLint ignore/config so vendor and generated folders do not block app linting.
+- Public layout improvements:
+  - Improved `Navbar`, `Footer`, `PageHero`, home page, industries page, and shared card layout patterns.
+  - Replaced broken footer Operations select with real Admin Hub and Client Portal links.
+  - Fixed home page `/about` link to `/about-us`.
+  - Replaced many broken image URLs with working Unsplash-backed images.
+  - Fixed `/brief` mobile overflow caused by active sidebar translate styling.
+- Admin/portal improvements:
+  - Improved admin dashboard card sizing and responsive behavior.
+  - Added mobile admin shell behavior while preserving auth checks.
+- Login page:
+  - Split the old single login card into separate Client Portal and Admin Console panels.
+  - Kept Firebase auth and role-based redirects intact.
+  - Verified `/login` with Browser Use: no console errors.
+  - Verified mobile/tablet responsive checks: two forms present and no horizontal overflow.
+
+### Latest Verification
+- `npm run build`: passing.
+- `npm run lint -- --quiet`: passing with no errors.
+- Previous broader crawl after image/link work: `routes=45`, `hardIssues=0`.
+
+### Current Open Issues From Browser Comments
+- Login:
+  - Fixed input/icon overlap by using icon capsules, stronger placeholder contrast, and increased input left padding.
+- Navigation:
+  - Added `/l` redirect route back to `/` to prevent the observed 404.
+  - Reworked mobile/fullscreen menu typography and added image-backed submenu category cards.
+- Product pages:
+  - Replaced false/hidden curtain wall “Technical Data” affordances with visible links to `/resources/downloads`.
+  - Improved glass systems card contrast and made Technical Spec / Explore Tech visible links.
+  - Improved `TechShowcase` selector/card contrast, spacing, and mobile layout.
+- Contact page:
+  - Reduced poster-scale heading/card text inside the form panel.
+  - Tightened contact/uplink cards and added wrapping/stronger containment for long values.
+- Quote page:
+  - Wrapped the intake form in a clean card and reduced oversized copy.
+  - Increased input/control usability and strengthened Quote/Brief/Consultation selected states.
+
+### Active Verification Needed
+- Completed after latest UI fixes:
+  - `npm run build`: passing.
+  - `npm run lint -- --quiet`: passing.
+  - Browser Use route checks: `/login`, `/l`, `/products/curtain-wall`, `/products/glass-systems`, `/contact`, and `/quote` load without 404s or console errors.
+  - Playwright responsive checks: no horizontal overflow on desktop or mobile for the marked pages.
+  - Mobile menu interaction check: submenu image cards are present and the Curtain Wall route opens correctly.
+
+### Required Workflow Going Forward
+- Before coding, read `AGENTS.md` and inspect the target files first.
+- Plan before implementation.
+- Save progress in this log after each meaningful step.
+- Verify changes with `npm run build`, `npm run lint -- --quiet`, and Browser Use/Playwright screenshots for affected pages.
+
+- 2026-04-30 admin console repair pass: tightened admin sidebar spacing/contrast, added admin content containment CSS to stop oversized headers/cards from sliding under the sidebar, added reusable admin quick-action modal, wired CRM/inventory/finance/service/workshop/staff/brands exports/actions, expanded CRM territories/countries, and made setup render as an admin panel instead of a full nested page.
+
+- 2026-04-30 admin verification: npm run build passed, npm run lint -- --quiet passed, Browser Use confirmed admin sidebar/system setup links render and the service quick-action modal opens on localhost:3020. Browser route inspection also confirmed CRM admin page renders with the updated sidebar/header; no auth bypass was used.

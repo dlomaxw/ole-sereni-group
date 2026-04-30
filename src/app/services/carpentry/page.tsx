@@ -16,25 +16,25 @@ const systems = [
   { 
     name: 'Built-in Wardrobes & Units', 
     desc: 'Floor-to-ceiling built-in wardrobes, linen cupboards, and media units with premium hardware finishes.',
-    image: 'https://images.unsplash.com/photo-1595428774223-ef52624120ec?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=800&auto=format&fit=crop',
     tag: 'Fitted'
   },
   { 
     name: 'Architectural Panelling', 
     desc: 'Timber wall panelling, feature panelled ceilings, and decorative board systems for premium interiors.',
-    image: 'https://images.unsplash.com/photo-1622372738946-629715071d3e?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=800&auto=format&fit=crop',
     tag: 'Premium'
   },
   { 
     name: 'Door & Frame Fabrication', 
     desc: 'Solid timber, engineered wood, and veneer doors with bespoke frames, architraves, and ironmongery.',
-    image: 'https://images.unsplash.com/photo-1544413234-2c351f8a848c?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=800&auto=format&fit=crop',
     tag: 'Structural'
   },
   { 
     name: 'Feature Walls & Screening', 
     desc: 'Decorative timber screens, feature wall cladding, and privacy partitions for hospitality and residential projects.',
-    image: 'https://images.unsplash.com/photo-1507652313519-d4511f7c46bc?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=800&auto=format&fit=crop',
     tag: 'Decorative'
   },
   { 
@@ -60,7 +60,7 @@ export default function CarpentryPage() {
         <div className="container-osg relative z-10">
           <Reveal className="mb-20">
             <span className="text-[10px] font-black text-osg-gold uppercase tracking-[0.5em] mb-4 block leading-none">Scope of Works // 04</span>
-            <h2 className="text-display-sm text-osg-navy font-black uppercase tracking-tighter italic">Joinery <br/><span className="text-osg-navy/20">Systems.</span></h2>
+            <h2 className="text-display-sm text-osg-navy font-black uppercase tracking-tighter">Joinery <br/><span className="text-osg-navy/20">Systems.</span></h2>
           </Reveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -99,7 +99,7 @@ export default function CarpentryPage() {
             <div className="max-w-3xl mb-16">
                 <Reveal>
                     <span className="text-[10px] font-black text-osg-gold uppercase tracking-[0.5em] mb-4 block leading-none">Technical Depth // 08</span>
-                    <h2 className="text-display-xs lg:text-display-sm text-white font-black uppercase tracking-tighter italic">Joinery <br /><span className="text-osg-gold">Extraction.</span></h2>
+                    <h2 className="text-display-xs lg:text-display-sm text-white font-black uppercase tracking-tighter">Joinery <br /><span className="text-osg-gold">Extraction.</span></h2>
                     <p className="mt-6 text-white/50 text-lg max-w-xl">
                         Explore the structural density, moisture tolerance, and fire-integrity ratings of our bespoke millwork and technical timber products.
                     </p>
@@ -115,7 +115,7 @@ export default function CarpentryPage() {
       <section className="bg-osg-navy py-12 border-t border-white/5">
         <div className="container-osg flex flex-col md:flex-row items-center justify-between gap-10">
           <div className="max-w-xl">
-            <h3 className="text-heading-md text-white mb-3 italic">Looking for bespoke joinery?</h3>
+            <h3 className="text-heading-md text-white mb-3">Looking for bespoke joinery?</h3>
             <p className="text-white/40 text-small uppercase tracking-widest">Our workshop team can fabricate to any architectural specification.</p>
           </div>
           <Link href="/quote" className="btn-primary flex-shrink-0 !bg-white !text-osg-navy">Initialize Project <ArrowRight size={16} /></Link>
@@ -124,3 +124,4 @@ export default function CarpentryPage() {
     </main>
   );
 }
+

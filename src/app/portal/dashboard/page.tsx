@@ -36,7 +36,7 @@ export default function ClientDashboardPage() {
             <TrendingUp size={12} />
             <span>Operational Context</span>
           </nav>
-          <h1 className="text-5xl font-serif font-black text-osg-navy tracking-tight uppercase leading-[0.9] mb-4">
+          <h1 className="text-5xl font-montserrat font-black text-osg-navy tracking-tight uppercase leading-[0.9] mb-4">
             Zenith Tower <span className="text-osg-gold">Exterior</span>
           </h1>
           <p className="text-[11px] font-bold text-osg-navy/50 uppercase tracking-[0.2em] leading-relaxed">
@@ -221,7 +221,7 @@ export default function ClientDashboardPage() {
                  <div className="absolute -top-3 -right-3 w-8 h-8 border-t-2 border-r-2 border-osg-gold"></div>
               </div>
               
-              <h4 className="text-2xl font-serif font-black tracking-tight leading-none mb-2">Elena Sterling</h4>
+              <h4 className="text-2xl font-montserrat font-black tracking-tight leading-none mb-2">Elena Sterling</h4>
               <p className="text-[9px] font-black text-osg-gold uppercase tracking-[0.6em] mb-12">Lead Project Strategist</p>
               
               <div className="w-full space-y-5 pt-10 border-t border-white/5">
@@ -279,3 +279,4 @@ export default function ClientDashboardPage() {
     </div>
   );
 }
+

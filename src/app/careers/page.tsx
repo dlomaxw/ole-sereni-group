@@ -61,8 +61,8 @@ export default function CareersPage() {
         <div className="container-osg">
           <Reveal className="mb-24">
             <span className="badge-system mb-6">Internal Culture</span>
-            <h2 className="text-display text-osg-navy italic !text-heading-xl leading-none">
-              The OSG <br /> <span className="text-osg-navy/20 not-italic">DNA.</span>
+            <h2 className="text-display text-osg-navy !text-heading-xl leading-none">
+              The OSG <br /> <span className="text-osg-navy/20 not-">DNA.</span>
             </h2>
             <p className="text-body-muted mt-8 max-w-sm uppercase tracking-widest leading-loose">A high-precision environment defined by shared ambition and technical mastery.</p>
           </Reveal>
@@ -88,8 +88,8 @@ export default function CareersPage() {
         <div className="container-osg relative z-10">
           <Reveal className="mb-24">
             <span className="badge-system mb-6">Active Vacancies</span>
-            <h2 className="text-display text-white italic !text-heading-xl leading-none">
-              Join the <br /> <span className="text-white/20 not-italic">Foundation.</span>
+            <h2 className="text-display text-white !text-heading-xl leading-none">
+              Join the <br /> <span className="text-white/20 not-">Foundation.</span>
             </h2>
           </Reveal>
 
@@ -103,7 +103,7 @@ export default function CareersPage() {
                     <span className="text-[10px] font-mono text-osg-gold font-bold tracking-[0.4em] opacity-40 group-hover:opacity-100 transition-opacity mt-1">{role.id}</span>
                     <div className="space-y-4">
                       <div className="flex items-center gap-6 flex-wrap">
-                        <h3 className="text-2xl font-black text-white italic tracking-tighter group-hover:text-osg-gold transition-colors">{role.title}</h3>
+                        <h3 className="text-2xl font-black text-white tracking-tighter group-hover:text-osg-gold transition-colors">{role.title}</h3>
                         {role.urgency && <span className="badge-system !text-[8px] !bg-red-500/10 !border-red-500/20 !text-red-500">PRIORITY</span>}
                       </div>
                       <div className="flex items-center gap-8 text-[10px] font-black uppercase tracking-widest text-white/30 group-hover:text-white/60 transition-colors">
@@ -126,7 +126,7 @@ export default function CareersPage() {
           <Reveal delay={0.4} className="mt-24">
             <div className="card-terminal p-16 text-center border-white/5 bg-white/[0.01]">
               <div className="max-w-xl mx-auto">
-                <h3 className="text-2xl font-black text-white italic tracking-tighter mb-6 uppercase">Speculative Briefings</h3>
+                <h3 className="text-2xl font-black text-white tracking-tighter mb-6 uppercase">Speculative Briefings</h3>
                 <p className="text-body-muted text-white/40 mb-12 uppercase tracking-[0.2em] text-[10px] leading-loose">Don't see your architectural role listed? We are always analyzing high-potential talent for future structural expansions.</p>
                 <a href="mailto:hr@oleserenigroup.com?subject=Speculative Application — OSG" className="btn-outline !text-white !border-white/10 hover:!border-white group">
                   SEND DATA PACKAGE <ArrowRight size={16} className="group-hover:translate-x-3 transition-transform" />
@@ -139,3 +139,4 @@ export default function CareersPage() {
     </main>
   );
 }
+

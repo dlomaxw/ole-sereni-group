@@ -92,7 +92,7 @@ export default function CostEstimatorPage() {
             <span className="text-white">Estimator</span>
           </nav>
           <h1 className="text-display-md lg:text-display-lg text-white font-black uppercase tracking-tighter leading-[0.9] mb-12">
-            INDICATIVE <br /><span className="text-osg-gold italic">VALUATION.</span>
+            INDICATIVE <br /><span className="text-osg-gold">VALUATION.</span>
           </h1>
           <p className="text-osg-slate text-body-lg max-w-2xl leading-relaxed font-light">
             Precision engineering begins with accurate planning. Use our signature tool to calculate technical specifications and receive an immediate indicative valuation for your architectural projects.
@@ -254,7 +254,7 @@ export default function CostEstimatorPage() {
             {/* Bottom Callout */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="aspect-square bg-osg-charcoal overflow-hidden border border-white/5 relative group">
-                <img src="https://images.unsplash.com/photo-1503387762-592dea58ef23?q=80&w=1200" className="w-full h-full object-cover grayscale opacity-40 group-hover:scale-110 transition-transform duration-[3000ms]" alt="Architecture" />
+                <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=1200" className="w-full h-full object-cover grayscale opacity-40 group-hover:scale-110 transition-transform duration-[3000ms]" alt="Architecture" />
                 <div className="absolute inset-0 bg-osg-navy/40" />
               </div>
               <div className="bg-white/5 border border-white/10 p-12 flex flex-col justify-center">
@@ -271,3 +271,4 @@ export default function CostEstimatorPage() {
     </main>
   );
 }
+

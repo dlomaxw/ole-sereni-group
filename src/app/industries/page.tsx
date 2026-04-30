@@ -56,7 +56,7 @@ const industries = [
 
 export default function IndustriesPage() {
   return (
-    <main className="bg-osg-navy min-h-screen">
+    <main className="bg-[#F8F9FB] min-h-screen">
       <PageHero
         label="Markets We Serve"
         title="Industries &"
@@ -66,85 +66,112 @@ export default function IndustriesPage() {
       />
 
       {/* Industry Matrix Grid */}
-      <section className="section-padding bg-osg-navy relative overflow-hidden">
-        <div className="absolute inset-0 bg-noise opacity-[0.03] pointer-events-none" />
-        <div className="container-osg relative z-10">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-12">
-            <Reveal className="max-w-2xl">
-                <span className="text-osg-gold font-black text-[10px] uppercase tracking-[0.5em] mb-8 block leading-none">Sector Allocation</span>
-                <h2 className="text-5xl lg:text-7xl text-white font-black uppercase tracking-tighter italic leading-none">Market <br /><span className="text-white/20">DNA Matrix.</span></h2>
-            </Reveal>
-            <Reveal className="lg:w-1/3 border-l-2 border-osg-gold pl-10">
-                <p className="text-white/40 text-[10px] uppercase tracking-[0.3em] font-black leading-relaxed">
+      <section className="py-20 lg:py-28 bg-[#0B1C2C] relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-blueprint opacity-[0.03] pointer-events-none" />
+        <div className="container-clean relative z-10">
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-16 lg:mb-24 gap-10 lg:gap-16">
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="max-w-3xl space-y-8"
+            >
+                <div className="flex items-center gap-4">
+                   <div className="w-12 h-[1px] bg-osg-gold/40"></div>
+                   <span className="text-[9px] sm:text-[10px] font-black text-osg-gold uppercase tracking-[0.3em] sm:tracking-[0.5em]">Sector Allocation</span>
+                </div>
+                <h2 className="text-5xl sm:text-6xl lg:text-[6.5rem] text-white font-black uppercase tracking-tighter leading-[0.9] font-sans">Market <br /><span className="text-white/20">DNA Matrix.</span></h2>
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="lg:w-1/3 border-l border-white/10 pl-6 lg:pl-12 pb-4"
+            >
+                <p className="text-white/45 text-[10px] uppercase tracking-[0.25em] lg:tracking-[0.35em] font-black leading-relaxed">
                     Deploying specialized engineering benchmarks across five strategic commercial and civic domains.
                 </p>
-            </Reveal>
+            </motion.div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/10 border border-white/10 shadow-2xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-8">
             {industries.map((ind, i) => (
-              <Reveal key={ind.id} delay={i * 0.1}>
+              <motion.div 
+                key={ind.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                viewport={{ once: true }}
+              >
                 <Link href={ind.href} className="block group h-full">
-                  <div className="bg-osg-navy p-12 lg:p-16 h-full transition-all duration-700 group-hover:bg-white/5 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-grid-blueprint opacity-[0.03] pointer-events-none transition-opacity group-hover:opacity-[0.08]" />
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-6 sm:p-8 lg:p-10 rounded-[1.75rem] lg:rounded-[2.25rem] h-full transition-all duration-700 hover:bg-white/10 hover:border-osg-gold relative overflow-hidden shadow-2xl">
+                    <div className="absolute inset-0 bg-grid-blueprint opacity-[0.02] pointer-events-none" />
                     
-                    <div className="flex justify-between items-start mb-16 relative z-10">
-                        <div className="w-16 h-16 flex items-center justify-center bg-white/5 border border-white/10 group-hover:border-osg-gold group-hover:bg-osg-gold group-hover:text-osg-navy transition-all duration-500">
+                    <div className="flex justify-between items-start gap-4 mb-10 lg:mb-12 relative z-10">
+                        <div className="w-14 h-14 lg:w-16 lg:h-16 rounded-2xl flex items-center justify-center bg-white/5 border border-white/10 group-hover:border-osg-gold group-hover:bg-osg-navy group-hover:text-osg-gold transition-all duration-500">
                             {ind.icon && <ind.icon size={28} className="transition-transform group-hover:scale-110" />}
                         </div>
-                        <div className="text-right">
-                             <span className="block text-osg-gold font-black text-[10px] uppercase tracking-[0.4em] mb-1">{ind.tag}</span>
-                             <span className="block text-white/20 font-black text-xs uppercase tracking-widest group-hover:text-white/40 transition-colors">{ind.metric}</span>
+                        <div className="text-right space-y-2">
+                             <span className="block text-osg-gold font-black text-[10px] uppercase tracking-[0.25em]">{ind.tag}</span>
+                             <span className="block text-white/20 font-black text-[9px] uppercase tracking-widest group-hover:text-white/40 transition-colors">{ind.metric}</span>
                         </div>
                     </div>
 
-                    <div className="relative z-10 mb-12">
-                        <h2 className="text-4xl lg:text-5xl text-white font-black uppercase tracking-tighter italic mb-4 leading-none group-hover:text-osg-gold transition-colors">{ind.title}</h2>
-                        <p className="text-osg-gold/50 text-[10px] font-black uppercase tracking-widest">{ind.subtitle}</p>
+                    <div className="relative z-10 mb-10">
+                        <h2 className="text-3xl lg:text-4xl text-white font-black uppercase tracking-tight mb-4 font-sans group-hover:text-osg-gold transition-colors">{ind.title}</h2>
+                        <p className="text-osg-gold/50 text-[9px] lg:text-[10px] font-black uppercase tracking-[0.25em]">{ind.subtitle}</p>
                     </div>
 
-                    <p className="text-white/40 text-sm font-medium leading-relaxed mb-12 max-w-lg relative z-10 group-hover:text-white/60 transition-colors line-clamp-3">
+                    <p className="text-white/45 text-base lg:text-lg font-medium leading-relaxed mb-8 lg:mb-10 max-w-lg relative z-10 font-sans group-hover:text-white/60 transition-colors">
                         {ind.desc}
                     </p>
 
-                    <div className="flex flex-wrap gap-3 mb-12 relative z-10 opacity-60 group-hover:opacity-100 transition-opacity">
+                    <div className="flex flex-wrap gap-3 mb-10 lg:mb-12 relative z-10 opacity-60 group-hover:opacity-100 transition-opacity">
                       {ind.services.map(s => (
-                        <span key={s} className="text-[9px] font-black uppercase tracking-widest px-4 py-1.5 bg-white/5 border border-white/10 text-white/50 group-hover:text-white transition-colors">{s}</span>
+                        <span key={s} className="text-[9px] font-black uppercase tracking-widest px-4 py-2 rounded-full border border-white/10 text-white/55 group-hover:text-white transition-colors">{s}</span>
                       ))}
                     </div>
 
-                    <div className="flex items-center gap-6 text-osg-gold text-[10px] font-black uppercase tracking-[0.4em] relative z-10">
+                    <div className="flex items-center gap-4 text-osg-gold text-[10px] font-black uppercase tracking-[0.28em] lg:tracking-[0.45em] relative z-10">
                         EXPLORE SECTOR 
-                        <span className="w-12 h-12 flex items-center justify-center border border-osg-gold/20 group-hover:border-osg-gold group-hover:bg-osg-gold group-hover:text-osg-navy transition-all duration-500">
-                            <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-                        </span>
+                        <div className="w-12 h-12 rounded-full border border-osg-gold/20 flex items-center justify-center group-hover:bg-osg-gold group-hover:text-osg-navy transition-all duration-500">
+                            <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                        </div>
                     </div>
                   </div>
                 </Link>
-              </Reveal>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Specialist CTA */}
-      <section className="section-padding-lg bg-[#fcfdfc] border-t border-osg-navy/5 relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid-blueprint opacity-[0.02] pointer-events-none" />
-        <div className="container-osg relative z-10 text-center">
-          <Reveal className="max-w-4xl mx-auto">
-            <Terminal className="text-osg-gold mx-auto mb-10" size={40} />
-            <h2 className="text-5xl lg:text-7xl text-osg-navy font-black uppercase tracking-tighter mb-10 italic leading-none">Cross-Sector <br/><span className="text-osg-navy/20">Capabilities.</span></h2>
-            <p className="text-lg text-osg-navy/50 mb-16 max-w-2xl mx-auto font-light leading-relaxed">OSG has experience across diverse building types. Operating in a sector not listed? Contact our engineering team to discuss your specific structural requirements.</p>
-            
-            <div className="flex flex-wrap justify-center gap-6">
-                <Link href="/contact" className="btn-primary py-6 px-14 group">
-                    Talk to an Engineer <ArrowRight size={18} className="ml-4 transition-transform group-hover:translate-x-2" />
-                </Link>
-                <Link href="/quote" className="btn-outline !text-osg-navy !border-osg-navy/10 hover:!border-osg-navy py-6 px-14 text-[10px] font-black uppercase tracking-widest transition-all">Submit Technical Brief</Link>
+      <section className="py-24 lg:py-32 bg-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-blueprint opacity-[0.03] pointer-events-none" />
+        <div className="container-clean relative z-10 text-center">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-5xl mx-auto space-y-12"
+          >
+            <div className="flex justify-center">
+               <Terminal className="text-osg-gold" size={48} />
             </div>
-          </Reveal>
+            <h2 className="text-5xl lg:text-[6.5rem] text-osg-navy font-black uppercase tracking-tight leading-[0.9] font-sans">Cross-Sector <br/><span className="text-osg-navy/10">Capabilities.</span></h2>
+            <p className="text-lg lg:text-2xl text-osg-navy/45 max-w-3xl mx-auto font-sans leading-relaxed">OSG has experience across diverse building types. Operating in a sector not listed? Contact our engineering team to discuss your specific structural requirements.</p>
+            
+            <div className="flex flex-wrap justify-center gap-8 pt-10">
+                <Link href="/contact" className="btn-cta !px-16 py-6 !text-[10px]">
+                    TALK TO AN ENGINEER <ArrowRight size={18} />
+                </Link>
+                <Link href="/quote" className="flex items-center gap-6 px-12 py-6 rounded-full border border-osg-navy/10 text-[10px] font-black uppercase tracking-widest text-osg-navy hover:bg-osg-navy hover:text-white transition-all">SUBMIT TECHNICAL BRIEF</Link>
+            </div>
+          </motion.div>
         </div>
       </section>
     </main>
   );
 }
+

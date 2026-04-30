@@ -1,5 +1,6 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import { Shield, Flame, Zap, CheckCircle, ArrowRight, Layers, Box, Factory, Ruler, Download, ShieldCheck, Clock, Terminal, Activity, Monitor } from 'lucide-react';
 import PageHero from '@/components/PageHero';
 import Link from 'next/link';
@@ -40,7 +41,7 @@ const infrastructureSectors = [
     id: '02',
     title: 'Structural Partitioning',
     desc: 'High-span gypsum and aluminium wall systems designed to meet fire and acoustic requirements in massive warehouse or mall environments.',
-    image: 'https://images.unsplash.com/photo-1541888946425-d81bb19480c5?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=800&auto=format&fit=crop',
     points: ['60-120 Min Fire Rating', 'Sound Transmission Class 55+', 'Seismic Brace Options'],
     overlayTitle: 'Integrity Rating',
     overlayDesc: 'Independently tested for thermal and structural load-bearing capacity under stress.',
@@ -63,7 +64,10 @@ const requirements = [
 
 export default function RetailIndustrialPage() {
   return (
-    <main className="bg-osg-navy font-sans">
+    <main className="bg-[#F8F9FB] min-h-screen relative overflow-hidden font-sans">
+      {/* Background Architectural Grid */}
+      <div className="absolute inset-0 bg-grid-blueprint opacity-[0.03] pointer-events-none" />
+      
       <PageHero
         label="Industries / Commerce"
         title="Commercial"
@@ -74,86 +78,118 @@ export default function RetailIndustrialPage() {
         ctaSecondary={{ label: 'Technical Standards', href: '/resources/downloads' }}
       />
 
-      {/* Sector DNA Meta-data */}
-      <section className="bg-osg-navy-mid py-12 border-b border-white/5 relative overflow-hidden">
+      {/* Sector DNA Meta-data: High-Fidelity Data Bar */}
+      <section className="bg-[#0B1C2C] py-20 relative overflow-hidden border-y border-white/5 shadow-2xl">
         <div className="absolute inset-0 bg-grid-blueprint opacity-[0.05] pointer-events-none" />
-        <div className="container-osg relative z-10">
-          <div className="flex flex-wrap justify-between items-center gap-10">
+        <div className="container-clean relative z-10">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-24">
             {technicalBenchmarks.map((spec, i) => (
-              <Reveal key={spec.label} delay={i * 0.1} className="flex items-center gap-6 group">
-                <div className="w-12 h-12 flex items-center justify-center bg-white/5 border border-white/10 group-hover:border-osg-gold transition-colors">
-                    <span className="text-osg-gold font-black text-xs italic">{i + 1}</span>
+              <motion.div 
+                key={spec.label} 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                viewport={{ once: true }}
+                className="flex items-center gap-10 group"
+              >
+                <div className="w-16 h-16 flex-shrink-0 flex items-center justify-center bg-white/5 rounded-2xl border border-white/10 group-hover:border-osg-gold group-hover:bg-osg-gold group-hover:text-osg-navy transition-all duration-500 shadow-2xl">
+                    <span className="text-osg-gold font-sans font-black text-2xl group-hover:text-osg-navy">{i + 1}</span>
                 </div>
-                <div>
-                    <span className="block text-[10px] uppercase font-black tracking-[0.2em] text-osg-slate mb-1">{spec.label}</span>
-                    <span className="block text-xl font-black text-white italic tracking-tighter leading-none">{spec.value}</span>
+                <div className="space-y-2">
+                    <span className="block text-[10px] uppercase font-black tracking-[0.4em] text-white/30 group-hover:text-osg-gold transition-colors">{spec.label}</span>
+                    <span className="block text-3xl font-sans font-black text-white tracking-tight leading-none">{spec.value}</span>
                 </div>
-              </Reveal>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Industrial High-Intensity Highlight */}
-      <section className="section-padding bg-white relative overflow-hidden">
-        {/* Architectural Background Detail */}
-        <div className="absolute right-0 top-0 w-1/3 h-full bg-[#f4f6f5] -skew-x-12 translate-x-1/2 pointer-events-none opacity-50" />
+      {/* Industrial High-Intensity Highlight: Luxury Tech Cards */}
+      <section className="py-48 bg-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-blueprint opacity-[0.01]" />
         
-        <div className="container-osg relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 mb-32">
+        <div className="container-clean relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16 mb-48">
             {highlightFeatures.map((feat, i) => (
-              <Reveal key={feat.title} delay={i * 0.1}>
-                <div className="p-10 bg-[#f8f9f8] border border-osg-navy/5 group hover:bg-osg-navy transition-all duration-700 shadow-2xl shadow-osg-navy/5 h-full">
-                  <feat.icon className="text-osg-gold mb-10 group-hover:scale-110 transition-transform" size={40} />
-                  <h3 className="text-2xl font-black text-osg-navy group-hover:text-white mb-6 uppercase tracking-tighter italic leading-none transition-colors">{feat.title}</h3>
-                  <p className="text-osg-navy/40 group-hover:text-white/40 text-[11px] font-black uppercase tracking-widest leading-relaxed transition-colors">{feat.desc}</p>
+              <motion.div 
+                key={feat.title} 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                viewport={{ once: true }}
+                className="group"
+              >
+                <div className="p-16 bg-[#F8F9FB] rounded-[4rem] border border-osg-navy/5 transition-all duration-700 hover:bg-[#0B1C2C] hover:border-osg-gold shadow-premium h-full flex flex-col justify-between group-hover:-translate-y-2">
+                  <div className="space-y-12">
+                    <div className="w-20 h-20 rounded-2xl bg-white flex items-center justify-center text-osg-gold shadow-xl group-hover:bg-osg-gold group-hover:text-osg-navy transition-all duration-500 group-hover:rotate-6">
+                      <feat.icon size={40} />
+                    </div>
+                    <h3 className="text-3xl font-sans font-black text-osg-navy group-hover:text-white uppercase tracking-tight transition-colors leading-none">{feat.title}</h3>
+                    <p className="text-lg text-osg-navy/40 group-hover:text-white/40 font-sans leading-relaxed transition-colors">{feat.desc}</p>
+                  </div>
                 </div>
-              </Reveal>
+              </motion.div>
             ))}
           </div>
 
-          <div className="space-y-48">
+          <div className="space-y-64">
             {infrastructureSectors.map((sec, i) => (
-              <div key={sec.id} className="grid grid-cols-1 lg:grid-cols-12 gap-20 lg:gap-32 items-center">
+              <div key={sec.id} className="grid grid-cols-1 lg:grid-cols-12 gap-24 lg:gap-40 items-center">
                 <div className={`${sec.reversed ? 'lg:col-span-7 lg:order-2' : 'lg:col-span-7'} relative order-1`}>
-                    <Reveal className="aspect-video bg-osg-charcoal overflow-hidden border border-osg-navy/5 shadow-2xl relative group">
+                    <motion.div 
+                      initial={{ opacity: 0, scale: 0.98 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      className="aspect-video bg-[#0B1C2C] rounded-[5rem] overflow-hidden border border-osg-navy/5 shadow-premium relative group"
+                    >
                         <Image 
                             src={sec.image} 
                             alt={sec.title}
                             fill
-                            className="w-full h-full object-cover grayscale opacity-60 group-hover:scale-105 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-1000" 
+                            className="object-cover grayscale opacity-30 group-hover:scale-110 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-[2000ms]" 
                         />
-                        <div className="absolute top-10 right-10 flex items-center gap-4">
-                            <span className="bg-osg-gold text-osg-navy text-[9px] font-black uppercase tracking-widest px-5 py-2 shadow-2xl">Infrastructure {sec.id}</span>
+                        <div className="absolute top-12 left-12">
+                            <span className="bg-osg-gold text-osg-navy text-[10px] font-black uppercase tracking-[0.5em] px-8 py-4 rounded-full shadow-2xl">Infrastructure {sec.id}</span>
                         </div>
-                        <div className="absolute inset-0 bg-gradient-to-t from-osg-navy/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                    </Reveal>
+                        <div className="absolute inset-0 bg-gradient-to-t from-osg-navy via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+                        <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-1000 pointer-events-none bg-grid-blueprint" />
+                    </motion.div>
+                    
                     {sec.overlayTitle && (
-                        <Reveal delay={0.2} className="absolute -bottom-10 -right-10 bg-osg-navy p-10 hidden lg:block max-w-xs shadow-2xl border border-white/5 overflow-hidden group">
-                           <div className="absolute inset-0 bg-grid-blueprint opacity-[0.05] pointer-events-none" />
-                           <div className="relative z-10">
-                                <h4 className="text-osg-gold font-black text-2xl mb-4 italic uppercase tracking-tighter leading-none">{sec.overlayTitle}</h4>
-                                <p className="text-[10px] text-white/30 leading-relaxed font-black uppercase tracking-[0.2em]">{sec.overlayDesc}</p>
+                        <motion.div 
+                          initial={{ opacity: 0, x: 20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.3 }}
+                          viewport={{ once: true }}
+                          className="absolute -bottom-16 -right-16 bg-[#0B1C2C] p-16 rounded-[4rem] hidden lg:block max-w-sm shadow-premium border border-white/5 overflow-hidden group/overlay"
+                        >
+                           <div className="absolute inset-0 bg-grid-blueprint opacity-[0.1] pointer-events-none" />
+                           <div className="relative z-10 space-y-6">
+                                <h4 className="text-osg-gold font-sans font-black text-3xl uppercase tracking-tight leading-none">{sec.overlayTitle}</h4>
+                                <p className="text-lg text-white/30 leading-relaxed font-sans group-hover/overlay:text-white/50 transition-colors">{sec.overlayDesc}</p>
                            </div>
-                        </Reveal>
+                        </motion.div>
                     )}
                 </div>
-                <div className={`${sec.reversed ? 'lg:col-span-5 lg:order-1' : 'lg:col-span-5'} space-y-10 order-2`}>
-                  <Reveal>
-                    <span className="text-osg-gold font-black text-[10px] uppercase tracking-[0.5em] mb-10 block leading-none">Engineering Spec</span>
-                    <h3 className="text-5xl lg:text-6xl text-osg-navy mt-4 uppercase tracking-tighter italic font-black leading-none">{sec.title}</h3>
-                    <p className="text-osg-navy/50 text-xl font-light leading-relaxed mt-10">{sec.desc}</p>
-                    <div className="space-y-4 mt-12 mb-12">
+                
+                <div className={`${sec.reversed ? 'lg:col-span-5 lg:order-1' : 'lg:col-span-5'} space-y-16 order-2`}>
+                  <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="space-y-12">
+                    <div className="flex items-center gap-6">
+                       <div className="w-12 h-[1px] bg-osg-gold/40"></div>
+                       <span className="text-osg-gold font-black text-[10px] uppercase tracking-[0.6em]">Engineering Spec</span>
+                    </div>
+                    <h3 className="text-[4rem] lg:text-[7rem] text-osg-navy font-sans font-black uppercase tracking-tighter leading-[0.85]">{sec.title}</h3>
+                    <p className="text-2xl text-osg-navy/50 font-sans leading-relaxed">{sec.desc}</p>
+                    <div className="space-y-6">
                       {sec.points.map(point => (
-                        <div key={point} className="flex items-center gap-4 text-[10px] font-black text-osg-navy uppercase tracking-widest border-l-2 border-osg-gold pl-4 transition-transform group-hover:translate-x-1">
+                        <div key={point} className="flex items-center gap-6 text-[10px] font-black text-osg-navy uppercase tracking-[0.4em] border-l border-osg-gold pl-6 transition-all hover:translate-x-2">
                           {point}
                         </div>
                       ))}
                     </div>
-                    <Link href="/contact" className="text-osg-navy font-black uppercase tracking-[0.4em] text-[10px] flex items-center gap-4 group-hover:gap-6 transition-all border-b-2 border-osg-navy/10 pb-2 w-fit hover:border-osg-gold hover:text-osg-gold">
-                      IDENTIFY BENCHMARKS <ArrowRight size={14} />
-                    </Link>
-                  </Reveal>
+                    <Link href="/contact" className="btn-cta !px-12 py-5 !text-[11px] w-fit">IDENTIFY BENCHMARKS <ArrowRight size={18} /></Link>
+                  </motion.div>
                 </div>
               </div>
             ))}
@@ -161,98 +197,150 @@ export default function RetailIndustrialPage() {
         </div>
       </section>
 
-      {/* Portfolio Matrix Showcase */}
-      <section className="section-padding bg-osg-navy relative overflow-hidden text-white">
-        <div className="absolute inset-0 bg-noise opacity-[0.03]" />
-        <div className="container-osg relative z-10">
-          <div className="max-w-3xl mb-24">
-            <Reveal>
-              <span className="text-osg-gold font-black text-[10px] uppercase tracking-[0.5em] mb-8 block leading-none">Execution Matrix</span>
-              <h2 className="text-5xl lg:text-7xl text-white font-black uppercase tracking-tighter italic font-black leading-none">Portfolio <br /><span className="text-white/20">Showcase.</span></h2>
-            </Reveal>
+      {/* Portfolio Matrix Showcase: Luxury Tiles */}
+      <section className="py-56 bg-[#0B1C2C] text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-blueprint opacity-[0.03] pointer-events-none" />
+        <div className="container-clean relative z-10">
+          <div className="max-w-4xl mb-32 space-y-12">
+            <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="flex items-center gap-6">
+               <div className="w-12 h-[1px] bg-osg-gold/40"></div>
+               <span className="text-osg-gold font-black text-[10px] uppercase tracking-[0.6em]">Execution Matrix</span>
+            </motion.div>
+            <h2 className="text-[4rem] lg:text-[7.5rem] font-sans font-black uppercase tracking-tighter leading-[0.85]">Portfolio <br /><span className="text-white/10">Showcase.</span></h2>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-4 auto-rows-[300px] gap-6">
-            <Reveal className="md:col-span-2 md:row-span-2 relative group overflow-hidden border border-white/5 shadow-2xl">
+          <div className="grid grid-cols-1 md:grid-cols-4 auto-rows-[400px] gap-8 lg:gap-12">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="md:col-span-2 md:row-span-2 relative group overflow-hidden rounded-[5rem] border border-white/5 shadow-premium"
+            >
               <Image 
                 src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=800" 
                 alt="Retail"
                 fill
-                className="object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:scale-105 group-hover:opacity-100 transition-all duration-1000" 
+                className="object-cover grayscale opacity-30 group-hover:grayscale-0 group-hover:scale-105 group-hover:opacity-100 transition-all duration-[2000ms]" 
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-osg-navy/95 via-osg-navy/20 to-transparent flex flex-col justify-end p-12 translate-y-4 group-hover:translate-y-0 transition-all duration-700">
-                <Monitor className="text-osg-gold mb-10" size={40} />
-                <h4 className="text-4xl font-black text-white italic tracking-tighter uppercase mb-4 leading-none">Luxury <br/>Flagship Concept.</h4>
-                <p className="text-osg-gold text-[10px] font-black uppercase tracking-widest">Retail Sector / Deployment 2024</p>
+              <div className="absolute inset-0 bg-gradient-to-t from-osg-navy via-transparent flex flex-col justify-end p-16 lg:p-24 translate-y-8 group-hover:translate-y-0 transition-all duration-1000">
+                <div className="w-20 h-20 rounded-2xl bg-osg-gold flex items-center justify-center text-osg-navy mb-12 shadow-2xl transition-transform group-hover:rotate-12">
+                   <Monitor size={40} />
+                </div>
+                <h4 className="text-[4rem] lg:text-[5rem] font-sans font-black text-white tracking-tighter uppercase mb-6 leading-none group-hover:text-osg-gold transition-colors">Luxury <br/>Flagship Concept.</h4>
+                <p className="text-osg-gold text-[11px] font-black uppercase tracking-[0.5em]">Retail Sector / Deployment 2024</p>
               </div>
-            </Reveal>
-            <Reveal className="md:col-span-2 relative group overflow-hidden border border-white/5 shadow-2xl">
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="md:col-span-2 relative group overflow-hidden rounded-[4rem] border border-white/5 shadow-premium"
+            >
               <Image 
                 src="https://images.unsplash.com/photo-1553413077-190dd305871c?q=80&w=800" 
                 alt="Industrial"
                 fill
-                className="object-cover grayscale opacity-40 group-hover:scale-110 group-hover:opacity-60 transition-all duration-1000" 
+                className="object-cover grayscale opacity-30 group-hover:scale-110 group-hover:opacity-60 transition-all duration-[2000ms]" 
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-osg-navy/90 via-transparent to-transparent p-10 flex flex-col justify-end translate-y-4 group-hover:translate-y-0 transition-all duration-700">
-                <h4 className="text-2xl font-black text-white italic tracking-tighter uppercase mb-2">Distribution Center</h4>
-                <p className="text-osg-gold text-[9px] font-black uppercase opacity-60 tracking-widest">Light Industrial / 2023</p>
+              <div className="absolute inset-0 bg-gradient-to-t from-osg-navy/90 via-transparent to-transparent p-16 flex flex-col justify-end translate-y-8 group-hover:translate-y-0 transition-all duration-1000">
+                <h4 className="text-4xl font-sans font-black text-white tracking-tight uppercase mb-4 group-hover:text-osg-gold transition-colors">Distribution Center</h4>
+                <p className="text-osg-gold text-[10px] font-black uppercase opacity-60 tracking-[0.4em]">Light Industrial / 2023</p>
               </div>
-            </Reveal>
-            <Reveal className="bg-white/5 border border-white/5 p-10 flex flex-col justify-center text-center hover:bg-osg-gold group transition-all duration-500 shadow-2xl relative overflow-hidden">
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              viewport={{ once: true }}
+              className="bg-white/5 backdrop-blur-3xl border border-white/5 p-12 rounded-[4rem] flex flex-col justify-center text-center hover:bg-osg-gold group transition-all duration-700 shadow-2xl relative overflow-hidden"
+            >
                <div className="absolute inset-0 bg-grid-blueprint opacity-[0.05] pointer-events-none" />
-               <Layers className="text-osg-gold mx-auto mb-8 group-hover:text-osg-navy group-hover:scale-110 transition-all duration-500 relative z-10" size={40} />
-               <h4 className="text-white text-[11px] font-black uppercase tracking-[0.2em] group-hover:text-osg-navy relative z-10">Boutique Fit-out</h4>
-            </Reveal>
-            <Reveal className="bg-white/5 border border-white/5 p-10 flex flex-col justify-center text-center hover:bg-osg-gold group transition-all duration-500 shadow-2xl relative overflow-hidden">
+               <Layers className="text-osg-gold mx-auto mb-8 group-hover:text-osg-navy group-hover:scale-125 transition-all duration-700 relative z-10" size={56} />
+               <h4 className="text-white text-[12px] font-black uppercase tracking-[0.4em] group-hover:text-osg-navy relative z-10">Boutique Fit-out</h4>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              viewport={{ once: true }}
+              className="bg-white/5 backdrop-blur-3xl border border-white/5 p-12 rounded-[4rem] flex flex-col justify-center text-center hover:bg-osg-gold group transition-all duration-700 shadow-2xl relative overflow-hidden"
+            >
                <div className="absolute inset-0 bg-grid-blueprint opacity-[0.05] pointer-events-none" />
-               <Factory className="text-osg-gold mx-auto mb-8 group-hover:text-osg-navy group-hover:scale-110 transition-all duration-500 relative z-10" size={40} />
-               <h4 className="text-white text-[11px] font-black uppercase tracking-[0.2em] group-hover:text-osg-navy relative z-10">Structural Core</h4>
-            </Reveal>
+               <Factory className="text-osg-gold mx-auto mb-8 group-hover:text-osg-navy group-hover:scale-125 transition-all duration-700 relative z-10" size={56} />
+               <h4 className="text-white text-[12px] font-black uppercase tracking-[0.4em] group-hover:text-osg-navy relative z-10">Structural Core</h4>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Requirements Benchmarks Banner */}
-      <section className="bg-white py-24 border-t border-osg-navy/5 relative overflow-hidden">
+      {/* Requirements Benchmarks Banner: Luxury Data Bar */}
+      <section className="bg-white py-32 border-t border-osg-navy/5 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-blueprint opacity-[0.02] pointer-events-none" />
-        <div className="container-osg flex flex-col lg:flex-row items-center justify-between gap-16 relative z-10">
-            <div className="max-w-2xl">
-                <Terminal className="text-osg-gold mb-8" size={32} />
-                <h3 className="text-osg-navy text-5xl font-black uppercase tracking-tighter italic mb-6 leading-none">Standardized <br/><span className="text-osg-navy/20">Protocols.</span></h3>
-                <p className="text-osg-navy/40 text-[10px] uppercase tracking-[0.4em] font-black leading-relaxed">We adhere to global security and energy safety codes for high-throughput commercial architecture.</p>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-12 lg:gap-16">
+        <div className="container-clean flex flex-col lg:flex-row items-center justify-between gap-24 relative z-10">
+            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="max-w-3xl space-y-12">
+                <div className="flex items-center gap-6">
+                   <div className="w-12 h-[1px] bg-osg-gold/40"></div>
+                   <span className="text-osg-gold font-black text-[10px] uppercase tracking-[0.6em]">Standardized Protocols</span>
+                </div>
+                <h3 className="text-osg-navy text-[4rem] lg:text-[7.5rem] font-sans font-black uppercase tracking-tighter leading-[0.85]">Safety <br/><span className="text-osg-navy/10">Compliance.</span></h3>
+                <p className="text-2xl text-osg-navy/40 font-sans leading-relaxed max-w-xl">We adhere to global security and energy safety codes for high-throughput commercial architecture across the East African landscape.</p>
+            </motion.div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-16 lg:gap-24">
                 {requirements.map((r, i) => (
-                    <Reveal key={r.title} delay={i * 0.1}>
-                        <div className="flex flex-col items-center lg:items-start group">
-                            <r.icon size={28} className="text-osg-gold mb-6 group-hover:translate-y-[-4px] transition-transform" />
-                            <h4 className="text-osg-navy text-[11px] font-black uppercase tracking-widest mb-3 leading-none transition-colors group-hover:text-osg-gold">{r.title}</h4>
-                            <p className="text-osg-navy/40 text-[10px] leading-relaxed max-w-[180px] uppercase font-black tracking-widest transition-colors group-hover:text-osg-navy/60">{r.desc}</p>
+                    <motion.div 
+                      key={r.title} 
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.1 }}
+                      viewport={{ once: true }}
+                      className="flex flex-col items-center lg:items-start group space-y-8"
+                    >
+                        <div className="w-16 h-16 rounded-2xl bg-[#F8F9FB] border border-osg-navy/5 flex items-center justify-center text-osg-gold group-hover:bg-osg-navy group-hover:text-osg-gold transition-all duration-500 shadow-sm">
+                           <r.icon size={32} className="group-hover:scale-110 transition-transform" />
                         </div>
-                    </Reveal>
+                        <div className="space-y-4">
+                           <h4 className="text-osg-navy text-[12px] font-black uppercase tracking-[0.4em] group-hover:text-osg-gold transition-colors">{r.title}</h4>
+                           <p className="text-osg-navy/40 text-[11px] leading-relaxed uppercase font-black tracking-[0.3em]">{r.desc}</p>
+                        </div>
+                    </motion.div>
                 ))}
             </div>
         </div>
       </section>
 
-      {/* Final Call */}
-      <section className="section-padding-lg bg-[#fcfdfc] text-center border-t border-osg-navy/5 relative overflow-hidden">
+      {/* Final Call: Operational Mandate */}
+      <section className="py-64 bg-[#F8F9FB] text-center relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-blueprint opacity-[0.03] pointer-events-none" />
-        <div className="container-osg relative z-10">
-          <Reveal className="max-w-4xl mx-auto space-y-12">
-            <span className="text-osg-gold font-black uppercase text-[10px] tracking-[0.5em] mb-12 block leading-none">Operational Mandate</span>
-            <h2 className="text-5xl lg:text-8xl text-osg-navy font-black uppercase tracking-tighter leading-[0.8] mb-12 italic">Secure Structural <br /><span className="text-osg-navy/20">Foundations.</span></h2>
-            <p className="text-lg text-osg-navy/50 mb-16 max-w-2xl mx-auto font-light leading-relaxed">Partner with Ole Sereni Group for industrial-grade excellence in retail environments. Our engineers are ready to discuss your durability requirements.</p>
-            
-            <div className="flex flex-wrap justify-center gap-8">
-              <Link href="/contact" className="btn-primary py-6 px-14 group shadow-2xl">
-                Consult Our Engineers <Ruler size={18} className="ml-4 transition-transform group-hover:rotate-45" />
-              </Link>
-              <Link href="/resources/downloads" className="btn-outline !text-osg-navy !border-osg-navy/10 hover:!border-osg-navy py-6 px-14 text-[10px] font-black uppercase tracking-widest transition-all">Industry Dossier <Download size={18} className="ml-4" /></Link>
+        <div className="container-clean relative z-10">
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-6xl mx-auto space-y-24"
+          >
+            <div className="space-y-12">
+               <div className="flex flex-col items-center gap-6">
+                  <div className="w-16 h-[1px] bg-osg-gold/40"></div>
+                  <span className="text-osg-gold font-black uppercase text-[11px] tracking-[0.6em]">Operational Mandate</span>
+               </div>
+               <h2 className="text-[5rem] lg:text-[10rem] text-osg-navy font-sans font-black uppercase tracking-tighter leading-[0.8]">Structural <br /><span className="text-osg-navy/10">Foundations.</span></h2>
+               <p className="text-2xl text-osg-navy/40 max-w-4xl mx-auto font-sans leading-relaxed">Partner with Ole Sereni Group for industrial-grade excellence in retail environments. Our engineers are ready to discuss your durability requirements.</p>
             </div>
-          </Reveal>
+            
+            <div className="flex flex-wrap justify-center gap-12 pt-12">
+              <Link href="/contact" className="btn-cta !px-24 py-8 !text-[12px] shadow-premium group">
+                CONSULT OUR ENGINEERS <Ruler size={24} className="ml-6 transition-transform group-hover:rotate-45" />
+              </Link>
+              <Link href="/resources/downloads" className="flex items-center gap-6 px-20 py-8 rounded-full border border-osg-navy/10 text-[12px] font-black uppercase tracking-[0.4em] text-osg-navy hover:bg-osg-navy hover:text-white transition-all shadow-sm">INDUSTRY DOSSIER <Download size={24} className="ml-6" /></Link>
+            </div>
+          </motion.div>
         </div>
       </section>
     </main>
   );
 }
+

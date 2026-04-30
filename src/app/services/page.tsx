@@ -5,6 +5,8 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { ArrowRight, ArrowUpRight, CheckCircle } from 'lucide-react';
 import PageHero from '@/components/PageHero';
+import Image from 'next/image';
+
 
 function Reveal({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef(null);
@@ -82,10 +84,13 @@ const services = [
 
 export default function ServicesPage() {
   return (
-    <>
+    <main className="bg-[#F8F9FB] min-h-screen relative overflow-hidden font-sans">
+      {/* Background Architectural Grid */}
+      <div className="absolute inset-0 bg-grid-blueprint opacity-[0.03] pointer-events-none" />
+      
       <PageHero
         label="Our Expertise"
-        title="Six Specialist"
+        title="Specialist"
         titleHighlight="Service Lines."
         subtitle="One accountable contractor. OSG coordinates all finishing works under a single umbrella so your project stays on programme and delivers at the highest standard."
         ctaPrimary={{ label: 'Request a Quote', href: '/quote' }}
@@ -93,66 +98,142 @@ export default function ServicesPage() {
         breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Services' }]}
       />
 
-      {/* Services Grid */}
-      <section className="section-padding bg-osg-navy">
-        <div className="container-osg">
-          <div className="space-y-6">
+      {/* Services Matrix: Luxury Staggered Grid */}
+      <section className="py-40 relative z-10">
+        <div className="container-clean">
+          <div className="flex flex-col lg:flex-row items-end justify-between mb-32 gap-16">
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-4xl space-y-10">
+              <div className="flex items-center gap-6">
+                 <div className="w-12 h-[1px] bg-osg-gold/40"></div>
+                 <span className="text-[10px] font-black text-osg-gold uppercase tracking-[0.6em]">Service Spectrum</span>
+              </div>
+              <h2 className="text-[4rem] lg:text-[7rem] text-osg-navy font-black uppercase tracking-tighter leading-[0.85] font-sans">Operational <br/><span className="text-osg-navy/10">Divisions.</span></h2>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="lg:w-1/3 border-l border-osg-gold pl-12">
+               <p className="text-[10px] text-osg-navy/40 uppercase tracking-[0.4em] font-black leading-relaxed">
+                    Our technical divisions operate as a unified force, ensuring seamless transitions between structural and finishing phases.
+               </p>
+            </motion.div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             {services.map((s, i) => (
-              <Reveal key={s.id} delay={i * 0.05}>
-                <div className="card-glass p-8 md:p-10 group">
-                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-                    {/* Left: intro */}
-                    <div className="lg:col-span-2">
-                      <div className="flex items-center gap-4 mb-4">
-                        <span className="text-3xl text-osg-gold">{s.icon}</span>
-                        <span className="badge-gold">{s.tag}</span>
-                      </div>
-                      <h2 className="text-heading-lg text-white mb-3 group-hover:text-osg-gold transition-colors">{s.title}</h2>
-                      <p className="text-body text-osg-slate mb-6 leading-relaxed">{s.desc}</p>
-                      <div className="flex flex-wrap gap-2 mb-6">
-                        {s.sectors.map(sec => (
-                          <span key={sec} className="px-3 py-1 text-xs text-osg-slate border border-white/10 tracking-wide">{sec}</span>
-                        ))}
-                      </div>
-                      <Link href={s.href} className="btn-primary text-sm inline-flex">
-                        Explore Service <ArrowRight size={14} />
-                      </Link>
+              <motion.div 
+                key={s.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                viewport={{ once: true }}
+                className="group relative"
+              >
+                <div className="bg-white rounded-[4rem] p-16 border border-osg-navy/5 shadow-premium h-full flex flex-col justify-between transition-all duration-700 hover:border-osg-gold hover:shadow-2xl">
+                  <div className="absolute inset-0 bg-grid-blueprint opacity-[0.01] pointer-events-none" />
+                  
+                  <div className="space-y-10 relative z-10">
+                    <div className="flex justify-between items-start">
+                       <span className="text-4xl text-osg-gold/40 group-hover:text-osg-gold transition-colors duration-500">{s.icon}</span>
+                       <span className="text-[10px] font-black text-osg-gold uppercase tracking-[0.4em]">{s.tag}</span>
                     </div>
-                    {/* Right: features */}
-                    <div>
-                      <h4 className="text-label mb-4">Scope Includes</h4>
-                      <ul className="space-y-2">
-                        {s.features.map(f => (
-                          <li key={f} className="flex items-center gap-3 text-small text-osg-slate">
-                            <CheckCircle size={13} className="text-osg-gold flex-shrink-0" />
-                            {f}
-                          </li>
-                        ))}
-                      </ul>
+                    
+                    <h3 className="text-[2.5rem] font-sans font-black text-osg-navy uppercase tracking-tight leading-none group-hover:text-osg-gold transition-colors duration-500">
+                      {s.title}
+                    </h3>
+                    
+                    <p className="text-lg text-osg-navy/40 font-sans leading-relaxed">
+                      {s.desc}
+                    </p>
+
+                    <div className="space-y-4 pt-4">
+                       <span className="text-[9px] font-black text-osg-navy/20 uppercase tracking-[0.5em] block">Sector Capability</span>
+                       <div className="flex flex-wrap gap-3">
+                          {s.sectors.map(sec => (
+                            <span key={sec} className="px-4 py-2 bg-[#F8F9FB] rounded-full text-[9px] font-black text-osg-navy/60 uppercase tracking-widest">{sec}</span>
+                          ))}
+                       </div>
                     </div>
                   </div>
+
+                  <div className="mt-16 relative z-10">
+                    <Link href={s.href} className="btn-cta w-full justify-center group !py-5 !text-[10px]">
+                       EXPLORE DIVISION <ArrowRight size={16} className="group-hover:translate-x-3 transition-transform" />
+                    </Link>
+                  </div>
                 </div>
-              </Reveal>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="section-padding-sm bg-osg-navy-mid border-t border-white/8">
-        <div className="container-osg text-center">
-          <Reveal>
-            <h2 className="text-heading-xl text-white mb-4">Not sure which service you need?</h2>
-            <p className="text-body text-osg-slate max-w-lg mx-auto mb-8">
-              Submit a project brief or speak with our team — we'll recommend the right scope.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link href="/brief" className="btn-primary">Submit a Brief <ArrowUpRight size={15} /></Link>
-              <Link href="/contact" className="btn-outline">Talk to Us</Link>
+      {/* Engineering Support Section */}
+      <section className="py-48 bg-[#0B1C2C] text-white relative overflow-hidden">
+          <div className="absolute inset-0 bg-grid-blueprint opacity-[0.03]" />
+          <div className="container-clean flex flex-col lg:flex-row items-center gap-32">
+               <motion.div 
+                 initial={{ opacity: 0, x: -30 }}
+                 whileInView={{ opacity: 1, x: 0 }}
+                 viewport={{ once: true }}
+                 className="lg:w-1/2 space-y-12"
+               >
+                  <div className="flex items-center gap-6">
+                     <div className="w-12 h-[1px] bg-osg-gold/40"></div>
+                     <span className="text-[10px] font-black text-osg-gold uppercase tracking-[0.6em]">Consolidated Oversight</span>
+                  </div>
+                  <h2 className="text-[4rem] lg:text-[6.5rem] font-sans font-black uppercase tracking-tighter leading-[0.85]">Single <br/><span className="text-osg-gold">Accountability.</span></h2>
+                  <p className="text-2xl text-white/40 font-sans leading-relaxed">
+                    We eliminate the friction between subcontractors by managing the entire finishing envelope. One team, one standard, one point of contact.
+                  </p>
+                  <div className="grid grid-cols-2 gap-12 pt-12">
+                     <div className="space-y-4">
+                        <span className="text-[10px] font-black text-osg-gold uppercase tracking-[0.4em]">01 // Integration</span>
+                        <p className="text-white/40 text-sm font-sans">Seamless coordination across all service lines.</p>
+                     </div>
+                     <div className="space-y-4">
+                        <span className="text-[10px] font-black text-osg-gold uppercase tracking-[0.4em]">02 // Quality Control</span>
+                        <p className="text-white/40 text-sm font-sans">Rigorous inspection protocols at every phase.</p>
+                     </div>
+                  </div>
+               </motion.div>
+               <motion.div 
+                 initial={{ opacity: 0, scale: 0.95 }}
+                 whileInView={{ opacity: 1, scale: 1 }}
+                 viewport={{ once: true }}
+                 className="lg:w-1/2 relative aspect-square rounded-[5rem] overflow-hidden border border-white/5 shadow-2xl"
+               >
+                  <Image src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=1000&auto=format&fit=crop" fill className="object-cover grayscale opacity-60" alt="Technical Oversight" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B1C2C] to-transparent" />
+               </motion.div>
+          </div>
+      </section>
+
+      {/* Final Call: Project Brief */}
+      <section className="py-48 bg-white text-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-blueprint opacity-[0.02]" />
+        <div className="container-clean max-w-6xl mx-auto">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.98 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="p-20 lg:p-32 border border-osg-navy/5 rounded-[5rem] relative overflow-hidden shadow-premium bg-[#F8F9FB]"
+          >
+            <div className="space-y-12 relative z-10">
+              <div className="flex flex-col items-center gap-6">
+                <div className="w-16 h-[1px] bg-osg-gold/40"></div>
+                <span className="text-osg-gold font-black uppercase text-[11px] tracking-[0.6em]">Initialize Scope</span>
+              </div>
+              <h2 className="text-[4rem] lg:text-[7rem] text-osg-navy font-black uppercase tracking-tight leading-[0.8] font-sans">Define your <br/><span className="text-osg-navy/10">Project Brief.</span></h2>
+              <p className="text-2xl text-osg-navy/40 max-w-3xl mx-auto font-sans leading-relaxed">
+                Submit your project requirements and let our technical team design a consolidated finishing schedule for your build.
+              </p>
+              <div className="flex flex-wrap justify-center gap-10 pt-8">
+                  <Link href="/brief" className="btn-cta !px-16 py-6 !text-[11px]">SUBMIT TECHNICAL BRIEF</Link>
+                  <Link href="/contact" className="flex items-center gap-6 px-12 py-6 rounded-full border border-osg-navy/10 text-[11px] font-black uppercase tracking-widest text-osg-navy hover:bg-osg-navy hover:text-white transition-all">TALK TO AN ENGINEER</Link>
+              </div>
             </div>
-          </Reveal>
+          </motion.div>
         </div>
       </section>
-    </>
+    </main>
   );
 }
+

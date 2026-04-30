@@ -34,7 +34,7 @@ const systems = [
   { 
     name: 'Data & ICT Infrastructure', 
     desc: 'Structured cabling solutions for corporate headquarters, featuring CAT6A/Fiber-Optic backbones and server room fit-outs.',
-    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc51?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1518005020951-eccb494ad742?q=80&w=800&auto=format&fit=crop',
     tag: 'Digital'
   },
 ];
@@ -54,7 +54,7 @@ export default function ElectricalPage() {
         <div className="container-osg relative z-10">
           <Reveal className="mb-20">
             <span className="text-[10px] font-black text-osg-gold uppercase tracking-[0.5em] mb-4 block leading-none">Scope of Works // 05</span>
-            <h2 className="text-display-sm text-osg-navy font-black uppercase tracking-tighter italic">Technical <br/><span className="text-osg-navy/20">Systems.</span></h2>
+            <h2 className="text-display-sm text-osg-navy font-black uppercase tracking-tighter">Technical <br/><span className="text-osg-navy/20">Systems.</span></h2>
           </Reveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -93,7 +93,7 @@ export default function ElectricalPage() {
             <div className="max-w-3xl mb-16">
                 <Reveal>
                     <span className="text-[10px] font-black text-osg-gold uppercase tracking-[0.5em] mb-4 block leading-none">Technical Depth // 05</span>
-                    <h2 className="text-display-xs lg:text-display-sm text-white font-black uppercase tracking-tighter italic">Grid <br /><span className="text-osg-gold">Intelligence.</span></h2>
+                    <h2 className="text-display-xs lg:text-display-sm text-white font-black uppercase tracking-tighter">Grid <br /><span className="text-osg-gold">Intelligence.</span></h2>
                     <p className="mt-6 text-white/50 text-lg max-w-xl">
                         Examine the distribution capacities, ingress protection ratings, and smart control protocols for our high-end electrical installations.
                     </p>
@@ -109,7 +109,7 @@ export default function ElectricalPage() {
       <section className="bg-osg-navy py-12 border-t border-white/5">
         <div className="container-osg flex flex-col md:flex-row items-center justify-between gap-10">
           <div className="max-w-xl">
-            <h3 className="text-heading-md text-white mb-3 italic">Complex electrical spec?</h3>
+            <h3 className="text-heading-md text-white mb-3">Complex electrical spec?</h3>
             <p className="text-white/40 text-small uppercase tracking-widest">Our technical engineers can review your site plans and load requirements.</p>
           </div>
           <Link href="/quote" className="btn-primary flex-shrink-0 !bg-white !text-osg-navy">Initialize Project <ArrowRight size={16} /></Link>
@@ -118,3 +118,4 @@ export default function ElectricalPage() {
     </main>
   );
 }
+

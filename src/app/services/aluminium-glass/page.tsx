@@ -16,25 +16,25 @@ const systems = [
   { 
     name: 'Aluminium Window Systems', 
     desc: 'Casement, sliding, tilt-and-turn, and fixed-light windows in anodized and powder-coated aluminium profiles.',
-    image: 'https://images.unsplash.com/photo-1503387762-592dea58ef04?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop',
     tag: 'Systems'
   },
   { 
     name: 'Aluminium Door Systems', 
     desc: 'Single and double-leaf doors, frameless pivot doors, automatic sliding systems, and fire-rated aluminium doors.',
-    image: 'https://images.unsplash.com/photo-1509721148483-fb01d8c29193?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=800&auto=format&fit=crop',
     tag: 'Access'
   },
   { 
     name: 'Glass Balustrades', 
     desc: 'Frameless and semi-framed tempered or laminated glass balustrades for balconies, staircases, and terraces.',
-    image: 'https://images.unsplash.com/photo-1628133534591-912abda85d41?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1518005020951-eccb494ad742?q=80&w=800&auto=format&fit=crop',
     tag: 'Safety'
   },
   { 
     name: 'Skylights & Atria', 
     desc: 'Custom-designed structural rooflights, atriums, and canopy systems bringing natural light deep into a building.',
-    image: 'https://images.unsplash.com/photo-1541888946425-d81bb19480c5?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=800&auto=format&fit=crop',
     tag: 'Light'
   },
   { 
@@ -79,7 +79,7 @@ export default function AluminiumGlassPage() {
         <div className="container-osg relative z-10">
           <Reveal className="mb-20">
             <span className="text-[10px] font-black text-osg-gold uppercase tracking-[0.5em] mb-4 block leading-none">Scope of Works // 01</span>
-            <h2 className="text-display-sm text-osg-navy font-black uppercase tracking-tighter italic">Glazing <br/><span className="text-osg-navy/20">Solutions.</span></h2>
+            <h2 className="text-display-sm text-osg-navy font-black uppercase tracking-tighter">Glazing <br/><span className="text-osg-navy/20">Solutions.</span></h2>
           </Reveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -118,7 +118,7 @@ export default function AluminiumGlassPage() {
             <div className="max-w-3xl mb-16">
                 <Reveal>
                     <span className="text-[10px] font-black text-osg-gold uppercase tracking-[0.5em] mb-4 block leading-none">Technical Depth // 02</span>
-                    <h2 className="text-display-xs lg:text-display-sm text-white font-black uppercase tracking-tighter italic">Technical <br /><span className="text-osg-gold">Showcase.</span></h2>
+                    <h2 className="text-display-xs lg:text-display-sm text-white font-black uppercase tracking-tighter">Technical <br /><span className="text-osg-gold">Showcase.</span></h2>
                     <p className="mt-6 text-white/50 text-lg max-w-xl">
                         Explore the precision engineering behind our architectural systems. Select a category to visualize structural schematics and performance data.
                     </p>
@@ -137,7 +137,7 @@ export default function AluminiumGlassPage() {
         <div className="container-osg relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
             <Reveal>
-              <h2 className="text-display-xs text-white uppercase italic tracking-tighter mb-10 leading-tight">Engineering Excellence in <span className="text-osg-gold">Fabrication.</span></h2>
+              <h2 className="text-display-xs text-white uppercase tracking-tighter mb-10 leading-tight">Engineering Excellence in <span className="text-osg-gold">Fabrication.</span></h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {benefits.map((benefit) => (
                   <div key={benefit} className="flex items-start gap-3">
@@ -157,7 +157,7 @@ export default function AluminiumGlassPage() {
                   ))}
                 </div>
                 <div className="border-t border-white/10 pt-10">
-                  <h4 className="text-white font-bold mb-6 italic uppercase">Related Solutions</h4>
+                  <h4 className="text-white font-bold mb-6 uppercase">Related Solutions</h4>
                   <div className="space-y-4">
                     {related.map(item => (
                       <Link key={item.title} href={item.href} className="flex items-center justify-between group py-3 border-b border-white/5 last:border-0 hover:border-osg-gold transition-colors">
@@ -177,18 +177,21 @@ export default function AluminiumGlassPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-osg-gold py-12">
+      <section className="bg-osg-gold py-16">
         <div className="container-osg flex flex-col md:flex-row items-center justify-between gap-10">
           <div className="max-w-xl">
-            <h3 className="text-heading-md text-osg-navy mb-3 italic">Technical consultation required?</h3>
-            <p className="text-osg-navy/60 text-small uppercase tracking-widest">Speak with our glazing engineers about your project specifications.</p>
+            <h3 className="text-4xl font-black text-osg-navy mb-3 font-sans uppercase leading-none">Technical <br/>Consultation?</h3>
+            <p className="text-osg-navy/60 text-[10px] font-black uppercase tracking-[0.3em]">Speak with our glazing engineers about your project specifications.</p>
           </div>
           <div className="flex flex-wrap gap-4">
-            <Link href="/contact" className="btn-primary !bg-osg-navy !text-white">Contact Engineer <Phone size={16} /></Link>
-            <button className="px-10 py-5 bg-osg-navy/10 text-osg-navy border border-osg-navy/20 hover:bg-osg-navy hover:text-white transition-all text-[10px] font-black uppercase tracking-widest flex items-center gap-3">Technical PDF <Download size={16}/></button>
+            <Link href="/contact" className="btn-cta !bg-osg-navy !text-white !px-8">Contact Engineer <Phone size={16} /></Link>
+            <Link href="/resources/downloads" className="btn-cta !bg-white !text-osg-navy border border-osg-navy/10 hover:!bg-white/80 !px-8">
+              Technical PDF <Download size={16}/>
+            </Link>
           </div>
         </div>
       </section>
     </main>
   );
 }
+

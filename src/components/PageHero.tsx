@@ -20,46 +20,50 @@ export default function PageHero({
   ctaPrimary, ctaSecondary, breadcrumb, centered = false,
 }: PageHeroProps) {
   return (
-    <section className="relative bg-osg-cream border-b border-osg-navy/5 overflow-hidden">
-      <div className="absolute inset-0 bg-grid-pattern opacity-10" />
+    <section className="relative bg-[#F8F9FB] border-b border-osg-navy/5 overflow-hidden">
+      {/* Background Graphic */}
+      <div className="absolute inset-0 bg-grid-blueprint opacity-[0.03] pointer-events-none" />
       
       {/* Structural Accent Lines */}
-      <div className="absolute top-0 right-0 w-1/3 h-full border-l border-osg-navy/5 hidden lg:block" />
-      <div className="absolute bottom-0 left-0 w-full h-1/2 border-t border-osg-navy/5 hidden lg:block" />
+      <div className="absolute top-0 right-[20%] w-[1px] h-full bg-osg-navy/[0.03] hidden lg:block" />
+      <div className="absolute top-[40%] left-0 w-full h-[1px] bg-osg-navy/[0.03] hidden lg:block" />
 
-      <div className={`container-osg relative z-10 py-16 lg:py-24 ${centered ? 'text-center' : ''}`}>
+      <div className={`container-clean relative z-10 pt-28 sm:pt-32 pb-16 sm:pb-20 lg:pt-44 lg:pb-28 ${centered ? 'text-center' : ''}`}>
         {/* Breadcrumb */}
         {breadcrumb && (
           <motion.nav
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className={`flex items-center gap-3 text-[10px] font-bold text-osg-navy/40 uppercase tracking-[0.3em] mb-10 ${centered ? 'justify-center' : ''}`}
+            className={`flex flex-wrap items-center gap-3 text-[9px] font-black text-osg-navy/25 uppercase tracking-[0.22em] sm:tracking-[0.35em] mb-8 lg:mb-12 ${centered ? 'justify-center' : ''}`}
           >
             {breadcrumb.map((crumb, i) => (
-              <span key={crumb.label} className="flex items-center gap-3">
-                {i > 0 && <ChevronRight size={10} className="opacity-20" />}
+              <span key={crumb.label} className="flex items-center gap-4">
+                {i > 0 && <ChevronRight size={10} className="opacity-10" />}
                 {crumb.href ? (
                   <Link href={crumb.href} className="hover:text-osg-navy transition-colors">{crumb.label}</Link>
                 ) : (
-                  <span className="text-osg-navy">{crumb.label}</span>
+                  <span className="text-osg-navy/60">{crumb.label}</span>
                 )}
               </span>
             ))}
           </motion.nav>
         )}
 
-        <div className={centered ? 'max-w-3xl mx-auto' : 'max-w-4xl'}>
+        <div className={centered ? 'max-w-3xl mx-auto' : 'max-w-5xl'}>
             {/* Label */}
             {label && (
-              <motion.span
+              <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-[11px] font-black text-osg-gold uppercase tracking-[0.5em] mb-6 block"
+                className="flex items-center gap-4 mb-6 lg:mb-8"
               >
-                {label}
-              </motion.span>
+                 <div className="w-12 h-[1px] bg-osg-gold/40"></div>
+                 <span className="text-[9px] sm:text-[10px] font-black text-osg-gold uppercase tracking-[0.28em] sm:tracking-[0.5em]">
+                    {label}
+                 </span>
+              </motion.div>
             )}
 
             {/* Title */}
@@ -67,11 +71,11 @@ export default function PageHero({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.75, delay: 0.15 }}
-              className="text-4xl lg:text-7xl font-serif font-black text-osg-navy uppercase leading-[0.9] tracking-tighter mb-8"
+              className="text-5xl sm:text-6xl lg:text-[6.5rem] font-sans font-black text-osg-navy uppercase leading-[0.9] tracking-tight mb-8 lg:mb-10"
             >
               {title}
               {titleHighlight && (
-                <span className="block text-osg-gold italic">{titleHighlight}</span>
+                <span className="block text-osg-gold uppercase">{titleHighlight}</span>
               )}
             </motion.h1>
 
@@ -81,7 +85,7 @@ export default function PageHero({
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.28 }}
-                className="text-lg lg:text-xl text-osg-navy/60 mb-12 max-w-2xl"
+                className="text-base sm:text-lg lg:text-2xl text-osg-navy/55 mb-10 lg:mb-14 max-w-3xl leading-relaxed font-sans"
               >
                 {subtitle}
               </motion.p>
@@ -93,15 +97,15 @@ export default function PageHero({
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.65, delay: 0.38 }}
-                className={`flex flex-wrap gap-6 ${centered ? 'justify-center' : ''}`}
+                className={`flex flex-wrap gap-4 sm:gap-6 ${centered ? 'justify-center' : ''}`}
               >
                 {ctaPrimary && (
-                  <Link href={ctaPrimary.href} className="btn-primary">
-                    {ctaPrimary.label} <ArrowRight size={18} />
+                  <Link href={ctaPrimary.href} className="btn-cta !px-8 sm:!px-12 py-4 sm:py-5 !text-[9px] sm:!text-[10px]">
+                    {ctaPrimary.label} <ArrowRight size={16} />
                   </Link>
                 )}
                 {ctaSecondary && (
-                  <Link href={ctaSecondary.href} className="btn-outline !text-osg-navy !border-osg-navy/10 hover:!border-osg-navy">
+                  <Link href={ctaSecondary.href} className="flex items-center gap-4 px-7 sm:px-10 py-4 sm:py-5 rounded-full border border-osg-navy/10 text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-osg-navy hover:bg-osg-navy hover:text-white transition-all">
                     {ctaSecondary.label}
                   </Link>
                 )}
@@ -112,3 +116,4 @@ export default function PageHero({
     </section>
   );
 }
+

@@ -1,404 +1,338 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  ArrowLeft, ArrowRight, Upload, CheckCircle, AlertTriangle, 
-  ShieldCheck, Clock, FileText, ChevronRight, CornerDownRight, 
-  Zap, Terminal, Cpu, Database, Activity, LayoutGrid, Info
+  CheckCircle, 
+  ArrowRight, 
+  ChevronRight, 
+  Phone,
+  Mail,
+  User,
+  Clock,
+  DollarSign,
+  Layout,
+  ArrowLeft,
+  Loader2,
+  Building2,
+  Calendar,
+  Briefcase
 } from 'lucide-react';
-import { db, storage } from '@/lib/firebase';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage';
 import Image from 'next/image';
+import { submitProjectBrief } from '@/lib/api/leads';
 
-/* ─── Architectural UI Components ─────────────────────────────────────── */
+// --- CLEAN COMPONENTS ---
 
-function FloatingInput({ label, name, type = 'text', value, onChange, placeholder, required = false, systemIdent }: any) {
-  const [focused, setFocused] = useState(false);
-  const active = focused || value;
-
+function SelectableCard({ title, icon: Icon, isSelected, onClick }: any) {
   return (
-    <div className="relative group mb-12">
-      <div className="flex justify-between items-center mb-4">
-        <label className={`text-[9px] font-black uppercase tracking-[0.4em] transition-colors duration-500 ${focused ? 'text-osg-gold' : 'text-osg-navy/30'}`}>
-          {label} {required && '*'}
-        </label>
-        {systemIdent && <span className="text-[8px] font-mono text-osg-navy/10 uppercase tracking-widest">{systemIdent}</span>}
+    <button
+      type="button"
+      onClick={onClick}
+      className={`
+        flex min-h-16 items-center gap-4 p-4 rounded-xl border transition-all duration-300 text-left
+        ${isSelected 
+          ? 'bg-osg-navy text-white border-osg-gold shadow-lg ring-2 ring-osg-gold/25' 
+          : 'bg-white text-osg-navy border-osg-border hover:border-osg-gold/40 hover:shadow-md'}
+      `}
+    >
+      <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${isSelected ? 'bg-white/10' : 'bg-osg-bg'}`}>
+        <Icon size={18} className={isSelected ? 'text-white' : 'text-osg-gold'} />
       </div>
-      <div className="relative">
-        <input 
-          name={name}
-          type={type}
-          required={required}
-          value={value}
-          onChange={onChange}
-          onFocus={() => setFocused(true)}
-          onBlur={() => setFocused(false)}
-          placeholder={focused ? placeholder : ''}
-          className={`
-            w-full bg-white/5 border border-osg-navy/5 p-6 text-osg-navy text-sm outline-none transition-all duration-700
-            ${focused ? 'border-osg-gold bg-white shadow-architectural' : 'hover:border-osg-navy/20'}
-          `}
-        />
-        <div className={`absolute bottom-0 left-0 h-[2px] bg-osg-gold transition-all duration-1000 ${focused ? 'w-full' : 'w-0'}`} />
+      <div>
+        <p className="text-[10px] font-black uppercase tracking-widest">{title}</p>
+        <div className={`h-1 w-4 mt-1 transition-all ${isSelected ? 'bg-osg-gold w-8' : 'bg-transparent'}`} />
+      </div>
+    </button>
+  );
+}
+
+function SelectionRow({ label, options, selectedValue, onSelect }: any) {
+  return (
+    <div className="space-y-4">
+      <label className="text-[10px] font-black uppercase tracking-[0.18em] text-osg-navy/55">{label}</label>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {options.map((opt: any) => (
+          <button
+            key={opt.value}
+            type="button"
+            onClick={() => onSelect(opt.value)}
+            className={`
+              min-h-12 flex items-center justify-center p-3 rounded-xl border font-bold text-[10px] uppercase tracking-widest transition-all
+              ${selectedValue === opt.value 
+                ? 'bg-osg-gold border-osg-gold text-osg-navy shadow-sm ring-2 ring-osg-gold/20' 
+                : 'bg-white border-osg-border text-osg-navy/40 hover:border-osg-gold/20'}
+            `}
+          >
+            {selectedValue === opt.value && <div className="w-1.5 h-1.5 rounded-full bg-osg-gold mr-3" />}
+            {opt.label}
+          </button>
+        ))}
       </div>
     </div>
   );
 }
 
-function FloatingSelect({ label, name, value, onChange, options, required = false, systemIdent }: any) {
-  const [focused, setFocused] = useState(false);
-  const active = focused || value;
-
-  return (
-    <div className="relative group mb-12">
-      <div className="flex justify-between items-center mb-4">
-        <label className={`text-[9px] font-black uppercase tracking-[0.4em] transition-colors duration-500 ${focused ? 'text-osg-gold' : 'text-osg-navy/30'}`}>
-          {label} {required && '*'}
-        </label>
-        {systemIdent && <span className="text-[8px] font-mono text-osg-navy/10 uppercase tracking-widest">{systemIdent}</span>}
-      </div>
-      <div className="relative">
-        <select 
-          name={name}
-          required={required}
-          value={value}
-          onChange={onChange}
-          onFocus={() => setFocused(true)}
-          onBlur={() => setFocused(false)}
-          className={`
-            w-full bg-white/5 border border-osg-navy/5 p-6 text-osg-navy text-sm outline-none transition-all duration-700 appearance-none cursor-pointer
-            ${focused ? 'border-osg-gold bg-white shadow-architectural' : 'hover:border-osg-navy/20'}
-          `}
-        >
-          <option value="" disabled>Select {label}...</option>
-          {options.map((o: string) => <option key={o} value={o} className="bg-white">{o}</option>)}
-        </select>
-        <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none opacity-30 group-hover:opacity-100 transition-opacity">
-          <ChevronRight size={14} className="rotate-90" />
-        </div>
-        <div className={`absolute bottom-0 left-0 h-[2px] bg-osg-gold transition-all duration-1000 ${focused ? 'w-full' : 'w-0'}`} />
-      </div>
-    </div>
-  );
-}
-
-const steps = [
-  { id: '01', title: 'Identity', subtitle: 'Project Stakeholder', icon: Terminal },
-  { id: '02', title: 'Scope', subtitle: 'Technical Parameters', icon: Cpu },
-  { id: '03', title: 'Assets', subtitle: 'BOQs & Documentation', icon: Database }
-];
-
-export default function QuotePage() {
-  const [step, setStep] = useState(0);
-  const [files, setFiles] = useState<File[]>([]);
-  const [uploading, setUploading] = useState(false);
-  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
+export default function UnifiedIntakePage() {
   const [form, setForm] = useState({
-    name: '', email: '', phone: '', company: '',
-    sector: '', service: '', location: '', stage: '', urgency: '', budget: '',
+    name: '',
+    email: '',
+    phone: '',
+    company: '',
+    sector: 'Residential',
+    service: 'Full Home Design',
+    budget: '$25K-$50K',
+    urgency: 'Within 3 Months',
     description: '',
+    intakeType: 'Quote' // 'Quote' | 'Brief' | 'Consultation'
   });
-
-  const handleChange = (e: any) => {
-    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) setFiles(Array.from(e.target.files));
-  };
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setUploading(true);
+    setStatus('loading');
+    
     try {
-      const fileUrls: string[] = [];
-      for (const file of files) {
-        const fileRef = storageRef(storage, `quote_uploads/${Date.now()}_${file.name}`);
-        await uploadBytes(fileRef, file);
-        const url = await getDownloadURL(fileRef);
-        fileUrls.push(url);
-      }
-      await addDoc(collection(db, 'quote_requests'), {
-        ...form, fileUrls,
-        createdAt: serverTimestamp(),
-        status: 'new',
-        source: 'quote_page',
+      await submitProjectBrief({
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        company: form.company,
+        sector: form.sector,
+        service: form.service,
+        location: 'Not Specified',
+        stage: 'Initial Planning',
+        urgency: form.urgency,
+        budget: form.budget,
+        description: `Unified Intake (${form.intakeType}): ${form.description}`,
       });
       setStatus('success');
-    } catch (err: any) {
-      console.error(err);
+    } catch (error) {
+      console.error('Submission Failed:', error);
       setStatus('error');
-    } finally {
-      setUploading(false);
     }
   };
 
   if (status === 'success') {
     return (
-      <div className="min-h-screen bg-osg-creme flex items-center justify-center font-sans relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid-blueprint opacity-[0.05]" />
-        <div className="text-center max-w-xl px-10 relative z-10">
-          <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: 'spring' }}
-            className="w-32 h-32 flex items-center justify-center mx-auto mb-12 bg-white border border-osg-navy/5 shadow-architectural relative overflow-hidden group">
-            <div className="absolute inset-0 bg-osg-gold translate-y-full group-hover:translate-y-0 transition-transform duration-700" />
-            <CheckCircle className="text-osg-gold group-hover:text-osg-navy relative z-10 transition-colors" size={48} />
-          </motion.div>
-          <span className="text-system-label mb-4 block">Transmission Confirmed</span>
-          <h2 className="text-display mb-8">Proposal <br/><span className="text-osg-gold italic">Initiated.</span></h2>
-          <p className="text-body-muted mb-12 max-w-sm mx-auto">Our engineering systems have received your technical brief. An itemized BOQ and structural proposal are being compiled.</p>
-          <div className="flex flex-col sm:flex-row justify-center gap-6">
-            <Link href="/" className="btn-primary">RETURN TO TERMINAL</Link>
+      <div className="min-h-screen bg-osg-bg flex items-center justify-center p-6">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="card-clean max-w-lg w-full text-center space-y-8"
+        >
+          <div className="w-20 h-20 bg-green-50 text-green-600 rounded-full flex items-center justify-center mx-auto">
+            <CheckCircle size={40} />
           </div>
-        </div>
+          <h2 className="text-3xl font-black text-osg-navy uppercase tracking-tight font-sans">Transmission Received</h2>
+          <p className="text-sm font-bold text-osg-navy/40 leading-relaxed uppercase tracking-widest">Our engineering team has received your unified brief. A technical account manager will contact you within 24 hours.</p>
+          <button onClick={() => window.location.href = '/'} className="btn-cta w-full">Back to Home</button>
+        </motion.div>
       </div>
     );
   }
 
   return (
-    <main className="bg-osg-creme min-h-screen flex flex-col lg:flex-row overflow-hidden font-sans">
-      {/* ─── Sidebar: Intelligence Panel (35%) ─── */}
-      <section className="lg:w-[35vw] bg-osg-navy relative flex flex-col justify-between p-12 lg:p-24 overflow-hidden order-2 lg:order-1">
-        <div className="absolute inset-0 bg-grid-blueprint opacity-5 pointer-events-none" />
-        <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-osg-navy via-transparent to-osg-gold/5 pointer-events-none" />
-        
-        <div className="relative z-10">
-          <Link href="/" className="inline-flex items-center gap-4 text-white/40 font-black uppercase text-[10px] tracking-[0.4em] mb-20 hover:text-osg-gold transition-colors group">
-            <ArrowLeft size={14} className="group-hover:-translate-x-2 transition-transform" /> COMMAND CENTER
-          </Link>
+    <main className="min-h-screen bg-osg-bg lg:flex">
+      {/* --- FORM SECTION (LEFT) --- */}
+      <section className="lg:w-1/2 px-4 py-8 sm:px-6 lg:p-12 flex flex-col justify-center">
+        <div className="max-w-2xl mx-auto w-full rounded-3xl border border-osg-navy/10 bg-white p-5 shadow-premium sm:p-7 lg:p-8">
           
-          <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}>
-            <span className="text-system-label mb-6 block text-osg-gold">Project Configurator // v1.2</span>
-            <h1 className="text-display text-white mb-10 leading-[0.85]">Technical <br /> <span className="text-white/20">Briefing.</span></h1>
-            <p className="text-body-muted text-white/40 max-w-sm mb-20 uppercase tracking-widest leading-loose">Initialize structural parameters to generate high-precision fabrication quotes.</p>
-          </motion.div>
+          <header className="space-y-5">
+            <Link href="/" className="inline-flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.22em] text-osg-navy/45 hover:text-osg-gold transition-colors">
+              <ArrowLeft size={14} /> Back to Systems
+            </Link>
+            <div className="space-y-2">
+              <span className="text-[10px] font-black uppercase tracking-[0.28em] text-osg-gold">Unified Project Intake // v2.0</span>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-osg-navy leading-tight font-sans uppercase">
+                Initialize <span className="text-osg-gold">Technical Brief.</span>
+              </h1>
+            </div>
+            <p className="text-sm font-bold text-osg-navy/55 leading-relaxed uppercase tracking-[0.14em]">
+              Consolidated architecture for quotes, formal briefs, and specialist consultations.
+            </p>
+          </header>
 
-          {/* Stepper: Structural Layout */}
-          <div className="space-y-16 relative">
-            <div className="absolute left-[19px] top-6 bottom-6 w-px bg-white/10" />
-            {steps.map((s, i) => (
-              <div key={s.id} className="relative flex items-center gap-12 group cursor-pointer" onClick={() => i <= step && setStep(i)}>
-                <div className={`w-10 h-10 flex items-center justify-center text-[11px] font-black z-10 transition-all duration-700 bg-osg-navy border ${i === step ? 'border-osg-gold text-osg-navy bg-osg-gold scale-125 shadow-gold' : i < step ? 'border-osg-gold text-osg-gold' : 'border-white/20 text-white/30'}`}>
-                    {i < step ? '✓' : <s.icon size={14} />}
-                </div>
-                <div className={`transition-all duration-700 ${i === step ? 'opacity-100 translate-x-0' : 'opacity-20 translate-x-[-10px]'}`}>
-                  <span className={`block text-[10px] font-black uppercase tracking-[0.4em] mb-1 ${i === step ? 'text-osg-gold' : 'text-white'}`}>{s.title}</span>
-                  <span className="block text-[8px] text-white/40 font-mono tracking-widest uppercase">{s.subtitle}</span>
+          <form onSubmit={handleSubmit} className="mt-8 space-y-8">
+            
+            {/* Intake Type Selection */}
+            <div className="space-y-4">
+              <label className="text-[10px] font-black uppercase tracking-[0.18em] text-osg-navy/55">Select Objective</label>
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                 {['Quote', 'Brief', 'Consultation'].map(type => (
+                   <button 
+                    key={type}
+                    type="button"
+                    onClick={() => setForm({...form, intakeType: type})}
+                    className={`min-h-12 px-5 py-3 rounded-full text-[10px] font-black uppercase tracking-widest transition-all ${form.intakeType === type ? 'bg-osg-navy text-white border border-osg-gold ring-2 ring-osg-gold/25' : 'bg-white border border-osg-border text-osg-navy/55 hover:border-osg-gold/40'}`}
+                   >
+                     {type}
+                   </button>
+                 ))}
+              </div>
+            </div>
+
+            {/* Identity Group */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="space-y-2">
+                <label className="text-[10px] font-black uppercase tracking-[0.16em] text-osg-navy/60">Full Name</label>
+                <div className="relative">
+                   <User size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-osg-gold" />
+                   <input required className="input-clean !p-4 !pl-12" placeholder="John Doe" value={form.name} onChange={e => setForm({...form, name: e.target.value})} />
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
+              <div className="space-y-2">
+                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-osg-navy/60">Professional Email</label>
+                <div className="relative">
+                   <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-osg-gold" />
+                   <input required type="email" className="input-clean !p-4 !pl-12" placeholder="johndoe@email.com" value={form.email} onChange={e => setForm({...form, email: e.target.value})} />
+                </div>
+              </div>
+            </div>
 
-        {/* System Telemetry */}
-        <div className="relative z-10 mt-20 pt-12 border-t border-white/5 flex justify-between items-end">
-             <div className="space-y-2">
-                 <span className="text-system-label text-osg-gold/50 !tracking-widest">Latency Status</span>
-                 <div className="flex items-center gap-3">
-                     <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                     <span className="text-xs font-black text-white italic">LIVE_UPLINK</span>
-                 </div>
-             </div>
-             <div className="text-right">
-                 <span className="text-system-label text-osg-gold/50 !tracking-widest">Transmission Rate</span>
-                 <span className="block text-xl font-black text-white italic leading-none mt-1">99.2% ACC</span>
-             </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="space-y-2">
+                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-osg-navy/60">Phone</label>
+                <div className="relative">
+                    <Phone size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-osg-gold" />
+                    <input required className="input-clean !p-4 !pl-12" placeholder="+256 000 000" value={form.phone} onChange={e => setForm({...form, phone: e.target.value})} />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-osg-navy/60">Company / Organization</label>
+                <div className="relative">
+                    <Building2 size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-osg-gold" />
+                    <input className="input-clean !p-4 !pl-12" placeholder="OSG Projects" value={form.company} onChange={e => setForm({...form, company: e.target.value})} />
+                </div>
+              </div>
+            </div>
+
+            {/* Sector Selection */}
+            <SelectionRow 
+              label="Select Sector"
+              selectedValue={form.sector}
+              onSelect={(val: string) => setForm({...form, sector: val})}
+              options={[
+                { label: 'Residential', value: 'Residential' },
+                { label: 'Commercial', value: 'Commercial' },
+                { label: 'Industrial', value: 'Industrial' }
+              ]}
+            />
+
+            {/* Service Cards */}
+            <div className="space-y-4">
+              <label className="text-[10px] font-black uppercase tracking-[0.2em] text-osg-navy/40">Select Primary System</label>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {[
+                  { id: 'full', label: 'Curtain Wall', icon: Layout },
+                  { id: 'glass', label: 'Glass Systems', icon: CheckCircle },
+                  { id: 'interior', label: 'Specialized Fit-out', icon: Briefcase },
+                  { id: 'consult', label: 'Advisory Only', icon: Calendar }
+                ].map(s => (
+                  <SelectableCard 
+                    key={s.id}
+                    title={s.label}
+                    icon={s.icon}
+                    isSelected={form.service === s.label}
+                    onClick={() => setForm({...form, service: s.label})}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Budget & Urgency */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+               <SelectionRow 
+                label="Budget Range"
+                selectedValue={form.budget}
+                onSelect={(val: string) => setForm({...form, budget: val})}
+                options={[
+                  { label: '<$10K', value: '<$10K' },
+                  { label: '$10K-$50K', value: '$10K-$50K' },
+                  { label: '$50K+', value: '$50K+' }
+                ]}
+              />
+               <SelectionRow 
+                label="Project Timeline"
+                selectedValue={form.urgency}
+                onSelect={(val: string) => setForm({...form, urgency: val})}
+                options={[
+                  { label: 'ASAP', value: 'ASAP' },
+                  { label: '1-3 Mos', value: '1-3 Mos' },
+                  { label: 'Planning', value: 'Planning' }
+                ]}
+              />
+            </div>
+
+            <div className="space-y-4">
+               <label className="text-[10px] font-black uppercase tracking-[0.2em] text-osg-navy/40">Narrative Description</label>
+               <textarea 
+                className="input-clean min-h-[140px] resize-none !p-4" 
+                placeholder="Describe your project vision and structural requirements..."
+                value={form.description}
+                onChange={e => setForm({...form, description: e.target.value})}
+              />
+            </div>
+
+            <button 
+              disabled={status === 'loading'}
+              type="submit" 
+              className="btn-cta w-full py-5 text-sm"
+            >
+              {status === 'loading' ? (
+                <span className="flex items-center gap-2"><Loader2 className="animate-spin" size={18} /> Processing Transmission...</span>
+              ) : (
+                `Submit ${form.intakeType} Brief`
+              )}
+            </button>
+          </form>
+
         </div>
       </section>
 
-      {/* ─── Main Interface: Interactive Canvas (65%) ─── */}
-      <section className="flex-1 bg-white relative lg:overflow-y-auto scrollbar-hide order-1 lg:order-2 flex flex-col transition-all duration-700">
-        <div className="absolute inset-0 bg-grid-blueprint opacity-[0.02] pointer-events-none" />
-        
-        <div className="container-osg max-w-5xl py-24 lg:py-32 relative z-10">
-          <form onSubmit={step === 2 ? handleSubmit : e => e.preventDefault()} className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-            
-            {/* Form Column (8 of 12) */}
-            <div className="lg:col-span-8">
-                <AnimatePresence mode="wait">
-                  {step === 0 && (
-                    <motion.div key="step0" initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }} className="space-y-16">
-                      <div className="space-y-4">
-                        <span className="badge-system">Initialization Phase</span>
-                        <h2 className="text-heading-xl text-osg-navy italic">Primary <br/><span className="text-osg-navy/20">Stakeholder.</span></h2>
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12">
-                        <FloatingInput label="Full Name" name="name" value={form.name} onChange={handleChange} required placeholder="e.g. David Sereni" systemIdent="IDENT_01" />
-                        <FloatingInput label="Email Address" name="email" type="email" value={form.email} onChange={handleChange} required placeholder="e.g. d.sereni@company.com" systemIdent="IDENT_02" />
-                        <FloatingInput label="Direct Line" name="phone" value={form.phone} onChange={handleChange} placeholder="e.g. +256 7XX XXX XXX" systemIdent="IDENT_03" />
-                        <FloatingInput label="Organisation" name="company" value={form.company} onChange={handleChange} placeholder="e.g. Sereni Arch Group" systemIdent="IDENT_04" />
-                      </div>
-                      <div className="pt-8 border-t border-osg-navy/5">
-                        <button type="button" onClick={() => setStep(1)} className="btn-primary group w-full sm:w-auto">
-                            INITIALIZE PARAMETERS <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
-                        </button>
-                      </div>
-                    </motion.div>
-                  )}
-
-                  {step === 1 && (
-                    <motion.div key="step1" initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }} className="space-y-16">
-                      <div className="space-y-4">
-                        <span className="badge-system">Technical Alignment</span>
-                        <h2 className="text-heading-xl text-osg-navy italic">Structural <br/><span className="text-osg-navy/20">Constraints.</span></h2>
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 bg-osg-navy/[0.02] p-8 lg:p-12 border border-osg-navy/5 shadow-inner">
-                        <FloatingSelect label="Project Sector" name="sector" value={form.sector} onChange={handleChange} required options={['Residential', 'Hospitality', 'Commercial', 'Corporate', 'Retail', 'Institutional', 'Industrial']} systemIdent="SYS_SECTOR" />
-                        <FloatingSelect label="Core Product" name="service" value={form.service} onChange={handleChange} required options={['Aluminium & Glass Systems', 'Gypsum Works & Ceilings', 'Painting & Tiling', 'Carpentry & Joinery', 'Electrical Installations', 'Multiple Services']} systemIdent="SYS_CORE" />
-                        <FloatingSelect label="Maturity Stage" name="stage" value={form.stage} onChange={handleChange} options={['Concept / Design', 'Tender Released', 'Active Construction', 'Renovation Brief']} systemIdent="SYS_STAGE" />
-                        <FloatingInput label="Project Location" name="location" value={form.location} onChange={handleChange} placeholder="e.g. Nakasero, Kampala" systemIdent="SYS_LOC" />
-                        <FloatingSelect label="Time Horizon" name="urgency" value={form.urgency} onChange={handleChange} options={['Immediate fit-out', 'Within Quarter', 'Future Phase']} systemIdent="SYS_TIME" />
-                        <FloatingSelect label="Budget Bracket" name="budget" value={form.budget} onChange={handleChange} options={['UGX 10M – 50M', 'UGX 50M – 200M', 'UGX 200M+', 'Enterprise Level']} systemIdent="SYS_VOL" />
-                      </div>
-                      <div className="flex flex-col sm:flex-row gap-6 pt-10 border-t border-osg-navy/5">
-                        <button type="button" onClick={() => setStep(0)} className="btn-outline flex-1 group !px-8">
-                             <ArrowLeft size={14} className="group-hover:-translate-x-2 transition-transform" /> PREVIOUS
-                        </button>
-                        <button type="button" onClick={() => setStep(2)} className="btn-primary flex-[2] group">
-                             ATTACH TECHNICAL ASSETS <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
-                        </button>
-                      </div>
-                    </motion.div>
-                  )}
-
-                  {step === 2 && (
-                    <motion.div key="step2" initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }} className="space-y-16">
-                      <div className="space-y-4">
-                        <span className="badge-system">Final Transmission</span>
-                        <h2 className="text-heading-xl text-osg-navy italic">Data <br/><span className="text-osg-navy/20">Transmission.</span></h2>
-                      </div>
-                      <div className="space-y-12">
-                        <div className="relative group">
-                          <label className="text-system-label block mb-6 leading-none">Technical Specification Summary</label>
-                          <textarea name="description" value={form.description} onChange={handleChange} rows={5} placeholder="Describe the structural scope, specialized finish requirements, and performance criteria..." className="w-full bg-osg-navy/[0.02] border border-osg-navy/5 p-8 text-osg-navy text-sm outline-none focus:border-osg-gold focus:bg-white transition-all duration-700 resize-none font-medium shadow-inner" />
-                        </div>
-                        <div className="relative">
-                          <label className="text-system-label block mb-6 leading-none">Engineering Drawings (CAD/PDF/BIM)</label>
-                          <label className="block cursor-pointer group">
-                            <div className="border-2 border-dashed border-osg-navy/10 p-16 lg:p-24 text-center bg-white group-hover:bg-osg-navy/[0.02] group-hover:border-osg-gold transition-all duration-700 relative overflow-hidden">
-                              <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-osg-gold opacity-30" />
-                              <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-osg-gold opacity-30" />
-                              <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-osg-gold opacity-30" />
-                              <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-osg-gold opacity-30" />
-                              
-                              <Upload size={40} className="text-osg-gold/40 mx-auto mb-8 transition-all duration-1000 group-hover:scale-110 group-hover:text-osg-gold opacity-50 shadow-gold" />
-                              <p className="text-xs font-black text-osg-navy uppercase tracking-[0.4em] mb-3">Upload Technical Package</p>
-                              <p className="text-body-muted text-[10px] uppercase">CAD, PDF, or XLSX up to 100MB Aggregate</p>
-                              
-                              {files.length > 0 && (
-                                <div className="mt-12 flex flex-wrap justify-center gap-4 bg-osg-navy/5 p-6 border border-osg-navy/5">
-                                  {files.map(f => (
-                                    <div key={f.name} className="bg-white text-osg-navy px-5 py-3 text-[9px] font-black uppercase tracking-widest flex items-center gap-3 border border-osg-navy/5 active:scale-95 transition-transform"><Zap size={10} className="text-osg-gold" /> {f.name}</div>
-                                  ))}
-                                </div>
-                              )}
-                            </div>
-                            <input type="file" multiple accept=".pdf,.dwg,.jpg,.jpeg,.png,.xlsx" onChange={handleFileChange} className="sr-only" />
-                          </label>
-                        </div>
-                      </div>
-                      
-                      {status === 'error' && (
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-6 text-red-600 bg-red-50 p-8 border border-red-100">
-                             <AlertTriangle size={24} />
-                             <div>
-                                <span className="text-[10px] font-black uppercase tracking-widest block mb-1">Transmission Fault Detected</span>
-                                <span className="text-xs font-medium opacity-70 italic font-mono">CODE: ERR_UPLINK_TIMOUT — Re-initializing...</span>
-                             </div>
-                        </motion.div>
-                      )}
-
-                      <div className="flex flex-col sm:flex-row gap-6 pt-10 border-t border-osg-navy/5">
-                        <button type="button" onClick={() => setStep(1)} className="btn-outline flex-1 group !px-8">
-                             <ArrowLeft size={14} className="group-hover:-translate-x-2 transition-transform" /> PREVIOUS
-                        </button>
-                        <button type="submit" disabled={uploading} className="btn-primary flex-[3] group shadow-gold">
-                          {uploading ? (
-                            <span className="flex items-center gap-4"><Activity size={18} className="animate-spin" /> DISPATCHING DATA PACKAGE...</span>
-                          ) : (
-                            <span className="flex items-center gap-4">TRANSMIT BRIEF TO ENGINEERING <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" /></span>
-                          )}
-                        </button>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+      {/* --- VISUAL SECTION (RIGHT) --- */}
+      <section className="lg:w-1/2 p-8 lg:p-12 h-screen max-lg:hidden sticky top-0">
+        <div className="relative h-full w-full rounded-[3.5rem] overflow-hidden shadow-premium group">
+          <Image 
+            src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=1400&auto=format&fit=crop" 
+            alt="Modern Interior" 
+            fill 
+            className="object-cover transition-transform duration-1000 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-osg-navy/60 to-transparent" />
+          <div className="absolute bottom-16 left-16 right-16">
+            <div className="bg-white/10 backdrop-blur-3xl p-10 rounded-[3rem] border border-white/20 text-white space-y-6">
+               <div className="flex items-center gap-3">
+                 <Activity size={18} className="text-osg-gold animate-pulse" />
+                 <p className="text-[10px] font-black uppercase tracking-[0.4em] text-osg-gold">Structural Integrity defined.</p>
+               </div>
+               <h3 className="text-4xl font-black font-sans tracking-tighter leading-none">Engineering full-scale <br/><span className="text-white/40">modernist facades.</span></h3>
+               <p className="text-sm font-bold text-white/60 leading-relaxed uppercase tracking-widest">
+                 Your unified brief will be analyzed by our architectural engineering team using proprietary BOQ algorithms.
+               </p>
             </div>
-
-            {/* System Intelligence Column (4 of 12) */}
-            <aside className="lg:col-span-4 hidden lg:block space-y-8">
-                 <div className="sticky top-12">
-                     <Reveal delay={0.2} className="card-terminal p-10 mb-8 border-osg-navy/5">
-                         <div className="corner-accent corner-tl" />
-                         <div className="flex items-center gap-4 mb-8">
-                             <div className="w-10 h-10 flex items-center justify-center bg-osg-gold/10 text-osg-gold">
-                                 <Info size={16} />
-                             </div>
-                             <span className="text-system-label !text-osg-navy text-[10px]">Contextual Data</span>
-                         </div>
-                         <h4 className="text-xs font-black uppercase tracking-widest text-osg-navy mb-6">System Intelligence</h4>
-                         
-                         <AnimatePresence mode="wait">
-                            {step === 0 && (
-                                <motion.div key="hint0" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-6">
-                                    <p className="text-body-muted text-[11px]">Primary identification is required for project auditing and legal architectural compliance across East African territories.</p>
-                                    <div className="flex items-center gap-4 text-osg-gold">
-                                        <ShieldCheck size={14} />
-                                        <span className="text-[9px] font-black uppercase tracking-widest">SSL Encrypted Terminal</span>
-                                    </div>
-                                </motion.div>
-                            )}
-                            {step === 1 && (
-                                <motion.div key="hint1" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-6">
-                                    <p className="text-body-muted text-[11px]">Selecting a specific Sector allows our CAD systems to pre-load relevant structural benchmarks and compliance templates.</p>
-                                    <div className="p-4 bg-osg-gold/5 border-l-2 border-osg-gold flex items-center gap-4">
-                                        <Clock size={14} className="text-osg-gold" />
-                                        <span className="text-[9px] font-black uppercase tracking-widest">Est. Response: 48h</span>
-                                    </div>
-                                </motion.div>
-                            )}
-                            {step === 2 && (
-                                <motion.div key="hint2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-6">
-                                    <p className="text-body-muted text-[11px]">Large technical drawing packages (DWG/BIM) expedite the itemization phase by 40%, ensuring higher BID-BUILT accuracy.</p>
-                                    <div className="flex items-center gap-4 text-osg-gold">
-                                        <Zap size={14} />
-                                        <span className="text-[9px] font-black uppercase tracking-widest">Priority Priority Protocol</span>
-                                    </div>
-                                </motion.div>
-                            )}
-                         </AnimatePresence>
-                     </Reveal>
-
-                     <div className="p-10 border border-osg-navy/10 bg-osg-navy text-white relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-osg-gold/10 blur-[60px]" />
-                        <Activity size={24} className="text-osg-gold mb-6 opacity-40" />
-                        <h4 className="text-[10px] font-black uppercase tracking-[0.4em] mb-4">Fabrication Status</h4>
-                        <p className="text-[10px] text-white/40 leading-relaxed uppercase tracking-widest mb-10">Our Mombasa Road facility currently operating at 92% capacity. Queue status: ACTIVE.</p>
-                        <div className="h-1 bg-white/10 relative">
-                            <motion.div initial={{ width: 0 }} animate={{ width: '92%' }} className="absolute top-0 left-0 h-full bg-osg-gold" />
-                        </div>
-                     </div>
-                 </div>
-            </aside>
-          </form>
+          </div>
         </div>
       </section>
     </main>
   );
 }
 
-function Reveal({ children, delay = 0, className = '' }: any) {
+function Activity({ size, className }: any) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
+    <svg 
+      width={size} 
+      height={size} 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke="currentColor" 
+      strokeWidth="2" 
+      strokeLinecap="round" 
+      strokeLinejoin="round" 
       className={className}
     >
-      {children}
-    </motion.div>
+      <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+    </svg>
   );
 }
+

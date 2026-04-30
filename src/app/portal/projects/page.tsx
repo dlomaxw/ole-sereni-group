@@ -21,7 +21,7 @@ const milestones = [
     date: 'Oct 24, 2023 — Dec 12, 2023',
     description: 'Detailed excavation, soil stabilization, and reinforced concrete foundation pouring. All structural benchmarks verified by independent engineering consultants.',
     status: 'completed',
-    image: 'https://images.unsplash.com/photo-1541888946425-d81bb19480c5?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=800&auto=format&fit=crop',
     links: [
       { label: 'SITE PHOTOS', icon: ImageIcon },
       { label: 'TECHNICAL REPORT', icon: FileText }
@@ -33,7 +33,7 @@ const milestones = [
     description: 'Vertical structural elements reached the 4th level. Mechanical, Electrical, and Plumbing (MEP) systems are currently being integrated within the structural framework.',
     status: 'active',
     progress: 42,
-    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=800&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop',
     activePhase: 'Current Phase Progress',
     videoLink: true
   },
@@ -60,7 +60,7 @@ export default function ProjectsPage() {
       {/* Page Header */}
       <header className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-10">
         <div className="max-w-2xl">
-          <h1 className="text-6xl font-serif font-black text-osg-navy tracking-tighter mb-6 leading-[0.85] uppercase">
+          <h1 className="text-6xl font-sans font-black text-osg-navy tracking-tighter mb-6 leading-[0.85] uppercase">
             Project <br /> <span className="text-osg-gold">Milestones</span>
           </h1>
           <p className="text-[11px] font-bold text-osg-navy/50 leading-relaxed uppercase tracking-widest max-w-md">
@@ -71,7 +71,7 @@ export default function ProjectsPage() {
         <div className="bg-white/80 backdrop-blur-xl border border-osg-navy/5 p-10 min-w-[300px] shadow-2xl shadow-osg-navy/5">
           <p className="text-[9px] font-black uppercase tracking-[0.4em] text-osg-gold mb-3">Overall Progress</p>
           <div className="flex items-baseline gap-3">
-            <span className="text-5xl font-serif font-black text-osg-navy">68%</span>
+            <span className="text-5xl font-sans font-black text-osg-navy">68%</span>
             <span className="text-[9px] font-black text-osg-navy/30 uppercase tracking-widest">Ahead of schedule</span>
           </div>
           <div className="w-full bg-osg-navy/5 h-1 mt-6">
@@ -115,7 +115,7 @@ export default function ProjectsPage() {
                       <span className="text-[9px] font-bold text-osg-navy/30 uppercase tracking-widest">{milestone.date}</span>
                     </div>
 
-                    <h3 className="text-3xl font-serif font-black text-osg-navy mb-4 tracking-tight uppercase leading-none">
+                    <h3 className="text-3xl font-sans font-black text-osg-navy mb-4 tracking-tight uppercase leading-none">
                       {milestone.title}
                     </h3>
                     
@@ -180,7 +180,7 @@ export default function ProjectsPage() {
 
       {/* Intelligence Grid */}
       <section className="mt-40">
-        <h2 className="text-4xl font-serif font-black text-osg-navy mb-12 tracking-tighter uppercase leading-none">
+        <h2 className="text-4xl font-sans font-black text-osg-navy mb-12 tracking-tighter uppercase leading-none">
            Project <span className="text-osg-gold">Intelligence</span>
         </h2>
         
@@ -189,7 +189,7 @@ export default function ProjectsPage() {
             <div className="absolute inset-0 bg-noise opacity-10"></div>
             <div className="relative z-10">
               <span className="text-osg-gold font-black text-[9px] uppercase tracking-[0.6em] mb-6 block">Resource Vault</span>
-              <h4 className="text-4xl font-serif font-black mb-6 uppercase tracking-tight leading-[0.9]">Complete Architectural <br /> CAD Specifications</h4>
+              <h4 className="text-4xl font-sans font-black mb-6 uppercase tracking-tight leading-[0.9]">Complete Architectural <br /> CAD Specifications</h4>
               <p className="text-white/40 text-[11px] font-medium leading-relaxed uppercase tracking-widest max-w-md mb-12">
                 Access the master architectural set including all BIM revisions and structural overlays. Sync live with site engineering data.
               </p>
@@ -205,7 +205,7 @@ export default function ProjectsPage() {
           <div className="bg-osg-offwhite p-12 flex flex-col justify-between border border-osg-navy/5 shadow-2xl shadow-osg-navy/5">
             <div>
               <span className="text-osg-gold font-black text-[9px] uppercase tracking-[0.6em] mb-6 block">Concierge Desk</span>
-              <h4 className="text-2xl font-serif font-black text-osg-navy mb-4 uppercase leading-none">Concierge <br /> Architect</h4>
+              <h4 className="text-2xl font-sans font-black text-osg-navy mb-4 uppercase leading-none">Concierge <br /> Architect</h4>
               <p className="text-[10px] font-bold text-osg-navy/40 uppercase tracking-widest leading-relaxed">
                 Direct encrypted line for technical modifications or design inquiries.
               </p>
@@ -228,3 +228,4 @@ export default function ProjectsPage() {
     </div>
   );
 }
+

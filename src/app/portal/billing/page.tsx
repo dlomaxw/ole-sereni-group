@@ -32,7 +32,7 @@ export default function BillingPage() {
 
       {/* Page Header */}
       <header className="mb-20">
-        <h1 className="text-6xl font-serif font-black text-osg-navy tracking-tighter mb-6 leading-[0.85] uppercase">
+        <h1 className="text-6xl font-sans font-black text-osg-navy tracking-tighter mb-6 leading-[0.85] uppercase">
           Financial <br /> <span className="text-osg-gold">Statements</span>
         </h1>
         <p className="text-[11px] font-bold text-osg-navy/50 leading-relaxed uppercase tracking-widest max-w-sm">
@@ -48,13 +48,13 @@ export default function BillingPage() {
              <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-12">
                 <div className="text-center md:text-left">
                    <p className="text-[9px] font-black text-osg-gold uppercase tracking-[0.4em] mb-4">Total Contract Value</p>
-                   <h2 className="text-5xl font-serif font-black tracking-tight mb-2 uppercase">$ 48,250,000</h2>
+                   <h2 className="text-5xl font-sans font-black tracking-tight mb-2 uppercase">$ 48,250,000</h2>
                    <p className="text-[10px] font-bold text-white/30 uppercase tracking-widest">Certified Valuation: OSG-LV-2024-X</p>
                 </div>
                 <div className="w-[1px] h-20 bg-white/10 hidden md:block"></div>
                 <div className="text-center md:text-left">
                    <p className="text-[9px] font-black text-osg-gold/50 uppercase tracking-[0.4em] mb-4">Current Outstanding</p>
-                   <h3 className="text-3xl font-serif font-black tracking-tight mb-1 text-osg-gold uppercase">$ 12,200,800</h3>
+                   <h3 className="text-3xl font-sans font-black tracking-tight mb-1 text-osg-gold uppercase">$ 12,200,800</h3>
                    <span className="text-[8px] font-black uppercase px-2 py-1 bg-osg-gold text-osg-navy tracking-widest">Action: Payment In Progress</span>
                 </div>
              </div>
@@ -88,7 +88,7 @@ export default function BillingPage() {
                     </div>
                     <div className="flex items-center gap-12 mt-6 md:mt-0 text-right">
                        <div>
-                          <p className="text-lg font-serif font-black text-osg-navy tracking-tight">{inv.amount}</p>
+                          <p className="text-lg font-sans font-black text-osg-navy tracking-tight">{inv.amount}</p>
                           <span className={`text-[8px] font-black px-2 py-0.5 uppercase tracking-widest ${inv.status === 'PAID' ? 'text-green-600 bg-green-50' : 'text-osg-gold bg-osg-gold/10'}`}>
                              {inv.status}
                           </span>
@@ -114,7 +114,7 @@ export default function BillingPage() {
                       <CreditCard size={24} />
                    </div>
                    <div>
-                      <p className="text-sm font-serif font-bold text-osg-navy leading-none">**** **** **** 8820</p>
+                      <p className="text-sm font-sans font-bold text-osg-navy leading-none">**** **** **** 8820</p>
                       <p className="text-[8px] font-bold text-osg-navy/20 uppercase mt-1">Global Trade (SGD)</p>
                    </div>
                 </div>
@@ -122,7 +122,7 @@ export default function BillingPage() {
              <button className="w-full py-5 bg-osg-navy text-white text-[9px] font-black uppercase tracking-[0.3em] hover:bg-osg-gold hover:text-osg-navy transition-all mb-4">
                 Update Disbursement Profile
              </button>
-             <p className="text-[8px] font-bold text-center text-osg-navy/20 uppercase tracking-widest italic">
+             <p className="text-[8px] font-bold text-center text-osg-navy/20 uppercase tracking-widest">
                 Secure SSL 256-bit encrypted operational tunnel.
              </p>
           </div>
@@ -144,3 +144,4 @@ export default function BillingPage() {
     </div>
   );
 }
+

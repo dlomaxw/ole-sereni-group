@@ -45,7 +45,10 @@ const hardware = [
 
 export default function WindowSystemsPage() {
   return (
-    <main className="bg-osg-navy">
+    <main className="bg-[#F8F9FB] min-h-screen relative overflow-hidden font-sans">
+      {/* Background Architectural Grid */}
+      <div className="absolute inset-0 bg-grid-blueprint opacity-[0.03] pointer-events-none" />
+      
       <PageHero
         label="Solutions / Products"
         title="Structural"
@@ -56,180 +59,219 @@ export default function WindowSystemsPage() {
         ctaSecondary={{ label: 'Get a Quote', href: '/quote' }}
       />
 
-      {/* Variations Section: Technical Catalog Style */}
-      <section className="section-padding bg-white relative overflow-hidden">
-        <div className="absolute right-0 top-0 w-1/3 h-full bg-[#f4f6f5] -skew-x-12 translate-x-1/2 pointer-events-none opacity-50" />
+      {/* System Variations: Luxury Architectural Catalog */}
+      <section className="py-40 bg-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-blueprint opacity-[0.01]" />
         
-        <div className="container-osg relative z-10">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
-            <Reveal>
-              <span className="text-[10px] font-black text-osg-gold uppercase tracking-[0.5em] mb-4 block leading-none">Product Range // 01</span>
-              <h2 className="text-display-sm text-osg-navy font-black uppercase tracking-tighter italic">System <br/><span className="text-osg-navy/20">Variations.</span></h2>
-            </Reveal>
-            <Reveal delay={0.1}>
-                <div className="h-px w-32 bg-osg-gold mb-4" />
-                <p className="text-secondary font-black uppercase tracking-[0.3em] text-[10px] text-osg-navy/30">Select Configuration</p>
-            </Reveal>
+        <div className="container-clean">
+          <div className="flex flex-col lg:flex-row items-end justify-between mb-32 gap-16">
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-4xl space-y-10">
+              <div className="flex items-center gap-6">
+                 <div className="w-12 h-[1px] bg-osg-gold/40"></div>
+                 <span className="text-[10px] font-black text-osg-gold uppercase tracking-[0.6em]">Product Range // 01</span>
+              </div>
+              <h2 className="text-[4rem] lg:text-[7rem] text-osg-navy font-black uppercase tracking-tighter leading-[0.85] font-sans">System <br/><span className="text-osg-navy/10">Variations.</span></h2>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="lg:w-1/3 border-l border-osg-gold pl-12">
+               <p className="text-[10px] text-osg-navy/40 uppercase tracking-[0.4em] font-black leading-relaxed">
+                    Select the optimal window configuration for your structural envelope, from panoramic sliding systems to high-ventilation casements.
+               </p>
+            </motion.div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 lg:gap-24">
             {windowSystems.map((sys, i) => (
-              <Reveal key={sys.title} delay={i * 0.15}>
-                <div className="group relative">
-                    <div className="aspect-[3/4] overflow-hidden bg-osg-navy relative border border-osg-navy/5">
-                        <Image 
-                        src={sys.image} 
-                        alt={sys.title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                        className="object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:scale-110 group-hover:opacity-100 transition-all duration-1000"
-                        />
-                        <div className="absolute top-6 right-6 bg-osg-gold text-osg-navy px-4 py-1.5 text-[9px] font-black uppercase tracking-widest shadow-xl">
-                        {sys.tag}
-                        </div>
-                        {/* Dimensional Lines Overlay */}
-                        <div className="absolute inset-x-8 top-1/2 h-px bg-white/20 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-700" />
-                        <div className="absolute inset-y-8 left-1/2 w-px bg-white/20 scale-y-0 group-hover:scale-y-100 transition-transform origin-top duration-700" />
-                    </div>
-                    <div className="pt-8">
-                        <h3 className="text-2xl font-black text-osg-navy mb-4 uppercase tracking-tighter transition-colors group-hover:text-osg-gold">{sys.title}</h3>
-                        <p className="text-sm text-osg-navy/60 mb-8 font-light leading-relaxed">{sys.desc}</p>
-                        <Link href="/quote" className="flex items-center gap-3 text-osg-gold text-[10px] font-black uppercase tracking-[0.3em] hover:gap-6 transition-all border-b border-osg-gold/20 pb-2 inline-block">
-                        Configure Technical Spec <ArrowRight size={14} />
-                        </Link>
-                    </div>
+              <motion.div 
+                key={sys.title} 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.15 }}
+                viewport={{ once: true }}
+                className="group space-y-12"
+              >
+                <div className="aspect-[3/4] relative rounded-[3rem] overflow-hidden border border-osg-navy/5 shadow-premium">
+                  <Image
+                    src={sys.image}
+                    alt={sys.title}
+                    fill
+                    className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-[1500ms] opacity-60 group-hover:opacity-100"
+                  />
+                  <div className="absolute top-10 left-10">
+                     <span className="bg-osg-gold text-osg-navy text-[10px] font-black uppercase tracking-[0.4em] px-6 py-2.5 rounded-full shadow-2xl">{sys.tag}</span>
+                  </div>
+                  {/* Dimensional Architecture Lines Overlay */}
+                  <div className="absolute inset-x-12 top-1/2 h-[1px] bg-white/20 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-1000" />
+                  <div className="absolute inset-y-12 left-1/2 w-[1px] bg-white/20 scale-y-0 group-hover:scale-y-100 transition-transform origin-top duration-1000" />
                 </div>
-              </Reveal>
+                <div className="space-y-6">
+                  <h3 className="text-4xl font-sans font-black text-osg-navy uppercase tracking-tight leading-none group-hover:text-osg-gold transition-colors">{sys.title}</h3>
+                  <div className="w-16 h-[1px] bg-osg-gold/20 group-hover:w-24 group-hover:bg-osg-gold transition-all duration-500" />
+                  <p className="text-lg text-osg-navy/40 font-sans leading-relaxed line-clamp-3">{sys.desc}</p>
+                  <Link href="/quote" className="btn-cta w-full justify-center group !py-5 !text-[10px]">
+                    CONFIGURE TECHNICAL SPEC <ArrowRight size={16} className="group-hover:translate-x-3 transition-transform" />
+                  </Link>
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Technical Exploration Showcase */}
-      <section className="section-padding bg-osg-navy relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid-blueprint opacity-10 pointer-events-none" />
-        <div className="container-osg relative z-10">
-            <div className="max-w-3xl mb-16">
-                <Reveal>
-                    <span className="text-[10px] font-black text-osg-gold uppercase tracking-[0.5em] mb-4 block leading-none">Technical Depth // 01</span>
-                    <h2 className="text-display-xs lg:text-display-sm text-white font-black uppercase tracking-tighter italic">Structural <br /><span className="text-osg-gold">Extraction.</span></h2>
-                    <p className="mt-6 text-white/50 text-lg max-w-xl">
-                        Review the thermal transmittance, acoustic reduction, and security classifications of our premium casement and sliding window systems.
-                    </p>
-                </Reveal>
+      <section className="py-48 bg-[#0B1C2C] text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-blueprint opacity-[0.03] pointer-events-none" />
+        <div className="container-clean relative z-10">
+            <div className="max-w-4xl mb-32 space-y-12">
+                <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="flex items-center gap-6">
+                   <div className="w-12 h-[1px] bg-osg-gold/40"></div>
+                   <span className="text-[10px] font-black text-osg-gold uppercase tracking-[0.6em]">Technical Depth // 01</span>
+                </motion.div>
+                <h2 className="text-[4rem] lg:text-[7rem] font-sans font-black uppercase tracking-tighter leading-[0.85]">Structural <br /><span className="text-osg-gold">Extraction.</span></h2>
+                <p className="text-2xl text-white/40 font-sans leading-relaxed max-w-2xl">
+                    Review the thermal transmittance, acoustic reduction, and security classifications of our premium casement and sliding window systems.
+                </p>
             </div>
             
-            <Reveal delay={0.2}>
-                <TechShowcase categoryKey="WindowSystems" />
-            </Reveal>
+            <TechShowcase categoryKey="WindowSystems" />
         </div>
       </section>
 
-      {/* Performance Section: Data Visualization */}
-      <section className="section-padding bg-osg-navy relative overflow-hidden border-t border-white/5">
-        <div className="absolute inset-0 bg-noise opacity-5" />
-        <div className="container-osg relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-            <div>
-              <Reveal>
-                <span className="text-osg-gold font-black uppercase text-[10px] tracking-[0.5em] mb-10 block leading-none">Technical Benchmarks</span>
-                <h2 className="text-display-md text-white font-black uppercase tracking-tighter leading-[0.85] italic mb-12">Engineered <br/><span className="text-osg-gold">Performance.</span></h2>
-              </Reveal>
-              <div className="space-y-12">
+      {/* Performance Benchmarks: High-Fidelity Data Modules */}
+      <section className="py-56 bg-white relative overflow-hidden border-t border-osg-navy/5">
+        <div className="absolute inset-0 bg-grid-blueprint opacity-[0.01]" />
+        <div className="container-clean">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-32 items-center">
+            <div className="lg:col-span-7 space-y-16">
+              <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-10">
+                <span className="text-osg-gold font-black uppercase text-[10px] tracking-[0.6em] mb-10 block leading-none">Technical Benchmarks</span>
+                <h2 className="text-[4rem] lg:text-[7.5rem] text-osg-navy font-sans font-black uppercase tracking-tighter leading-[0.85]">Engineered <br/><span className="text-osg-navy/10">Performance.</span></h2>
+              </motion.div>
+              
+              <div className="space-y-20">
                 {metrics.map((m, i) => (
-                  <Reveal key={m.label} delay={i * 0.1}>
-                    <div className="group">
-                      <div className="flex items-center gap-8 mb-4">
-                        <div className="w-16 h-16 flex items-center justify-center bg-white/5 border border-white/10 text-osg-gold group-hover:bg-osg-gold group-hover:text-osg-navy transition-all duration-500">
-                          <m.icon size={24} />
+                  <motion.div 
+                    key={m.label} 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.1 }}
+                    viewport={{ once: true }}
+                    className="group"
+                  >
+                    <div className="flex items-center gap-10 mb-8">
+                      <div className="w-20 h-20 flex-shrink-0 rounded-2xl bg-[#F8F9FB] border border-osg-navy/5 flex items-center justify-center text-osg-navy group-hover:bg-osg-navy group-hover:text-osg-gold transition-all duration-500 shadow-premium">
+                        <m.icon size={28} />
+                      </div>
+                      <div className="flex-1 space-y-6">
+                        <div className="flex justify-between items-end">
+                           <h4 className="text-2xl font-sans font-black text-osg-navy uppercase tracking-tight">{m.label}</h4>
+                           <span className="text-3xl font-sans font-black text-osg-gold">{m.value}</span>
                         </div>
-                        <div className="flex-1">
-                          <div className="flex justify-between items-end mb-4">
-                            <h4 className="text-lg font-black text-white uppercase tracking-tight">{m.label}</h4>
-                            <span className="text-xl text-osg-gold font-black italic">{m.value}</span>
-                          </div>
-                          <div className="h-1 w-full bg-white/5 overflow-hidden">
-                            <motion.div 
-                              initial={{ width: 0 }}
-                              whileInView={{ width: `${m.pct}%` }}
-                              transition={{ duration: 1.5, delay: 0.5 }}
-                              className="h-full bg-osg-gold"
-                            />
-                          </div>
-                          <p className="text-[9px] text-white/30 uppercase tracking-[0.4em] mt-4 font-black">{m.desc}</p>
+                        <div className="h-1.5 w-full bg-[#F8F9FB] rounded-full overflow-hidden">
+                           <motion.div 
+                             initial={{ width: 0 }}
+                             whileInView={{ width: `${m.pct}%` }}
+                             transition={{ duration: 2, ease: "circOut" }}
+                             viewport={{ once: true }}
+                             className="h-full bg-osg-navy"
+                           />
                         </div>
+                        <p className="text-[10px] font-black text-osg-navy/20 uppercase tracking-[0.5em]">{m.desc}</p>
                       </div>
                     </div>
-                  </Reveal>
+                  </motion.div>
                 ))}
               </div>
             </div>
 
-            <Reveal delay={0.2}>
-              <div className="relative bg-white/5 p-16 overflow-hidden min-h-[600px] flex items-center justify-center border border-white/10 group">
-                <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity">
-                  <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle, rgba(201,168,76,0.3) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
-                </div>
-                <div className="relative z-10 text-center max-w-sm">
-                  <span className="text-osg-gold text-[10px] uppercase tracking-[0.5em] font-black mb-10 block">Structural Resources</span>
-                  <h3 className="text-white text-5xl font-black uppercase tracking-tighter italic mb-12 leading-none">Access the full structural data.</h3>
-                  <button className="btn-primary !bg-white !text-osg-navy mx-auto py-5 px-10">
-                    <Download size={18} /> DOWNLOAD TECHNICAL CATALOG
-                  </button>
-                </div>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.98 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="lg:col-span-5 relative bg-[#F8F9FB] p-20 lg:p-32 rounded-[5rem] overflow-hidden border border-osg-navy/5 shadow-premium group min-h-[600px] flex flex-col justify-between"
+            >
+              <div className="absolute inset-0 bg-grid-blueprint opacity-[0.02]" />
+              <div className="relative z-10 space-y-12">
+                  <span className="text-osg-gold text-[10px] uppercase tracking-[0.6em] font-black mb-10 block">Structural Resources</span>
+                  <h3 className="text-[3rem] lg:text-[4rem] text-osg-navy font-sans font-black uppercase tracking-tight leading-none group-hover:text-osg-gold transition-colors duration-700">Access full structural data.</h3>
+                  <p className="text-xl text-osg-navy/40 font-sans leading-relaxed">
+                    Download the comprehensive technical catalog including profile dimensions, hardware options, and wind-load performance charts.
+                  </p>
               </div>
-            </Reveal>
+              <div className="relative z-10 pt-16">
+                  <button className="btn-cta w-full justify-center !py-6 group !text-[10px]">
+                    <Download size={20} className="mr-4 group-hover:translate-y-1 transition-transform" /> DOWNLOAD TECHNICAL CATALOG
+                  </button>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Hardware Options: Tactical Grid */}
-      <section className="section-padding bg-white">
-        <div className="container-osg">
-          <div className="flex flex-col lg:flex-row items-end justify-between mb-32 gap-10">
-            <div className="max-w-xl">
-                <span className="text-osg-gold font-black uppercase text-[10px] tracking-[0.5em] mb-6 block leading-none">Interface Components</span>
-                <h2 className="text-display-sm text-osg-navy font-black uppercase tracking-tighter leading-none">Tactile <br/><span className="text-osg-navy/20 italic">Precision.</span></h2>
-            </div>
-            <p className="lg:w-1/3 text-xs text-osg-navy/40 uppercase tracking-[0.2em] font-bold leading-relaxed border-l-2 border-osg-gold pl-8">
-                The interface between user and architecture. Tactile quality engineered into every interaction.
-            </p>
+      {/* Tactile Precision: Luxury Hardware Grid */}
+      <section className="py-48 bg-[#0B1C2C] text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-blueprint opacity-[0.03] pointer-events-none" />
+        <div className="container-clean">
+          <div className="flex flex-col lg:flex-row items-end justify-between mb-40 gap-16">
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="max-w-4xl space-y-10">
+                <span className="text-osg-gold font-black uppercase text-[10px] tracking-[0.6em] mb-6 block leading-none">Interface Components</span>
+                <h2 className="text-[4rem] lg:text-[7rem] font-sans font-black uppercase tracking-tighter leading-[0.85]">Tactile <br/><span className="text-white/10">Precision.</span></h2>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="lg:w-1/3 border-l border-osg-gold pl-12">
+               <p className="text-[10px] text-white/40 uppercase tracking-[0.4em] font-black leading-relaxed">
+                    The interface between user and architecture. Tactile quality engineered into every interaction through premium hardware finish series.
+               </p>
+            </motion.div>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-osg-navy/10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {hardware.map((h, i) => (
-              <Reveal key={h.name} delay={i * 0.1}>
-                <div className="bg-white p-16 text-center group transition-colors duration-700 hover:bg-osg-navy">
-                  <div className="aspect-square flex items-center justify-center mb-10 relative">
-                    {h.icon ? (
-                      <h.icon size={56} className="text-osg-navy/20 group-hover:text-osg-gold transition-all duration-700 group-hover:scale-110" />
-                    ) : (
-                      <div className="w-20 h-20 rounded-full group-hover:scale-110 transition-transform shadow-2xl border-4 border-white/10" style={{ backgroundColor: h.color }} />
-                    )}
-                  </div>
-                  <h5 className="text-lg font-black text-osg-navy group-hover:text-white mb-2 uppercase tracking-tighter transition-colors">{h.name}</h5>
-                  <p className="text-[9px] uppercase tracking-[0.3em] text-osg-navy/30 group-hover:text-osg-gold transition-colors font-black">{h.tool}</p>
+              <motion.div 
+                key={h.name} 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-white/5 backdrop-blur-xl border border-white/5 p-16 rounded-[4rem] text-center group hover:border-osg-gold transition-all duration-700 shadow-2xl"
+              >
+                <div className="aspect-square flex items-center justify-center mb-10 relative">
+                  {h.icon ? (
+                    <h.icon size={64} className="text-white/10 group-hover:text-osg-gold transition-all duration-700 group-hover:scale-110" />
+                  ) : (
+                    <div className="w-24 h-24 rounded-full group-hover:scale-110 transition-transform shadow-2xl border-[6px] border-white/10" style={{ backgroundColor: h.color }} />
+                  )}
                 </div>
-              </Reveal>
+                <h5 className="text-2xl font-sans font-black text-white group-hover:text-osg-gold mb-3 uppercase tracking-tight transition-colors">{h.name}</h5>
+                <p className="text-[10px] font-black uppercase tracking-[0.4em] text-white/20 group-hover:text-white transition-colors">{h.tool}</p>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="section-padding-lg bg-[#fcfdfc] text-center border-t border-osg-navy/5">
-        <div className="container-osg">
-          <Reveal>
-            <span className="text-osg-gold font-black uppercase text-[11px] tracking-[0.5em] mb-10 block">Consultation Lead</span>
-            <h2 className="text-5xl lg:text-7xl text-osg-navy font-black uppercase tracking-tighter mb-10 italic leading-none">Ready to <span className="text-osg-navy/20">Specify?</span></h2>
-            <p className="text-xl text-osg-navy/60 mb-14 max-w-2xl mx-auto font-light leading-relaxed">Consult with our engineering team to integrate OSG Window Systems into your structural envelope.</p>
-            <div className="flex flex-wrap justify-center gap-6">
-              <Link href="/contact" className="btn-primary py-6 px-14">Talk to an Engineer</Link>
-              <Link href="/quote" className="btn-outline !text-osg-navy !border-osg-navy/10 hover:!border-osg-navy py-6 px-14 uppercase tracking-widest text-[11px] font-black">Request Bulk Quote</Link>
+      {/* Final CTA: Ready to Specify */}
+      <section className="py-64 bg-white text-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-blueprint opacity-[0.02]" />
+        <div className="container-clean">
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="space-y-16"
+          >
+            <div className="flex flex-col items-center gap-6">
+                <div className="w-16 h-[1px] bg-osg-gold/40"></div>
+                <span className="text-osg-gold font-black uppercase text-[11px] tracking-[0.6em]">Consultation Lead</span>
             </div>
-          </Reveal>
+            <h2 className="text-[4rem] lg:text-[8rem] text-osg-navy font-sans font-black uppercase tracking-tighter leading-none">Ready to <br/><span className="text-osg-navy/10">Specify?</span></h2>
+            <p className="text-2xl text-osg-navy/40 max-w-3xl mx-auto font-sans leading-relaxed">Consult with our engineering team to integrate OSG Window Systems into your structural envelope.</p>
+            <div className="flex flex-wrap justify-center gap-10 pt-8">
+              <Link href="/contact" className="btn-cta !px-16 py-6 !text-[11px]">TALK TO AN ENGINEER</Link>
+              <Link href="/quote" className="flex items-center gap-6 px-12 py-6 rounded-full border border-osg-navy/10 text-[11px] font-black uppercase tracking-widest text-osg-navy hover:bg-osg-navy hover:text-white transition-all">REQUEST BULK QUOTE</Link>
+            </div>
+          </motion.div>
         </div>
       </section>
     </main>
   );
 }
+

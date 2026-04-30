@@ -17,82 +17,84 @@ import { motion } from 'framer-motion';
 
 export default function AboutUsPage() {
   return (
-    <div className="flex flex-col bg-[#fcfdfc]">
+    <div className="flex flex-col bg-[#F8F9FB]">
       {/* Hero Section */}
-      <section className="relative h-[85vh] flex items-center overflow-hidden">
+      <section className="relative h-screen flex items-center overflow-hidden bg-[#0B1C2C]">
         <div className="absolute inset-0">
           <Image 
             src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2669&auto=format&fit=crop"
             alt="The OSG Office"
             fill
-            className="object-cover grayscale opacity-20 scale-110"
+            className="object-cover grayscale opacity-10 scale-105"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0B1C2C] via-transparent to-[#0B1C2C]" />
+          <div className="absolute inset-0 bg-grid-blueprint opacity-[0.03]" />
         </div>
 
-        <div className="container-osg relative z-10">
-          <div className="max-w-4xl">
-            <motion.span 
+        <div className="container-clean relative z-10">
+          <div className="max-w-6xl">
+            <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="text-[11px] font-black text-osg-gold uppercase tracking-[0.6em] mb-10 block"
+              className="flex items-center gap-6 mb-12"
             >
-              Architectural Identity // Established Excellence
-            </motion.span>
+              <div className="w-16 h-[1px] bg-osg-gold/40"></div>
+              <span className="text-[11px] font-black text-osg-gold uppercase tracking-[0.6em]">Architectural Identity // Established Excellence</span>
+            </motion.div>
+            
             <motion.h1 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="text-display font-serif font-black text-osg-navy uppercase leading-[0.85] tracking-tighter mb-10 italic"
+              className="text-[5rem] lg:text-[10rem] font-sans font-black text-white uppercase leading-[0.8] tracking-tighter mb-12"
             >
               The Blueprint <br />
-              <span className="text-white bg-osg-navy px-4 py-2 inline-block -rotate-1 mt-4">OF OSG.</span>
+              <span className="text-osg-gold">Of OSG.</span>
             </motion.h1>
+            
             <motion.p 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
-              className="text-2xl text-osg-navy/70 max-w-2xl font-light leading-relaxed"
+              className="text-2xl lg:text-3xl text-white/40 max-w-3xl font-sans leading-relaxed"
             >
               Ole Sereni Group: East Africa's premier partner for high-performance architectural systems and precision finishing.
             </motion.p>
           </div>
         </div>
 
-        {/* Vertical Text Decoration */}
-        <div className="absolute right-12 bottom-20 hidden lg:block overflow-hidden h-64">
-           <motion.p 
-             animate={{ y: [0, -200, 0] }}
-             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-             className="text-[10px] font-black text-osg-navy/10 uppercase tracking-[1em] [writing-mode:vertical-rl] whitespace-nowrap"
-           >
-             Precision // Integrity // Excellence // Innovation // Structural Strength
-           </motion.p>
+        {/* Decorative Element */}
+        <div className="absolute right-24 bottom-24 hidden lg:block">
+           <div className="w-[1px] h-48 bg-gradient-to-b from-osg-gold to-transparent opacity-40"></div>
         </div>
       </section>
 
-      {/* Mission & Vision: Split Terminal Layout */}
-      <section className="bg-white py-0 border-y border-osg-navy/5">
+      {/* Mission & Vision: Refined Luxury Split */}
+      <section className="bg-white py-0 border-y border-osg-navy/5 relative z-20">
         <div className="grid grid-cols-1 lg:grid-cols-2">
-            <div className="p-16 lg:p-32 bg-osg-navy text-white relative group overflow-hidden">
-                <div className="absolute inset-0 bg-grid-pattern opacity-10" />
-                <div className="relative z-10 space-y-10">
-                    <div className="w-16 h-1 w-full bg-osg-gold mb-12"></div>
-                    <Eye size={48} className="text-osg-gold opacity-40" />
-                    <h2 className="text-5xl font-serif font-black uppercase tracking-tight italic">The Vision</h2>
-                    <p className="text-xl text-white/60 leading-relaxed font-light">
+            <div className="p-20 lg:p-40 bg-[#0B1C2C] text-white relative group overflow-hidden">
+                <div className="absolute inset-0 bg-grid-blueprint opacity-[0.02]" />
+                <div className="relative z-10 space-y-12">
+                    <div className="flex items-center gap-6">
+                       <div className="w-12 h-[1px] bg-osg-gold"></div>
+                       <span className="text-[10px] font-black text-osg-gold uppercase tracking-[0.6em]">Directive 01</span>
+                    </div>
+                    <h2 className="text-6xl font-sans font-black uppercase tracking-tight">The <span className="text-osg-gold">Vision.</span></h2>
+                    <p className="text-2xl text-white/40 leading-relaxed font-sans">
                         To define the next generation of architectural integrity through specialist systems that combine ethereal transparency with structural permanence.
                     </p>
                 </div>
             </div>
-            <div className="p-16 lg:p-32 bg-white relative overflow-hidden group">
-                <div className="absolute inset-0 bg-osg-cream/20 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-                <div className="relative z-10 space-y-10">
-                    <div className="w-16 h-1 w-full bg-osg-navy mb-12"></div>
-                    <Target size={48} className="text-osg-navy opacity-20" />
-                    <h2 className="text-5xl font-serif font-black text-osg-navy uppercase tracking-tight">The Mission</h2>
-                    <p className="text-xl text-osg-navy/60 leading-relaxed font-light">
+            <div className="p-20 lg:p-40 bg-white relative overflow-hidden group">
+                <div className="absolute inset-0 bg-grid-blueprint opacity-[0.02]" />
+                <div className="relative z-10 space-y-12">
+                    <div className="flex items-center gap-6">
+                       <div className="w-12 h-[1px] bg-osg-navy/20"></div>
+                       <span className="text-[10px] font-black text-osg-navy/40 uppercase tracking-[0.6em]">Directive 02</span>
+                    </div>
+                    <h2 className="text-6xl font-sans font-black text-osg-navy uppercase tracking-tight">The <span className="text-osg-gold">Mission.</span></h2>
+                    <p className="text-2xl text-osg-navy/40 leading-relaxed font-sans">
                         Engineering precision. Aesthetic soul. We deliver superior environments through uncompromising safety, material mastery, and client-centered execution.
                     </p>
                 </div>
@@ -101,22 +103,26 @@ export default function AboutUsPage() {
       </section>
 
       {/* Core Principles: Architectural Grid */}
-      <section className="section-padding bg-[#fcfdfc]">
-        <div className="container-osg">
-          <div className="flex flex-col lg:flex-row items-end justify-between mb-32 gap-10">
-            <div className="max-w-2xl">
-                <span className="text-osg-gold font-black uppercase text-[10px] tracking-[0.5em] mb-6 block">Our Operating DNA</span>
-                <h2 className="text-display-sm text-osg-navy font-black uppercase tracking-tighter leading-none">Core Principles <br/><span className="text-osg-navy/20 italic">Of Execution.</span></h2>
+      <section className="py-40 bg-[#F8F9FB] relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-blueprint opacity-[0.02]" />
+        <div className="container-clean">
+          <div className="flex flex-col lg:flex-row items-end justify-between mb-40 gap-16">
+            <div className="max-w-4xl space-y-8">
+                <div className="flex items-center gap-4">
+                   <div className="w-12 h-[1px] bg-osg-gold/40"></div>
+                   <span className="text-[10px] font-black text-osg-gold uppercase tracking-[0.6em]">Our Operating DNA</span>
+                </div>
+                <h2 className="text-[4rem] lg:text-[7rem] text-osg-navy font-black uppercase tracking-tighter leading-[0.85] font-sans">Core Principles <br/><span className="text-osg-navy/10">Of Execution.</span></h2>
             </div>
-            <div className="lg:w-1/3">
-                <div className="w-full h-px bg-osg-navy/10 mb-8" />
-                <p className="text-sm text-osg-navy/50 uppercase tracking-widest font-bold leading-loose">
+            <div className="lg:w-1/3 space-y-8">
+                <div className="w-full h-[1px] bg-osg-navy/10" />
+                <p className="text-[10px] text-osg-navy/40 uppercase tracking-[0.4em] font-black leading-loose">
                     At OSG, we don't just build. <br/> We calibrate environments for the human experience through industrial-grade precision.
                 </p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-osg-navy/5">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {[
               { 
                 title: 'Engineering Precision', 
@@ -139,16 +145,19 @@ export default function AboutUsPage() {
             ].map((value, i) => (
               <motion.div 
                 key={i} 
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-white p-12 lg:p-20 group relative overflow-hidden"
+                viewport={{ once: true }}
+                className="bg-white p-16 lg:p-20 group relative overflow-hidden rounded-[3rem] shadow-premium hover:shadow-2xl transition-all duration-700 border border-osg-navy/5"
               >
-                <div className="absolute -right-4 -top-4 text-osg-navy/5 font-black text-7xl uppercase italic opacity-20 group-hover:text-osg-gold/10 transition-colors">{i+1}</div>
-                <value.icon size={32} className="text-osg-gold mb-10 group-hover:scale-110 transition-transform" />
-                <h3 className="text-2xl font-serif font-black text-osg-navy uppercase mb-6">{value.title}</h3>
-                <p className="text-osg-navy/50 text-body leading-relaxed mb-10">{value.desc}</p>
-                <div className="text-[10px] font-black text-osg-navy/30 uppercase tracking-[0.4em] pt-8 border-t border-osg-navy/5 group-hover:text-osg-gold transition-colors">{value.stat}</div>
+                <div className="absolute -right-6 -top-6 text-osg-navy/5 font-black text-8xl uppercase group-hover:text-osg-gold/5 transition-colors">0{i+1}</div>
+                <div className="w-20 h-20 rounded-2xl bg-[#F8F9FB] flex items-center justify-center text-osg-navy group-hover:bg-osg-navy group-hover:text-osg-gold transition-all duration-500 mb-12">
+                   <value.icon size={32} />
+                </div>
+                <h3 className="text-3xl font-sans font-black text-osg-navy uppercase mb-6 group-hover:text-osg-gold transition-colors">{value.title}</h3>
+                <p className="text-xl text-osg-navy/40 font-sans leading-relaxed mb-12">{value.desc}</p>
+                <div className="text-[10px] font-black text-osg-navy/20 uppercase tracking-[0.4em] pt-10 border-t border-osg-navy/5 group-hover:text-osg-gold/40 transition-colors">{value.stat}</div>
               </motion.div>
             ))}
           </div>
@@ -156,41 +165,43 @@ export default function AboutUsPage() {
       </section>
 
       {/* Story Section: The Timeline */}
-      <section className="section-padding bg-osg-navy text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-noise opacity-5" />
-        <div className="container-osg relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-24 items-center">
-            <div className="lg:col-span-5">
-              <span className="text-osg-gold font-black uppercase text-[10px] tracking-[0.6em] mb-10 block">Industrial Roots</span>
-              <h2 className="text-display-sm font-serif font-black uppercase tracking-tight italic mb-10 leading-[0.9]">Uncompromising <br /><span className="text-osg-gold">Legacy.</span></h2>
+      <section className="py-48 bg-[#0B1C2C] text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-blueprint opacity-[0.03]" />
+        <div className="container-clean relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-32 items-center">
+            <div className="lg:col-span-6 space-y-12">
+              <div className="flex items-center gap-6">
+                 <div className="w-16 h-[1px] bg-osg-gold/40"></div>
+                 <span className="text-osg-gold font-black uppercase text-[11px] tracking-[0.6em]">Industrial Roots</span>
+              </div>
+              <h2 className="text-[4rem] lg:text-[7rem] font-sans font-black uppercase tracking-tight mb-12 leading-[0.85]">Uncompromising <br /><span className="text-osg-gold">Legacy.</span></h2>
               
-              <div className="space-y-8 text-white/50 text-lg leading-relaxed font-light mb-12">
+              <div className="space-y-10 text-white/40 text-xl font-sans leading-relaxed max-w-2xl">
                 <p>Founded as a specialized contractor for high-performance architectural systems, Ole Sereni Group has evolved into East Africa's premier partner for complex building envelopes.</p>
                 <p>Our journey began with a singular focus: to raise the standard of structural finishing. Today, we coordinate full-spectrum technical executions for the region's most ambitious developments.</p>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-6">
-                <Link href="/projects" className="btn-primary group !bg-white !text-osg-navy">
-                    View Portfolio <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
+              <div className="flex flex-wrap gap-10 pt-8">
+                <Link href="/projects" className="btn-cta !px-16 py-6 !text-[11px]">
+                    VIEW PORTFOLIO <ArrowRight size={18} />
                 </Link>
-                <Link href="/contact" className="btn-outline !border-white/20 !text-white hover:!bg-white hover:!text-osg-navy transition-all uppercase tracking-widest text-[10px] py-4 px-10">Technical Support</Link>
+                <Link href="/contact" className="flex items-center gap-6 px-12 py-6 rounded-full border border-white/10 text-[11px] font-black uppercase tracking-widest text-white hover:bg-white hover:text-osg-navy transition-all">TECHNICAL SUPPORT</Link>
               </div>
             </div>
 
-            <div className="lg:col-span-7 relative">
-                <div className="aspect-[4/5] relative grayscale hover:grayscale-0 transition-all duration-1000 overflow-hidden border border-white/5">
+            <div className="lg:col-span-6 relative">
+                <div className="aspect-[4/5] relative grayscale hover:grayscale-0 transition-all duration-1000 overflow-hidden rounded-[4rem] border border-white/5 shadow-2xl">
                     <Image 
-                        src="https://images.unsplash.com/photo-1541888946425-d81bb19480c5?q=80&w=2670&auto=format&fit=crop"
+                        src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=2670&auto=format&fit=crop"
                         alt="OSG Site Construction"
                         fill
-                        className="object-cover scale-110 group-hover:scale-100 transition-transform duration-2000"
+                        className="object-cover scale-110 hover:scale-100 transition-transform duration-2000"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-osg-navy via-transparent translate-y-20 transition-transform duration-1000" />
                 </div>
                 {/* Float Overlay */}
-                <div className="absolute -bottom-10 -left-10 bg-osg-gold p-12 hidden md:block shadow-2xl">
-                    <p className="text-osg-navy font-black text-6xl italic leading-none">15+</p>
-                    <p className="text-osg-navy font-black text-[10px] uppercase tracking-[0.4em] mt-2">Years Of Precision</p>
+                <div className="absolute -bottom-12 -left-12 bg-osg-gold p-16 rounded-[2rem] hidden xl:block shadow-premium rotate-[-3deg]">
+                    <p className="text-osg-navy font-black text-8xl font-sans leading-none">15+</p>
+                    <p className="text-osg-navy font-black text-[11px] uppercase tracking-[0.5em] mt-4">Years Of Precision</p>
                 </div>
             </div>
           </div>
@@ -198,22 +209,28 @@ export default function AboutUsPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="section-padding-lg bg-white text-center">
-        <div className="container-osg max-w-4xl mx-auto">
+      <section className="py-48 bg-white text-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-blueprint opacity-[0.02]" />
+        <div className="container-clean max-w-6xl mx-auto">
           <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.98 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            className="p-16 lg:p-24 border border-osg-navy/10 relative overflow-hidden"
+            viewport={{ once: true }}
+            className="p-20 lg:p-32 border border-osg-navy/5 rounded-[5rem] relative overflow-hidden shadow-premium bg-[#F8F9FB]"
           >
-            <div className="absolute inset-0 bg-grid-pattern opacity-5" />
-            <span className="text-osg-gold font-black uppercase text-[11px] tracking-[0.5em] mb-10 block">System Integration</span>
-            <h2 className="text-5xl lg:text-7xl text-osg-navy font-black uppercase tracking-tighter mb-10 leading-[0.85] italic">Engineer Your <br/><span className="text-osg-navy/20">Vision.</span></h2>
-            <p className="text-osg-navy/60 text-xl font-light mb-14 max-w-2xl mx-auto leading-relaxed">
-                Bring your blueprints to our technical experts. We provide the structural integrity your architecture deserves.
-            </p>
-            <div className="flex flex-wrap justify-center gap-6">
-                <Link href="/quote" className="btn-primary py-6 px-14">Initialize Brief</Link>
-                <Link href="/book" className="btn-outline !text-osg-navy !border-osg-navy/10 hover:!border-osg-navy py-6 px-14 uppercase tracking-widest text-[11px] font-black">Book Consultation</Link>
+            <div className="space-y-12 relative z-10">
+              <div className="flex flex-col items-center gap-6">
+                <div className="w-16 h-[1px] bg-osg-gold/40"></div>
+                <span className="text-osg-gold font-black uppercase text-[11px] tracking-[0.6em]">System Integration</span>
+              </div>
+              <h2 className="text-[4rem] lg:text-[7rem] text-osg-navy font-black uppercase tracking-tight leading-[0.8] font-sans">Engineer Your <br/><span className="text-osg-navy/10">Vision.</span></h2>
+              <p className="text-2xl text-osg-navy/40 max-w-3xl mx-auto font-sans leading-relaxed">
+                  Bring your blueprints to our technical experts. We provide the structural integrity your architecture deserves.
+              </p>
+              <div className="flex flex-wrap justify-center gap-10 pt-8">
+                  <Link href="/quote" className="btn-cta !px-16 py-6 !text-[11px]">INITIALIZE BRIEF</Link>
+                  <Link href="/book" className="flex items-center gap-6 px-12 py-6 rounded-full border border-osg-navy/10 text-[11px] font-black uppercase tracking-widest text-osg-navy hover:bg-osg-navy hover:text-white transition-all">BOOK CONSULTATION</Link>
+              </div>
             </div>
           </motion.div>
         </div>
@@ -221,3 +238,4 @@ export default function AboutUsPage() {
     </div>
   );
 }
+

@@ -33,7 +33,7 @@ export default function SettingsPage() {
 
       {/* Page Header */}
       <header className="mb-20">
-        <h1 className="text-6xl font-serif font-black text-osg-navy tracking-tighter mb-6 leading-[0.85] uppercase">
+        <h1 className="text-6xl font-sans font-black text-osg-navy tracking-tighter mb-6 leading-[0.85] uppercase">
           Client <br /> <span className="text-osg-gold">Identity</span>
         </h1>
         <p className="text-[11px] font-bold text-osg-navy/50 leading-relaxed uppercase tracking-widest max-w-sm">
@@ -55,7 +55,7 @@ export default function SettingsPage() {
              
              <div className="flex-1 text-center md:text-left">
                 <div className="flex flex-col md:flex-row md:items-center gap-4 mb-4">
-                   <h2 className="text-3xl font-serif font-black text-osg-navy tracking-tight uppercase leading-none">{osgUser?.displayName || 'Principal User'}</h2>
+                   <h2 className="text-3xl font-sans font-black text-osg-navy tracking-tight uppercase leading-none">{osgUser?.displayName || 'Principal User'}</h2>
                    <span className="text-[8px] font-black px-3 py-1 bg-osg-gold text-osg-navy uppercase tracking-widest self-center md:self-auto">Verified Asset Lead</span>
                 </div>
                 <div className="flex flex-col md:flex-row gap-6 mb-8 text-[9px] font-black text-osg-navy/40 uppercase tracking-widest">
@@ -158,3 +158,4 @@ export default function SettingsPage() {
     </div>
   );
 }
+

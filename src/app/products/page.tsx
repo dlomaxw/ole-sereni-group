@@ -79,7 +79,10 @@ const productCategories = [
 
 export default function ProductsPage() {
   return (
-    <div className="flex flex-col">
+    <main className="bg-[#F8F9FB] min-h-screen relative overflow-hidden font-sans">
+      {/* Background Architectural Grid */}
+      <div className="absolute inset-0 bg-grid-blueprint opacity-[0.03] pointer-events-none" />
+      
       <PageHero 
         label="System Inventory"
         title="Technical"
@@ -88,76 +91,100 @@ export default function ProductsPage() {
         breadcrumb={[{ label: 'Home', href: '/' }, { label: 'Products' }]}
       />
 
-      {/* Grid Section */}
-      <section className="section-padding bg-osg-cream">
-        <div className="container-osg">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      {/* Grid Section: Luxury Series Cards */}
+      <section className="py-48 bg-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-blueprint opacity-[0.01]" />
+        <div className="container-clean relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16">
             {productCategories.map((cat, i) => (
-              <div 
-                key={cat.id} 
-                className="bg-white border border-osg-navy/5 p-12 flex flex-col h-full group hover:border-osg-gold transition-all duration-700 hover:shadow-2xl"
+              <motion.div 
+                key={cat.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                viewport={{ once: true }}
               >
-                <div className="mb-10 flex justify-between items-start">
-                  <cat.icon size={32} className="text-osg-navy/20 group-hover:text-osg-navy transition-colors" />
-                  <span className="text-[10px] font-black text-osg-gold uppercase tracking-[0.3em]">{cat.label}</span>
-                </div>
-                
-                <h3 className="text-xl font-serif font-black text-osg-navy uppercase mb-6 leading-tight group-hover:text-osg-gold transition-colors">{cat.title}</h3>
-                
-                <p className="text-osg-navy/50 text-small leading-relaxed mb-8 flex-grow">
-                  {cat.desc}
-                </p>
-
-                <div className="space-y-3 mb-10 pt-6 border-t border-osg-navy/5">
-                  {cat.specs.map(spec => (
-                    <div key={spec} className="flex items-center gap-3 text-[10px] font-bold text-osg-navy/40 uppercase tracking-widest">
-                      <div className="w-1 h-1 rounded-full bg-osg-gold" />
-                      {spec}
+                <Link href={cat.href} className="group block h-full">
+                  <div className="bg-[#F8F9FB] border border-osg-navy/5 p-16 flex flex-col h-full transition-all duration-700 hover:bg-[#0B1C2C] hover:border-osg-gold hover:shadow-premium rounded-[4rem] relative overflow-hidden group/card">
+                    <div className="absolute inset-0 bg-grid-blueprint opacity-[0.02] pointer-events-none" />
+                    
+                    <div className="mb-16 flex justify-between items-center relative z-10">
+                      <div className="w-20 h-20 rounded-2xl bg-white flex items-center justify-center text-osg-navy group-hover/card:bg-osg-gold group-hover/card:text-osg-navy transition-all duration-500 shadow-xl group-hover/card:rotate-6">
+                        <cat.icon size={32} />
+                      </div>
+                      <span className="text-[11px] font-black text-osg-gold uppercase tracking-[0.5em]">{cat.label}</span>
                     </div>
-                  ))}
-                </div>
+                    
+                    <h3 className="text-3xl font-sans font-black text-osg-navy uppercase mb-8 tracking-tighter group-hover/card:text-white transition-colors leading-none">{cat.title}</h3>
+                    
+                    <p className="text-osg-navy/50 text-lg font-sans leading-relaxed mb-12 flex-grow group-hover/card:text-white/40 transition-colors">
+                      {cat.desc}
+                    </p>
 
-                <Link href={cat.href} className="text-[10px] font-black text-osg-navy uppercase tracking-[0.3em] flex items-center gap-3 group/link border-b border-osg-navy/5 pb-2 w-fit">
-                  Explore Series <ArrowRight size={14} className="group-hover/link:translate-x-1 transition-transform" />
+                    <div className="space-y-6 mb-16 pt-12 border-t border-osg-navy/10 group-hover/card:border-white/10 transition-colors">
+                      {cat.specs.map(spec => (
+                        <div key={spec} className="flex items-center gap-6 text-[10px] font-black text-osg-navy/30 uppercase tracking-[0.4em] group-hover/card:text-white/30 transition-colors">
+                          <div className="w-1.5 h-1.5 rounded-full bg-osg-gold/40 group-hover/card:bg-osg-gold" />
+                          {spec}
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="text-[11px] font-black text-osg-navy uppercase tracking-[0.6em] flex items-center gap-6 group-hover/card:text-osg-gold transition-colors">
+                      EXPLORE SERIES <ArrowRight size={20} className="group-hover/card:translate-x-2 transition-transform" />
+                    </div>
+                  </div>
                 </Link>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Technical Download Section */}
-      <section className="section-padding bg-osg-navy text-white overflow-hidden relative">
-        <div className="container-osg relative z-10 flex flex-col lg:flex-row justify-between items-center gap-16">
-          <div className="max-w-2xl">
-            <span className="text-label mb-6 block">Resource Center</span>
-            <h2 className="text-heading-xl font-serif font-black uppercase tracking-tight italic">Technical Specification Sheets</h2>
-            <p className="text-white/40 text-lg mt-8">
+      {/* Technical Download Section: Luxury Data Library */}
+      <section className="py-64 bg-[#0B1C2C] text-white overflow-hidden relative">
+        <div className="absolute inset-0 bg-grid-blueprint opacity-[0.05]" />
+        <div className="container-clean relative z-10 flex flex-col lg:flex-row justify-between items-center gap-32">
+          <div className="max-w-4xl space-y-16">
+            <div className="flex items-center gap-6">
+               <div className="w-12 h-[1px] bg-osg-gold/40"></div>
+               <span className="text-[11px] font-black text-osg-gold uppercase tracking-[0.6em]">Resource Center</span>
+            </div>
+            <h2 className="text-[4.5rem] lg:text-[8rem] font-sans font-black uppercase tracking-tighter leading-[0.8]">Technical <br /> <span className="text-white/10">Specification</span> Library.</h2>
+            <p className="text-white/40 text-2xl font-sans leading-relaxed max-w-2xl">
               Access the OSG Component Library. Download complete CAD files, BIM models, and technical data sheets for our entire series of architectural systems.
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-6">
-            <Link href="/resources" className="btn-primary">
-              Access Library <Download size={18} />
+          <div className="flex flex-col gap-8">
+            <Link href="/resources" className="btn-cta !px-20 py-8 !text-[12px] shadow-premium">
+              ACCESS ARCHIVE <Download size={24} />
             </Link>
           </div>
         </div>
-        <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-white/5 skew-x-12 translate-x-1/2" />
       </section>
 
-      {/* Quote CTA */}
-      <section className="section-padding bg-white text-center">
-        <div className="container-osg max-w-4xl mx-auto">
-          <h2 className="text-heading-xl text-osg-navy font-black uppercase tracking-tighter mb-8 italic">Calibrate Your Project</h2>
-          <p className="text-osg-navy/80 text-lg mb-12">
-            Need a custom profile or a specialized glass assembly? Our engineering department specializes in hardware-level customization for unique structural requirements.
-          </p>
-          <div className="flex flex-wrap justify-center gap-6">
-            <Link href="/quote" className="btn-primary">Initialize Project Review</Link>
-            <Link href="/contact" className="btn-outline !text-osg-navy !border-osg-navy/10 hover:!border-osg-navy">Request Sample Kit</Link>
+      {/* Quote CTA: Structural Outro */}
+      <section className="py-64 bg-white text-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-blueprint opacity-[0.02] pointer-events-none" />
+        <div className="container-clean max-w-6xl mx-auto space-y-24">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="space-y-12">
+            <div className="flex flex-col items-center gap-6">
+                <div className="w-16 h-[1px] bg-osg-gold/40"></div>
+                <span className="text-osg-gold font-black uppercase text-[11px] tracking-[0.6em]">Operational Mandate</span>
+            </div>
+            <h2 className="text-[4rem] lg:text-[9rem] font-sans font-black text-osg-navy uppercase tracking-tighter leading-[0.85]">Calibrate Your <br/><span className="text-osg-navy/10">Project.</span></h2>
+            <p className="text-osg-navy/40 text-2xl font-sans leading-relaxed max-w-4xl mx-auto">
+              Need a custom profile or a specialized glass assembly? Our engineering department specializes in hardware-level customization for unique structural requirements.
+            </p>
+          </motion.div>
+          
+          <div className="flex flex-wrap justify-center gap-12 pt-12">
+            <Link href="/quote" className="btn-cta !px-24 py-8 !text-[12px] shadow-premium">INITIALIZE PROJECT REVIEW</Link>
+            <Link href="/contact" className="flex items-center gap-8 px-20 py-8 rounded-full border border-osg-navy/10 text-[12px] font-black uppercase tracking-[0.4em] text-osg-navy hover:bg-osg-navy hover:text-white transition-all shadow-sm">REQUEST SAMPLE KIT</Link>
           </div>
         </div>
       </section>
-    </div>
+    </main>
   );
 }
+

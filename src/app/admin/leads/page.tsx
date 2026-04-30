@@ -16,7 +16,7 @@ import {
   FileText,
   Zap
 } from 'lucide-react';
-import { subscribeToLeads, subscribeToBookings, subscribeToEstimates, updateLeadStatus, ProjectLead } from '@/lib/api/leads';
+import { getLeads, getBookings, getEstimates, updateLeadStatus } from '@/lib/api/leads';
 
 export default function AdminLeadsPage() {
   const [activeTab, setActiveTab] = useState<'briefs' | 'bookings' | 'estimates'>('briefs');
@@ -25,31 +25,29 @@ export default function AdminLeadsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setData([]);
-    setLoading(true);
-    let unsubscribe: () => void;
-    
-    if (activeTab === 'briefs') {
-      unsubscribe = subscribeToLeads((fetched) => {
-        setData(fetched);
-        if (fetched.length > 0 && !selectedLead) setSelectedLead(fetched[0]);
-        setLoading(false);
-      });
-    } else if (activeTab === 'bookings') {
-      unsubscribe = subscribeToBookings((fetched) => {
-        setData(fetched);
-        if (fetched.length > 0 && !selectedLead) setSelectedLead(fetched[0]);
-        setLoading(false);
-      });
-    } else {
-      unsubscribe = subscribeToEstimates((fetched) => {
-        setData(fetched);
-        if (fetched.length > 0 && !selectedLead) setSelectedLead(fetched[0]);
-        setLoading(false);
-      });
+    async function loadData() {
+      setData([]);
+      setLoading(true);
+      
+      let fetched: any[] = [];
+      if (activeTab === 'briefs') {
+        fetched = await getLeads();
+      } else if (activeTab === 'bookings') {
+        fetched = await getBookings();
+      } else {
+        fetched = await getEstimates();
+      }
+      
+      setData(fetched);
+      if (fetched.length > 0) {
+        setSelectedLead(fetched[0]);
+      } else {
+        setSelectedLead(null);
+      }
+      setLoading(false);
     }
     
-    return unsubscribe;
+    loadData();
   }, [activeTab]);
 
 
@@ -57,7 +55,7 @@ export default function AdminLeadsPage() {
     <div className="space-y-10">
       <section className="flex flex-col md:flex-row justify-between items-end gap-6">
         <div>
-          <h1 className="text-display-md text-osg-navy font-black tracking-tighter uppercase mb-6 italic">Operations CRM</h1>
+          <h1 className="text-display-md text-osg-navy font-black tracking-tighter uppercase mb-6">Operations CRM</h1>
           <div className="flex gap-10 border-b border-osg-navy/10">
              {(['briefs', 'bookings', 'estimates'] as const).map(tab => (
                  <button 
@@ -158,7 +156,7 @@ export default function AdminLeadsPage() {
                                     <span className="text-[12px] font-black text-osg-gold uppercase tracking-[0.5em]">Project Identifier</span>
                                     <div className="h-[2px] w-14 bg-osg-gold" />
                                 </div>
-                                <h2 className="text-display-sm text-osg-navy uppercase tracking-tighter mb-4 italic">{selectedLead.projectTitle || 'Intake Brief'}</h2>
+                                <h2 className="text-display-sm text-osg-navy uppercase tracking-tighter mb-4">{selectedLead.projectTitle || 'Intake Brief'}</h2>
                                 <p className="text-md font-bold text-osg-navy uppercase tracking-widest opacity-60">{selectedLead.clientName} // {selectedLead.clientEmail}</p>
                             </div>
                             <div className="bg-osg-navy p-8 text-center min-w-[140px] shadow-2xl border-b-4 border-osg-gold">
@@ -245,3 +243,4 @@ export default function AdminLeadsPage() {
     </div>
   );
 }
+

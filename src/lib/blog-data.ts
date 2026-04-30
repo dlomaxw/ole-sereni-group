@@ -34,7 +34,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <h3>The Thermal Revolution</h3>
       <p>Traditional aluminium framing was often criticized for its high thermal conductivity. However, modern "thermal break" technology—using polyamide or resin barriers between internal and external profiles—has fundamentally changed the calculus. Today's systems can achieve U-values as low as 0.9 W/m²K, rivaling even the most insulated traditional wall structures.</p>
       
-      <img src="https://images.unsplash.com/photo-1541888946425-d81bb19480c5?q=80&w=1200" alt="Technical Detail" />
+      <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=1200" alt="Technical Detail" />
       
       <h3>Case Study: The Green Spire</h3>
       <p>In our latest project, the integration of high-performance curtain walls resulted in a 35% reduction in HVAC energy consumption. By using solar-reflective coatings on the aluminium profiles themselves, we were able to minimize heat gain while maintaining maximum transparency.</p>

@@ -29,7 +29,7 @@ const projects = [
     location: 'Kampala, Uganda', 
     status: 'Completed', 
     scope: 'Bespoke Carpentry & Luxury Interior Finishing',
-    image: 'https://images.unsplash.com/photo-1512914890251-2f96a9b092e3?q=80&w=1200',
+    image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200',
     span: 'lg:col-span-1' 
   },
   { 
@@ -39,7 +39,7 @@ const projects = [
     location: 'Kampala, Uganda', 
     status: 'Completed', 
     scope: 'Aluminium Systems & Unitized Glazing',
-    image: 'https://images.unsplash.com/photo-1541829070764-84a7d30dee6b?q=80&w=1200',
+    image: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=1200',
     span: '' 
   },
   { 
@@ -82,7 +82,7 @@ export default function ProjectsPage() {
     : projects.filter(p => p.sector === active);
 
   return (
-    <main className="bg-osg-navy font-sans">
+    <main className="bg-[#F8F9FB] font-sans">
       <PageHero
         label="Industry Portfolio"
         title="Works &"
@@ -94,17 +94,17 @@ export default function ProjectsPage() {
       />
 
       {/* Sticky filter bar */}
-      <div className="sticky top-[72px] z-40 bg-white/95 backdrop-blur-xl border-b border-osg-navy/5">
-        <div className="container-osg py-4">
-          <div className="flex items-center justify-between gap-6 overflow-x-auto no-scrollbar">
-            <div className="flex items-center gap-2 flex-shrink-0">
+      <div className="sticky top-[80px] z-40 bg-white/70 backdrop-blur-3xl border-b border-osg-navy/5 shadow-xl shadow-osg-navy/5">
+        <div className="container-clean py-6">
+          <div className="flex items-center justify-between gap-12 overflow-x-auto no-scrollbar">
+            <div className="flex items-center gap-4 flex-shrink-0">
               {filters.map(f => (
                 <button
                   key={f}
                   onClick={() => setActive(f)}
-                  className={`px-8 py-3 text-[9px] font-black tracking-[0.3em] uppercase transition-all whitespace-nowrap ${
+                  className={`px-10 py-4 text-[10px] font-black tracking-[0.4em] uppercase transition-all whitespace-nowrap rounded-full ${
                     active === f
-                      ? 'bg-osg-gold text-osg-navy shadow-lg'
+                      ? 'bg-osg-navy text-osg-gold shadow-2xl'
                       : 'text-osg-navy/40 hover:text-osg-navy hover:bg-osg-navy/5'
                   }`}
                 >
@@ -112,16 +112,15 @@ export default function ProjectsPage() {
                 </button>
               ))}
             </div>
-            <span className="text-[10px] text-osg-navy/30 font-black tracking-widest uppercase flex-shrink-0">{filtered.length} DISCOVERIES</span>
+            <span className="text-[10px] text-osg-navy/20 font-black tracking-[0.4em] uppercase flex-shrink-0">{filtered.length} DISCOVERIES</span>
           </div>
         </div>
       </div>
 
-      <section className="section-padding bg-white relative overflow-hidden">
-        {/* Subtle Grid Background */}
-        <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+      <section className="py-32 bg-[#F8F9FB] relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-blueprint opacity-[0.02] pointer-events-none" />
         
-        <div className="container-osg relative z-10">
+        <div className="container-clean relative z-10">
           <AnimatePresence mode="wait">
             <motion.div
               key={active}
@@ -129,53 +128,55 @@ export default function ProjectsPage() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.5 }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-24"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-16 gap-y-32"
             >
               {filtered.map((p, i) => (
                 <motion.div
                   key={p.id}
                   initial={{ opacity: 0, y: 40 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.08, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  viewport={{ once: true }}
                   className={`${p.span} group`}
                 >
                   <Link href={`/projects/${p.id}`} className="block">
-                    <div className="relative aspect-[4/5] bg-osg-charcoal overflow-hidden mb-10 border border-osg-navy/5 shadow-2xl transition-all duration-1000 group-hover:shadow-osg-navy/20">
+                    <div className="relative aspect-[4/5] bg-[#0B1C2C] overflow-hidden mb-12 rounded-[3.5rem] shadow-premium transition-all duration-1000 group-hover:shadow-2xl">
                       <Image
                         src={p.image}
                         alt={p.title}
                         fill
-                        className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 group-hover:brightness-75 transition-all duration-1000"
+                        className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 group-hover:brightness-50 transition-all duration-1000"
                       />
                       
-                      {/* Architectural Overlay */}
-                      <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none" style={{ backgroundImage: 'linear-gradient(rgba(201,168,76,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,0.3) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
-                      
                       {/* Metadata */}
-                      <div className="absolute top-8 left-8 flex flex-col items-start gap-4">
-                        <span className="bg-white text-osg-navy text-[8px] font-black uppercase tracking-[0.4em] px-4 py-1.5 shadow-xl transition-transform group-hover:-translate-x-1 duration-700">{p.sector}</span>
-                        <div className="flex items-center gap-2 bg-osg-navy/80 backdrop-blur-md px-3 py-1.5">
+                      <div className="absolute top-10 left-10 flex flex-col items-start gap-4">
+                        <span className="bg-white/90 backdrop-blur-md text-osg-navy text-[9px] font-black uppercase tracking-[0.5em] px-6 py-2 rounded-full shadow-2xl">{p.sector}</span>
+                        <div className="flex items-center gap-3 bg-osg-navy/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/10">
                            <span className={`w-1.5 h-1.5 rounded-full ${p.status === 'In Progress' ? 'bg-osg-gold animate-pulse' : 'bg-green-500'}`} />
-                           <span className="text-[8px] text-white font-black uppercase tracking-widest">{p.status}</span>
+                           <span className="text-[9px] text-white font-black uppercase tracking-widest">{p.status}</span>
                         </div>
                       </div>
 
-                      {/* Detail Link */}
-                      <div className="absolute bottom-8 right-8 w-16 h-16 bg-osg-gold flex items-center justify-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-700">
-                         <ArrowUpRight size={20} className="text-osg-navy" />
+                      {/* Detail Link Overlay */}
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                         <div className="w-24 h-24 rounded-full bg-osg-gold flex items-center justify-center text-osg-navy scale-50 group-hover:scale-100 transition-transform duration-700 shadow-2xl">
+                            <ArrowUpRight size={32} />
+                         </div>
                       </div>
                     </div>
 
-                    <div className="flex items-end justify-between border-l-2 border-osg-navy/5 pl-8 group-hover:border-osg-gold transition-colors duration-700">
-                      <div>
-                        <span className="text-[9px] text-osg-navy/30 font-black uppercase tracking-[0.5em] mb-3 block">{p.location}</span>
-                        <h3 className="text-3xl font-black text-osg-navy uppercase tracking-tighter mb-1 italic leading-none group-hover:text-osg-navy transition-colors">{p.title}</h3>
-                        <p className="text-[11px] text-osg-navy/50 font-medium uppercase tracking-widest mt-4 max-w-[200px] leading-relaxed">{p.scope}</p>
+                    <div className="space-y-6 px-4">
+                      <div className="flex justify-between items-start">
+                        <div className="space-y-2">
+                          <span className="text-[10px] text-osg-gold font-black uppercase tracking-[0.5em]">{p.location}</span>
+                          <h3 className="text-4xl font-sans font-black text-osg-navy uppercase tracking-tight leading-none group-hover:text-osg-gold transition-colors">{p.title}</h3>
+                        </div>
+                        <div className="text-right">
+                           <span className="text-[8px] font-black text-osg-navy/10 uppercase tracking-[0.4em] block">ID</span>
+                           <span className="text-[10px] font-black text-osg-navy/30 tracking-widest uppercase">OSG-{i+102}</span>
+                        </div>
                       </div>
-                      <div className="flex flex-col items-end gap-2">
-                         <span className="text-[8px] font-black text-osg-navy/20 uppercase tracking-[0.3em]">Project ID</span>
-                         <span className="text-[10px] font-black text-osg-navy/40 tracking-widest">OSG-00{i+1}</span>
-                      </div>
+                      <p className="text-lg text-osg-navy/40 font-sans leading-relaxed max-w-xs">{p.scope}</p>
                     </div>
                   </Link>
                 </motion.div>
@@ -186,18 +187,27 @@ export default function ProjectsPage() {
       </section>
 
       {/* Modern High-Impact CTA */}
-      <section className="bg-osg-navy py-40 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-5" style={{ backgroundImage: 'radial-gradient(circle at center, #fff 1px, transparent 1.5px)', backgroundSize: '40px 40px' }} />
-        <div className="container-osg relative z-10 text-center">
-            <Reveal>
-              <span className="text-osg-gold font-black uppercase text-xs tracking-[0.6em] mb-12 block">Strategic Partnerships</span>
-              <h2 className="text-6xl lg:text-8xl text-white font-black uppercase tracking-tighter italic mb-16 leading-none">Engineer <br/> your <span className="text-white/20">Legacy.</span></h2>
-              <div className="flex flex-wrap justify-center gap-10">
-                <Link href="/quote" className="btn-primary !py-8 !px-20 text-sm font-black tracking-[0.3em]">START PROJECT CONSULTATION <ArrowRight size={18} /></Link>
+      <section className="bg-[#0B1C2C] py-48 relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-blueprint opacity-[0.03] pointer-events-none" />
+        <div className="container-clean relative z-10 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="space-y-16"
+            >
+              <div className="flex flex-col items-center gap-6">
+                <div className="w-16 h-[1px] bg-osg-gold/40"></div>
+                <span className="text-osg-gold font-black uppercase text-[10px] tracking-[0.6em]">Strategic Partnerships</span>
               </div>
-            </Reveal>
+              <h2 className="text-[5rem] lg:text-[9rem] text-white font-black uppercase tracking-tight leading-[0.85] font-sans">Engineer <br/> your <span className="text-white/10">Legacy.</span></h2>
+              <div className="flex flex-wrap justify-center gap-10 pt-8">
+                <Link href="/quote" className="btn-cta !px-20 py-7 !text-[11px]">START PROJECT CONSULTATION <ArrowRight size={18} /></Link>
+              </div>
+            </motion.div>
         </div>
       </section>
     </main>
   );
 }
+

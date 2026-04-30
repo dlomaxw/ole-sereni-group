@@ -73,30 +73,32 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
         <div className="absolute inset-0">
           <img 
             src={post.image} 
-            className="w-full h-full object-cover grayscale opacity-40" 
+            className="w-full h-full object-cover grayscale opacity-20" 
             alt={post.title} 
           />
-          <div className="absolute inset-0 bg-gradient-to-at from-osg-navy via-osg-navy/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-at from-osg-navy via-osg-navy/80 to-transparent" />
+          <div className="absolute inset-0 bg-grid-blueprint opacity-[0.05]" />
         </div>
         
         <div className="container-osg relative z-10 text-center px-4">
           <Reveal>
-            <div className="flex items-center justify-center gap-6 text-osg-gold font-bold text-[10px] uppercase tracking-[0.4em] mb-12">
+            <div className="flex items-center justify-center gap-6 text-osg-gold font-bold text-[10px] uppercase tracking-[0.6em] mb-12">
               <span>{post.category}</span>
               <span className="w-1.5 h-1.5 rounded-full bg-osg-gold/50" />
               <div className="flex items-center gap-2">
                 <Clock size={12} /> {post.readTime}
               </div>
             </div>
-            <h1 className="text-display-sm lg:text-display-md text-white mb-12 uppercase tracking-tighter max-w-5xl mx-auto leading-[0.9]">
+            <h1 className="text-display-md lg:text-display-lg text-white mb-12 uppercase tracking-tighter max-w-5xl mx-auto leading-[0.85] font-sans">
               {post.title}
             </h1>
-            <div className="flex items-center justify-center gap-4 text-osg-slate font-bold uppercase tracking-widest text-[10px]">
-              <Calendar size={12} /> {post.date}
+            <div className="flex items-center justify-center gap-4 text-white/40 font-bold uppercase tracking-[0.4em] text-[10px]">
+              <Calendar size={12} className="text-osg-gold" /> {post.date}
             </div>
           </Reveal>
         </div>
       </section>
+
 
       {/* Article Body */}
       <section className="section-padding bg-osg-navy border-y border-white/5 relative">

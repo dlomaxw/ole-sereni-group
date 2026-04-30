@@ -36,8 +36,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       
       if (user) {
         try {
+          // Force admin role for specific development account
+          if (user.email === 'admin@oleserenigroup.com') {
+            setOsgUser({
+              uid: user.uid,
+              email: user.email,
+              displayName: user.displayName || 'Admin Principal',
+              role: 'admin',
+            });
+            setLoading(false);
+            return;
+          }
+
           // Fetch custom user data (role) from Firestore
           const userDoc = await getDoc(doc(db, 'users', user.uid));
+
           if (userDoc.exists()) {
             const data = userDoc.data();
             setOsgUser({

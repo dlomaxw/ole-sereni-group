@@ -48,7 +48,7 @@ export default function DocumentsPage() {
       {/* Page Header */}
       <header className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-10">
         <div className="max-w-2xl">
-          <h1 className="text-6xl font-serif font-black text-osg-navy tracking-tighter mb-6 leading-[0.85] uppercase">
+          <h1 className="text-6xl font-sans font-black text-osg-navy tracking-tighter mb-6 leading-[0.85] uppercase">
             Asset <br /> <span className="text-osg-gold">Vault</span>
           </h1>
           <p className="text-[11px] font-bold text-osg-navy/50 leading-relaxed uppercase tracking-widest max-w-sm">
@@ -80,7 +80,7 @@ export default function DocumentsPage() {
                   <ShieldCheck size={32} className="text-osg-gold" />
                </div>
                <div>
-                  <h3 className="text-2xl font-serif font-black uppercase tracking-tight mb-1">Encrypted CAD Access</h3>
+                  <h3 className="text-2xl font-sans font-black uppercase tracking-tight mb-1">Encrypted CAD Access</h3>
                   <p className="text-[9px] font-bold text-white/40 uppercase tracking-[0.3em]">Operational clearance required for live BIM model synchronization.</p>
                </div>
             </div>
@@ -131,3 +131,4 @@ export default function DocumentsPage() {
     </div>
   );
 }
+

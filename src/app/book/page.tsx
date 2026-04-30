@@ -80,7 +80,7 @@ export default function BookingPage() {
             <CheckCircle2 className="text-osg-gold" size={48} />
           </motion.div>
           <span className="text-system-label mb-4 block">Consultation Secured</span>
-          <h2 className="text-display mb-8">Uplink <br /><span className="text-osg-gold italic">Confirmed.</span></h2>
+          <h2 className="text-display mb-8">Uplink <br /><span className="text-osg-gold">Confirmed.</span></h2>
           <p className="text-body-muted mb-12 max-w-sm mx-auto uppercase tracking-widest text-[10px] leading-loose">Your structural consultation for <span className="text-osg-navy font-black">{selectedType}</span> has been provisionally scheduled for <br /> <span className="text-osg-gold font-black">Oct {selectedDate} @ {selectedTime}</span>.</p>
           <Link href="/" className="btn-primary">RETURN TO PORTAL</Link>
         </div>
@@ -101,7 +101,7 @@ export default function BookingPage() {
 
           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
             <span className="text-system-label mb-6 block text-osg-gold">Site Consultation // v4.0</span>
-            <h1 className="text-display text-white mb-10 leading-[0.85]">Architectural <br /> <span className="text-white/20 italic">Consult.</span></h1>
+            <h1 className="text-display text-white mb-10 leading-[0.85]">Architectural <br /> <span className="text-white/20">Consult.</span></h1>
             <p className="text-body-muted text-white/40 max-w-sm mb-20 uppercase tracking-widest leading-loose">Secure a professional assessment for your next landmark project.</p>
           </motion.div>
 
@@ -131,7 +131,7 @@ export default function BookingPage() {
             <span className="text-system-label text-osg-gold !tracking-widest">Network Status</span>
             <div className="flex items-center gap-3">
               <div className="w-1.5 h-1.5 rounded-full bg-osg-gold animate-pulse" />
-              <span className="text-[10px] font-black text-white italic tracking-tighter uppercase">GRID_SECURE</span>
+              <span className="text-[10px] font-black text-white tracking-tighter uppercase">GRID_SECURE</span>
             </div>
           </div>
           <Activity size={24} className="text-osg-gold opacity-40" />
@@ -154,7 +154,7 @@ export default function BookingPage() {
                     <div className="space-y-16">
                       <div className="space-y-4">
                         <span className="badge-system">Initialization Phase</span>
-                        <h2 className="text-heading-xl text-osg-navy italic">Project <br /><span className="text-osg-navy/20">Nature.</span></h2>
+                        <h2 className="text-heading-xl text-osg-navy">Project <br /><span className="text-osg-navy/20">Nature.</span></h2>
                       </div>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {projectTypes.map((type) => (
@@ -181,10 +181,10 @@ export default function BookingPage() {
                     <div className="space-y-16">
                       <div className="space-y-4">
                         <span className="badge-system">Technical Alignment</span>
-                        <h2 className="text-heading-xl text-osg-navy italic">Service <br /><span className="text-osg-navy/20">Selection.</span></h2>
+                        <h2 className="text-heading-xl text-osg-navy">Service <br /><span className="text-osg-navy/20">Selection.</span></h2>
                       </div>
                       <div className="bg-osg-navy/[0.02] p-10 lg:p-16 border border-osg-navy/5 shadow-inner">
-                        <p className="text-body-muted text-sm italic mb-12 uppercase tracking-widest leading-loose">"OSG services are grouped by technical complexity. Select the core discipline for this consultation."</p>
+                        <p className="text-body-muted text-sm mb-12 uppercase tracking-widest leading-loose">"OSG services are grouped by technical complexity. Select the core discipline for this consultation."</p>
                         <div className="grid grid-cols-1 gap-4">
                           {['Aluminium & Glass Systems', 'Interior Gypsum & Ceilings', 'Mechanical & Electrical', 'Civil Engineering'].map((opt, i) => (
                             <button key={opt} onClick={() => nextStep()}
@@ -206,7 +206,7 @@ export default function BookingPage() {
                     <div className="space-y-16">
                       <div className="space-y-4">
                         <span className="badge-system">Temporal Allocation</span>
-                        <h2 className="text-heading-xl text-osg-navy italic">Schedule <br /><span className="text-osg-navy/20">Uplink.</span></h2>
+                        <h2 className="text-heading-xl text-osg-navy">Schedule <br /><span className="text-osg-navy/20">Uplink.</span></h2>
                       </div>
                       <div className="space-y-12">
                         <div className="bg-osg-navy/[0.02] p-10 border border-osg-navy/5">
@@ -239,7 +239,7 @@ export default function BookingPage() {
                     <div className="space-y-16">
                       <div className="space-y-4">
                         <span className="badge-system">Security Clearance</span>
-                        <h2 className="text-heading-xl text-osg-navy italic">Identity <br /><span className="text-osg-navy/20">Validation.</span></h2>
+                        <h2 className="text-heading-xl text-osg-navy">Identity <br /><span className="text-osg-navy/20">Validation.</span></h2>
                       </div>
                       <div className="space-y-2">
                         <FloatingInput label="Full Name" name="name" value={clientName} onChange={(e: any) => setClientName(e.target.value)} required placeholder="Architecture Lead / Owner" systemIdent="IDENT_01" />
@@ -303,7 +303,7 @@ export default function BookingPage() {
                   <p className="text-[10px] text-osg-navy/70 leading-relaxed uppercase tracking-widest font-black mb-8">Nairobi & Kampala hubs reporting high demand for structural site visits. Secure your slot early.</p>
                   <div className="flex items-center gap-4">
                     <div className="w-2 h-2 rounded-full bg-osg-navy animate-pulse" />
-                    <span className="text-[9px] font-black text-osg-navy uppercase italic">STABLE_GRID_RESERVE</span>
+                    <span className="text-[9px] font-black text-osg-navy uppercase">STABLE_GRID_RESERVE</span>
                   </div>
                 </div>
               </div>
@@ -315,3 +315,4 @@ export default function BookingPage() {
     </main>
   );
 }
+

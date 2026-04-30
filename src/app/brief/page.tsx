@@ -100,7 +100,7 @@ export default function ProjectBriefPage() {
           <div className="flex flex-col gap-6">
             <div className="flex justify-between items-end mb-2">
               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white">Intake Progress</span>
-              <span className="text-4xl font-black text-osg-gold italic">{Math.round(progress)}%</span>
+              <span className="text-4xl font-black text-osg-gold">{Math.round(progress)}%</span>
             </div>
             <div className="h-1 bg-white/10 w-full overflow-hidden">
               <motion.div 
@@ -125,7 +125,7 @@ export default function ProjectBriefPage() {
                 const isActive = (idx + 1) === currentStep;
                 const isCompleted = (idx + 1) < currentStep;
                 return (
-                  <div key={idx} className={`flex items-center gap-6 transition-all duration-500 ${isActive ? 'translate-x-2' : ''}`}>
+                  <div key={idx} className={`flex items-center gap-6 transition-all duration-500 ${isActive ? 'lg:translate-x-2' : ''}`}>
                     <div className={`w-10 h-10 flex items-center justify-center border-2 font-black text-xs transition-colors duration-500 ${
                       isActive ? 'bg-osg-gold border-osg-gold text-osg-navy' : 
                       isCompleted ? 'bg-white/10 border-white/10 text-osg-gold' : 
@@ -294,7 +294,7 @@ export default function ProjectBriefPage() {
                         <div className="text-center py-20">
                              <h2 className="text-display-xs text-white uppercase tracking-tighter mb-4 underline decoration-osg-gold underline-offset-8 decoration-1">Section in Development</h2>
                              <p className="text-osg-slate text-body-lg">The detailed technical filing for Step 0{currentStep} is being optimized for structural compliance.</p>
-                             <p className="text-[10px] font-bold text-osg-gold uppercase tracking-[0.4em] mt-8 italic">Available in production environment</p>
+                             <p className="text-[10px] font-bold text-osg-gold uppercase tracking-[0.4em] mt-8">Available in production environment</p>
                         </div>
                     )}
 
@@ -355,3 +355,4 @@ export default function ProjectBriefPage() {
     </main>
   );
 }
+

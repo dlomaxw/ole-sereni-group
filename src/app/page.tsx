@@ -7,201 +7,331 @@ import {
   ArrowUpRight, 
   ShieldCheck, 
   Zap, 
-  Users, 
-  Globe,
-  DraftingCompass,
+  Activity,
+  Maximize2,
   Building2,
-  HardHat,
-  MonitorCheck
+  Cpu,
+  Layout,
+  Package,
+  ArrowDown
 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import Reveal from '@/components/Reveal';
 
 export default function Home() {
+  const { scrollY } = useScroll();
+  const heroY = useTransform(scrollY, [0, 500], [0, 200]);
+  const heroOpacity = useTransform(scrollY, [0, 500], [1, 0]);
+
   return (
-    <div className="flex flex-col">
-      {/* Hero Section */}
-      <section className="relative h-screen flex items-center overflow-hidden bg-osg-navy">
-        <div className="absolute inset-0 z-0">
+    <main className="bg-[#F8F9FB] min-h-screen relative overflow-hidden font-sans">
+      {/* Global Architectural Grid */}
+      <div className="absolute inset-0 bg-grid-blueprint opacity-[0.02] pointer-events-none" />
+      
+      {/* --- PREMIUM ARCHITECTURAL HERO --- */}
+      <section className="relative min-h-screen flex items-center overflow-hidden bg-[#0B1C2C] pt-28 pb-16 lg:pt-32 lg:pb-40">
+        <motion.div style={{ y: heroY, opacity: heroOpacity }} className="absolute inset-0 z-0">
           <Image 
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2670&auto=format&fit=crop"
+            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1800"
             alt="Architectural Masterpiece"
             fill
             sizes="100vw"
-            className="object-cover opacity-60 grayscale"
+            className="object-cover opacity-40 scale-105"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-osg-navy/20 via-osg-navy/40 to-osg-navy" />
-        </div>
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0B1C2C]/60 via-transparent to-[#0B1C2C]" />
+          <div className="absolute inset-0 bg-grid-blueprint opacity-[0.05]" />
+        </motion.div>
 
-        <div className="container-osg relative z-10">
-          <div className="max-w-5xl">
-            <span className="text-system-label !text-osg-gold !tracking-[0.8em] mb-12 block animate-fade-in-up">
-              Engineering Architectural Excellence
-            </span>
-            <h1 className="text-display text-white mb-10 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-              Redefining <br />
-              <span className="text-osg-gold">Structural</span> <br />
-              Integrity.
-            </h1>
-            <p className="text-body-muted text-white/80 max-w-xl mb-16 animate-fade-in-up !text-lg uppercase tracking-widest leading-loose" style={{ animationDelay: '0.2s' }}>
-              Precision-engineered building envelopes and specialist architectural systems for the next generation of infrastructure.
-            </p>
-            <div className="flex flex-wrap gap-8 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
-              <Link href="/quote" className="btn-primary shadow-gold">
-                INITIALIZE PROJECT <ArrowRight size={18} />
-              </Link>
-              <Link href="/products" className="btn-outline !text-white !border-white/20 hover:!border-osg-gold hover:!text-osg-gold">
-                VIEW SECTOR PORTFOLIO
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Summary - Immediately under Hero */}
-      <section className="bg-white border-b border-osg-navy/5 py-12">
-        <div className="container-osg">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-12">
-            {[
-              { label: 'Projects Completed', value: '1200+' },
-              { label: 'Qualified Engineers', value: '150+' },
-              { label: 'SLA Turnaround', value: '24h' },
-              { label: 'Certified Quality', value: 'ISO 9001' },
-            ].map((stat, i) => (
-              <div key={i} className="text-center">
-                <h4 className="text-2xl font-serif font-black text-osg-navy mb-1">{stat.value}</h4>
-                <p className="text-[9px] font-bold text-osg-navy/40 uppercase tracking-widest">{stat.label}</p>
+        <div className="container-clean relative z-10 w-full">
+          <div className="max-w-6xl">
+            <motion.div 
+               initial={{ opacity: 0, y: 40 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+               className="space-y-12"
+            >
+              <div className="flex items-center gap-4 sm:gap-6">
+                 <div className="w-12 h-[1px] bg-osg-gold/40"></div>
+                 <span className="text-[9px] sm:text-[11px] font-black uppercase tracking-[0.28em] sm:tracking-[0.5em] text-osg-gold">Architectural Identity // 01</span>
               </div>
-            ))}
+              <h1 className="text-5xl sm:text-7xl lg:text-[8rem] xl:text-[9.5rem] font-sans font-black text-white leading-[0.9] lg:leading-[0.82] tracking-tighter uppercase">
+                The Blueprint <br />
+                Of <span className="text-osg-gold/10 text-stroke-gold">OSG.</span>
+              </h1>
+              <p className="text-lg sm:text-xl lg:text-2xl text-white/55 font-sans max-w-2xl leading-relaxed">
+                Ole Sereni Group: East Africa's premier partner for high-performance architectural systems and precision finishing.
+              </p>
+              <div className="flex flex-wrap gap-4 sm:gap-6 lg:gap-8 pt-4 lg:pt-8">
+                <Link href="/quote" className="btn-cta text-[9px] sm:text-[11px] !px-8 sm:!px-12 lg:!px-16 py-5 lg:py-7">
+                  INITIALIZE PROJECT <ArrowRight size={20} />
+                </Link>
+                <Link href="/products" className="flex items-center gap-4 sm:gap-6 px-7 sm:px-10 lg:px-12 py-5 lg:py-7 rounded-full border border-white/10 text-white text-[9px] sm:text-[11px] font-black uppercase tracking-[0.25em] sm:tracking-[0.35em] hover:bg-white hover:text-osg-navy transition-all backdrop-blur-3xl">
+                  EXPLORE SYSTEMS <ArrowUpRight size={20} />
+                </Link>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* --- LUXURY STATS BAR --- */}
+        <div className="absolute bottom-16 left-0 w-full hidden lg:block overflow-hidden">
+           <div className="container-clean">
+              <motion.div 
+                initial={{ opacity: 0, y: 100 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8, duration: 1.2 }}
+                className="bg-white/5 backdrop-blur-3xl border border-white/5 rounded-[2.5rem] p-8 xl:p-10 flex justify-between items-center shadow-premium relative overflow-hidden"
+              >
+                  <div className="absolute inset-0 bg-grid-blueprint opacity-[0.05] pointer-events-none" />
+                  {[
+                    { label: 'Projects Completed', value: '1,200+', icon: Building2 },
+                    { label: 'SLA Response', value: '24H', icon: Zap },
+                    { label: 'Calibration', value: '0.01mm', icon: Maximize2 }
+                  ].map((stat, i) => (
+                    <div key={i} className="flex items-center gap-10 group relative z-10">
+                       <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center text-osg-gold group-hover:bg-osg-gold group-hover:text-osg-navy transition-all duration-500 shadow-2xl">
+                          <stat.icon size={28} />
+                       </div>
+                       <div className="space-y-2">
+                          <p className="text-2xl font-sans font-black text-white tracking-tight leading-none">{stat.value}</p>
+                          <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/30">{stat.label}</p>
+                       </div>
+                    </div>
+                  ))}
+                  
+                  <div className="h-16 w-[1px] bg-white/5 mx-12 relative z-10" />
+                  
+                  <div className="flex items-center gap-10 group relative z-10">
+                     <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center text-osg-gold shadow-2xl">
+                        <Activity size={28} className="animate-pulse" />
+                     </div>
+                     <div className="text-right space-y-2">
+                        <p className="text-[11px] font-black text-white uppercase tracking-[0.4em] leading-none">Facility Active</p>
+                        <p className="text-[9px] font-black uppercase tracking-[0.3em] text-green-500/60 flex items-center gap-3 justify-end">
+                           <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                           Sub-Millimeter Logic
+                        </p>
+                     </div>
+                  </div>
+              </motion.div>
+           </div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <motion.div 
+          animate={{ y: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 2 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/20 hidden lg:block"
+        >
+          <ArrowDown size={32} />
+        </motion.div>
+      </section>
+
+      {/* --- VISION & MISSION: Architectural Split --- */}
+      <section className="py-24 lg:py-40 bg-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-blueprint opacity-[0.01]" />
+        <div className="container-clean relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-28 xl:gap-40 items-start">
+            <Reveal className="space-y-12">
+              <div className="w-20 h-20 rounded-[2rem] bg-[#0B1C2C] flex items-center justify-center text-osg-gold shadow-premium">
+                 <ShieldCheck size={40} />
+              </div>
+              <div className="space-y-6">
+                <div className="flex items-center gap-6">
+                   <div className="w-12 h-[1px] bg-osg-gold/40"></div>
+                   <span className="text-osg-gold font-black text-[10px] uppercase tracking-[0.6em]">Operational Philosophy</span>
+                </div>
+                <h3 className="text-5xl lg:text-7xl font-sans font-black text-osg-navy uppercase tracking-tighter">The Vision.</h3>
+              </div>
+              <p className="text-lg lg:text-2xl text-osg-navy/55 font-sans leading-relaxed max-w-xl">
+                To define the next generation of architectural integrity through specialist systems that combine ethereal transparency with structural permanence.
+              </p>
+            </Reveal>
+
+            <Reveal delay={0.2} className="space-y-12">
+              <div className="w-20 h-20 rounded-[2rem] bg-[#0B1C2C] flex items-center justify-center text-osg-gold shadow-premium">
+                 <Activity size={40} />
+              </div>
+              <div className="space-y-6">
+                <div className="flex items-center gap-6">
+                   <div className="w-12 h-[1px] bg-osg-gold/40"></div>
+                   <span className="text-osg-gold font-black text-[10px] uppercase tracking-[0.6em]">Engineering Mandate</span>
+                </div>
+                <h3 className="text-5xl lg:text-7xl font-sans font-black text-osg-navy uppercase tracking-tighter">The Mission.</h3>
+              </div>
+              <p className="text-lg lg:text-2xl text-osg-navy/55 font-sans leading-relaxed max-w-xl">
+                Engineering precision. Aesthetic soul. We deliver superior environments through uncompromising safety, material mastery, and client-centered execution.
+              </p>
+              <div className="pt-8 border-l border-osg-gold pl-12 space-y-4">
+                <p className="text-[11px] font-black text-osg-navy/30 uppercase tracking-[0.5em] leading-relaxed">
+                  At OSG, we don't just build. <br />
+                  <span className="text-osg-navy text-[13px]">We calibrate environments for the human experience through industrial-grade precision.</span>
+                </p>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* Engineering Precision Section */}
-      <section className="section-padding bg-osg-cream">
-        <div className="container-osg">
-          <div className="flex flex-col lg:flex-row justify-between items-end gap-12 mb-20">
-            <div className="max-w-2xl">
-              <span className="text-label mb-4 block">Our Methodology</span>
-              <h2 className="text-heading-xl text-osg-navy font-black uppercase leading-none">Engineering Precision</h2>
-              <p className="text-osg-navy/60 mt-6 text-lg">
-                We combine technical BOQ analysis with bespoke fabrication to deliver building envelopes that exceed international standards for performance and sustainability.
-              </p>
-            </div>
-            <Link href="/about-us" className="text-[11px] font-black text-osg-navy uppercase tracking-[0.3em] flex items-center gap-4 border-b-2 border-osg-navy pb-3 hover:text-osg-gold hover:border-osg-gold transition-all">
-              DISCOVER OUR BLUEPRINT <ArrowRight size={14} />
-            </Link>
-          </div>
+      {/* --- FEATURED TYPOLOGIES: High-Fidelity Catalog --- */}
+      <section className="py-24 lg:py-40 bg-[#0B1C2C] text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-blueprint opacity-[0.03] pointer-events-none" />
+        <div className="container-clean relative z-10">
+          <header className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 lg:gap-16 mb-16 lg:mb-24">
+             <div className="max-w-3xl space-y-12">
+                <div className="flex items-center gap-6">
+                   <div className="w-12 h-[1px] bg-osg-gold/40"></div>
+                   <span className="text-[11px] font-black uppercase tracking-[0.6em] text-osg-gold">System Typologies</span>
+                </div>
+                <h2 className="text-5xl sm:text-6xl lg:text-[7rem] font-sans font-black uppercase tracking-tighter leading-[0.88]">Architectural <br/><span className="text-white/10">Modernism.</span></h2>
+                <p className="text-lg lg:text-2xl text-white/45 font-sans max-w-2xl leading-relaxed">
+                  We combine technical BOQ analysis with bespoke fabrication to deliver systems that exceed international standards.
+                </p>
+             </div>
+             <Link href="/services" className="btn-cta !px-12 py-6 !text-[11px]">
+                THE ENGINEERING BLUEPRINT <ArrowRight size={18} />
+             </Link>
+          </header>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-8">
             {[
               { 
                 title: 'Aluminium Systems', 
-                desc: 'Bespoke curtain walls and window systems engineered for structural resilience.',
-                image: 'https://images.unsplash.com/photo-1517581177682-a085bb7ffb15?q=80&w=2670&auto=format&fit=crop',
-                icon: Building2
+                desc: 'Bespoke curtain walls engineered for structural resilience.',
+                image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200',
+                icon: Building2,
               },
               { 
                 title: 'Structural Glazing', 
-                desc: 'Unitized and semi-unitized frameworks designed for ethereal transparency.',
-                image: 'https://images.unsplash.com/photo-1533035353720-f1c6a75cd8ab?q=80&w=2574&auto=format&fit=crop',
-                icon: DraftingCompass
+                desc: 'Unitized frameworks designed for ethereal transparency.',
+                image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200',
+                icon: Layout,
               },
               { 
-                title: 'Specialist Tiling', 
-                desc: 'Precision exterior and interior finishing using advanced material adhesives.',
-                image: 'https://images.unsplash.com/photo-1502005229762-f833b18ba72c?q=80&w=2574&auto=format&fit=crop',
-                icon: MonitorCheck
-              }
-            ].map((service, i) => (
-              <div key={i} className="card-architectural group overflow-hidden">
-                <div className="h-80 relative overflow-hidden">
-                  <Image src={service.image} alt={service.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0" />
-                  <div className="absolute inset-0 bg-osg-navy/20 group-hover:bg-transparent transition-all" />
-                </div>
-                <div className="p-10">
-                  <service.icon size={24} className="text-osg-gold mb-6" />
-                  <h3 className="text-xl font-serif font-black text-osg-navy uppercase mb-4">{service.title}</h3>
-                  <p className="text-osg-navy/50 text-small mb-8">{service.desc}</p>
-                  <Link href="/services" className="text-[10px] font-bold text-osg-navy uppercase tracking-widest flex items-center gap-2 group/link">
-                    Explore Technical Specs <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Typologies Grid */}
-      <section className="section-padding bg-osg-navy text-white">
-        <div className="container-osg">
-          <div className="text-center max-w-3xl mx-auto mb-20 px-4">
-            <span className="text-[10px] font-bold text-osg-gold uppercase tracking-[0.4em] mb-4 block">System Classifications</span>
-            <h2 className="text-4xl lg:text-heading-xl font-serif font-black uppercase tracking-tight">Advanced System Typologies</h2>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-px bg-white/5">
-            {[
-              { 
-                title: 'Structural Curtain Walls', 
-                label: 'Type 01 / Unitized',
-                desc: 'Engineered for rapid installation and extreme thermal performance.',
-                image: 'https://images.unsplash.com/photo-1521747116042-5a810fda9664?q=80&w=2670&auto=format&fit=crop'
-              },
-              { 
-                title: 'Unitized Systems', 
-                label: 'Type 02 / Modular',
-                desc: 'Pre-fabricated offsite modules for precision structural alignment.',
-                image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2670&auto=format&fit=crop'
-              },
-              { 
-                title: 'Precision Skylights', 
-                label: 'Type 03 / Glazing',
-                desc: 'Architectural overhead systems for optimized natural light control.',
-                image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2669&auto=format&fit=crop'
-              },
-              { 
-                title: 'Industrial Envelopes', 
-                label: 'Type 04 / Heavy-Duty',
-                desc: 'Durable structural shells designed for logistic and retail hubs.',
-                image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2670&auto=format&fit=crop'
+                title: 'Clean Finishing', 
+                desc: 'Precision interior finishing using advanced material logic.',
+                image: 'https://images.unsplash.com/photo-1558211583-d26f610c1eb1?q=80&w=1200',
+                icon: Cpu,
               }
             ].map((item, i) => (
-              <div key={i} className="relative group overflow-hidden h-96">
-                <Image src={item.image} alt={item.title} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover opacity-60 grayscale transition-all duration-700 group-hover:scale-105 group-hover:opacity-80 group-hover:grayscale-0" />
-                <div className="absolute inset-0 bg-osg-navy/40 group-hover:bg-osg-navy/20 transition-all" />
-                <div className="absolute inset-0 p-12 flex flex-col justify-end">
-                  <span className="text-[9px] font-black text-osg-gold uppercase tracking-widest mb-2">{item.label}</span>
-                  <h3 className="text-2xl font-serif font-black uppercase mb-4">{item.title}</h3>
-                  <p className="text-white/40 text-small max-w-xs mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">{item.desc}</p>
-                  <Link href="/projects" className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-osg-gold hover:border-osg-gold transition-all text-white hover:text-osg-navy">
-                    <ArrowUpRight size={18} />
-                  </Link>
-                </div>
-              </div>
+              <Reveal key={i} delay={i * 0.1}>
+                <Link href="/services" className="group block h-full">
+                  <div className="bg-white/5 backdrop-blur-3xl border border-white/5 rounded-[1.75rem] lg:rounded-[2.25rem] overflow-hidden group h-full flex flex-col transition-all duration-700 hover:border-osg-gold shadow-2xl relative">
+                    <div className="absolute inset-0 bg-grid-blueprint opacity-[0.02] pointer-events-none" />
+                    <div className="relative aspect-[4/3] min-h-[260px] overflow-hidden">
+                      <Image src={item.image} alt={item.title} fill className="object-cover grayscale opacity-40 transition-all duration-[2000ms] group-hover:scale-110 group-hover:grayscale-0 group-hover:opacity-100" />
+                      <div className="absolute top-10 left-10 w-16 h-16 rounded-2xl bg-osg-navy flex items-center justify-center text-osg-gold shadow-2xl transition-transform group-hover:rotate-6">
+                        <item.icon size={32} />
+                      </div>
+                    </div>
+                    <div className="p-6 lg:p-8 xl:p-10 space-y-8 flex-1 flex flex-col relative z-10">
+                      <div className="space-y-6">
+                        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/20 group-hover:text-osg-gold transition-colors">System Typologies // 0{i+1}</span>
+                        <h3 className="text-2xl lg:text-3xl font-sans font-black text-white uppercase tracking-tight group-hover:text-osg-gold transition-colors">{item.title}</h3>
+                        <p className="text-base lg:text-lg text-white/40 font-sans leading-relaxed group-hover:text-white/55 transition-colors">{item.desc}</p>
+                      </div>
+                      <div className="pt-12 mt-auto border-t border-white/5 flex justify-between items-center text-[10px] font-black uppercase tracking-[0.5em] group-hover:text-osg-gold transition-colors">
+                         <span>EXPLORE SPECS</span>
+                         <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="section-padding bg-osg-cream relative overflow-hidden">
-        <div className="container-osg relative z-10 text-center max-w-4xl mx-auto">
-          <h2 className="text-heading-xl text-osg-navy font-black uppercase tracking-tighter mb-8 italic">Ready to Engineer the Future?</h2>
-          <p className="text-osg-navy/60 text-lg mb-12">
-            Initialize your architectural journey with our precision-engineered intake system. Our consultants are ready to evaluate your structural requirements.
-          </p>
-          <div className="flex flex-wrap justify-center gap-6">
-            <Link href="/quote" className="btn-primary">
-              Initialize Project Review
-            </Link>
-            <Link href="/contact" className="btn-outline !border-osg-navy/10 !text-osg-navy hover:!border-osg-navy">
-              Contact Command Center
-            </Link>
-          </div>
+      {/* --- OPERATIONAL EXCELLENCE: Luxury Deep-Dive --- */}
+      <section className="py-24 lg:py-40 bg-white border-y border-osg-navy/5 relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-blueprint opacity-[0.02] pointer-events-none" />
+        <div className="container-clean relative z-10">
+           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-28 xl:gap-40 items-center">
+              <Reveal>
+                <div className="relative h-[380px] lg:h-[560px] rounded-[2rem] lg:rounded-[3rem] overflow-hidden shadow-premium group border border-osg-navy/5">
+                   <Image 
+                    src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=1200" 
+                    alt="Engineering" 
+                    fill 
+                    className="object-cover grayscale opacity-30 group-hover:scale-105 group-hover:grayscale-0 group-hover:opacity-100 transition-transform duration-[2000ms]"
+                  />
+                  <div className="absolute top-12 left-12">
+                      <span className="bg-[#0B1C2C] text-osg-gold text-[10px] font-black uppercase tracking-[0.5em] px-8 py-4 rounded-full shadow-2xl">Calibration Hub</span>
+                  </div>
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-1000 pointer-events-none bg-grid-blueprint" />
+                </div>
+              </Reveal>
+              
+              <Reveal delay={0.2} className="space-y-16">
+                 <div className="space-y-12">
+                   <div className="flex items-center gap-6">
+                      <div className="w-12 h-[1px] bg-osg-gold/40"></div>
+                      <span className="text-osg-gold font-black text-[10px] uppercase tracking-[0.6em]">Operational Excellence</span>
+                   </div>
+                   <h2 className="text-5xl lg:text-[6.5rem] font-sans font-black text-osg-navy uppercase leading-[0.9] tracking-tighter">Enterprise Scale <br/> Fabrication.</h2>
+                   <p className="text-lg lg:text-2xl text-osg-navy/55 font-sans leading-relaxed max-w-xl">
+                     Our state-of-the-art facility on Mombasa Road operates at 92% efficiency, ensuring your architectural components are fabricated with sub-millimeter precision.
+                   </p>
+                 </div>
+                 
+                 <div className="grid grid-cols-2 gap-16 lg:gap-24">
+                    <div className="space-y-6">
+                       <span className="text-[10px] font-black uppercase tracking-[0.4em] text-osg-navy/20">Quality Control</span>
+                       <p className="text-[12px] font-black text-osg-navy uppercase tracking-[0.3em] flex items-center gap-4 group hover:text-osg-gold transition-colors">
+                          <ShieldCheck size={20} className="text-osg-gold group-hover:scale-110 transition-transform" />
+                          ISO 9001:2015 CERTIFIED
+                       </p>
+                    </div>
+                    <div className="space-y-6">
+                       <span className="text-[10px] font-black uppercase tracking-[0.4em] text-osg-navy/20">Supply Chain</span>
+                       <p className="text-[12px] font-black text-osg-navy uppercase tracking-[0.3em] flex items-center gap-4 group hover:text-osg-gold transition-colors">
+                          <Package size={20} className="text-osg-gold group-hover:scale-110 transition-transform" />
+                          TIER-1 ARCHITECTURAL
+                       </p>
+                    </div>
+                 </div>
+                 
+                 <div className="pt-8">
+                    <Link href="/about-us" className="btn-cta !px-16 py-6 !text-[11px]">
+                       VIEW CAPABILITIES <ArrowRight size={20} />
+                    </Link>
+                 </div>
+              </Reveal>
+           </div>
         </div>
       </section>
-    </div>
+      
+      {/* FINAL CTA: High-Impact Outro */}
+      <section className="py-24 lg:py-40 bg-[#F8F9FB] relative overflow-hidden">
+         <div className="absolute inset-0 bg-grid-blueprint opacity-[0.03] pointer-events-none" />
+         <div className="container-clean relative z-10 text-center space-y-24">
+            <Reveal className="space-y-16">
+              <div className="flex flex-col items-center gap-6">
+                 <div className="w-16 h-[1px] bg-osg-gold/40"></div>
+                 <span className="text-osg-gold font-black uppercase text-[11px] tracking-[0.6em]">Operational Mandate</span>
+              </div>
+              <h2 className="text-5xl sm:text-6xl lg:text-[8rem] xl:text-[9rem] font-sans font-black text-osg-navy uppercase tracking-tighter leading-[0.88]">
+                 Ready to Engineer <br/><span className="text-osg-navy/10">the Future.</span>
+              </h2>
+              <p className="text-lg lg:text-2xl text-osg-navy/45 max-w-3xl mx-auto font-sans leading-relaxed">
+                Partner with Ole Sereni Group for projects where failure is not an option and luxury is the baseline structural requirement.
+              </p>
+            </Reveal>
+
+            <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                className="flex flex-wrap justify-center gap-12"
+            >
+                <Link href="/quote" className="btn-cta !px-24 py-8 !text-[12px]">INITIALIZE REVIEW</Link>
+                <Link href="/contact" className="flex items-center gap-6 px-16 py-8 rounded-full border border-osg-navy/10 text-[12px] font-black uppercase tracking-[0.4em] text-osg-navy hover:bg-osg-navy hover:text-white transition-all shadow-sm">CONTACT CENTER</Link>
+            </motion.div>
+         </div>
+      </section>
+    </main>
   );
 }
+
